@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 15:49:02 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/09 15:52:20 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=						\
+SRCS		:=	srcs/main.c			\
 
 OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 
