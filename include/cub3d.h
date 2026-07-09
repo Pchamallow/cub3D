@@ -6,12 +6,17 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/08 14:00:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 15:58:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include "../lib/minilibx-linux/mlx_int.h"
+# include "../lib/minilibx-linux/mlx.h"
+# include "../lib/libft/libft.h"
+# include "../lib/get_next_line/get_next_line.h"
 
 typedef struct s_map
 {

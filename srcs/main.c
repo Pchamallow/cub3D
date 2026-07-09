@@ -6,13 +6,8 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 15:53:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 16:14:40 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main (int ac, char **av)
-{
-	(void)av;
-	if (ac != 1)
-		return (1); // message error to print
-}
+#include "../include/cub3d.h"

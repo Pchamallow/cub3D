@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 15:52:20 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/09 16:04:59 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,11 @@
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g
 MAKEFLAGS	+= --no-print-directory
-DATE		:= $(shell date +"%y_%m_%d_%H-%M-%S")
 BUILD_DIR	:= .cub3d
 
-# Includes
-INCLUDES	:=							\
-				-Iincludes				\
+# Include
+INCLUDE	:=								\
+				-Iinclude				\
 		   		-Ilib/minilibx-linux/	\
 				-Ilib/libft/			\
 
@@ -32,7 +31,10 @@ GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=	srcs/main.c			\
+SRCS		:=	srcs/main.c								\
+			lib/get_next_line/get_next_line.c			\
+			lib/get_next_line/get_next_line_utils.c		\
+			lib/get_next_line/strlen_modifs.c			\
 
 OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 
@@ -78,7 +80,7 @@ $(BUILD_DIR):
 # Compilation .c -> .o
 $(BUILD_DIR)/%.o: src/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	@$(MAKE) -C $(DIR_MLX) clean -s
