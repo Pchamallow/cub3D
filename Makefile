@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 16:04:59 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/09 16:24:59 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INCLUDE	:=								\
 				-Iinclude				\
 		   		-Ilib/minilibx-linux/	\
 				-Ilib/libft/			\
+				-Ilib/get_next_line/	\
 
 NAME		:= cub3d
 
@@ -31,10 +32,8 @@ GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=	srcs/main.c								\
-			lib/get_next_line/get_next_line.c			\
-			lib/get_next_line/get_next_line_utils.c		\
-			lib/get_next_line/strlen_modifs.c			\
+SRCS		:=	srcs/main.c				\
+				srcs/parser/map.c		\
 
 OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 
@@ -60,7 +59,7 @@ LIBFT	:= lib/libft/libft.a
 
 # ================= COMMANDS ================= #
 
-all: $(MLX) $(LIBFT) $(NAME)
+all: $(MLX) $(LIBFT) $(GNL) $(NAME)
 	@clear
 	@echo $(GREEN)"💫 All compiled 💫\n"$(NC)
 
@@ -70,8 +69,11 @@ $(MLX):
 $(LIBFT):
 	@$(MAKE) -C $(DIR_LIB) -s
 
+$(GNL):
+	@$(MAKE) -C $(DIR_GNL) -s
+
 $(NAME): $(BUILD_DIR) $(OBJS) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) $(INCLUDES) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) $(GNL) $(INCLUDES) -o $(NAME)
 	@echo $(GREEN)"\n✨ cub3d build created. ✨\n"$(NC)
 
 $(BUILD_DIR):
@@ -85,11 +87,13 @@ $(BUILD_DIR)/%.o: src/%.c
 clean:
 	@$(MAKE) -C $(DIR_MLX) clean -s
 	@$(MAKE) -C $(DIR_LIB) clean -s
+	@$(MAKE) -C $(DIR_GNL) clean -s
 	@rm -rf $(BUILD_DIR)
 	@echo $(GREEN)"cub3d build is clean. 🧹"$(NC)
 
 fclean: clean
 	@$(MAKE) -C $(DIR_LIB) fclean -s
+	@$(MAKE) -C $(DIR_GNL) fclean -s
 	@rm -f $(NAME)
 	@echo $(GREEN)"cub3d library is clean. 🧹"$(NC)
 

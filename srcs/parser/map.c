@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 16:14:58 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 16:27:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ int main (int ac, char **av)
 		return (1);
 	line = get_next_line(fd);
 	printf("%s\n", line);
+	int end = end_file("minimalist.cub");
+	end_gnl(line, fd, end);
 }
