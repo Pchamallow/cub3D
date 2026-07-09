@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/08 14:00:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 13:59:50 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,13 @@ typedef struct s_data
 	t_map			map;
 	t_direction	direction;
 }			t_data;
+
+// =============================
+// FUNCTIONS
+// =============================
+
+// Parser
+
+int	args_not_valid(int ac, char **av);
 
 #endif
