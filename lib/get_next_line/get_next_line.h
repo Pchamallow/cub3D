@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 10:21:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 16:26:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 16:42:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*strjoin_modifs(char *s1, char *s2);
 char	*substr_modifs(char *s, unsigned int start, size_t len);
 size_t	strlen_modifs(const char *s);
 char	*get_next_line(int fd);
-int		end_gnl(char *line, int fd, int end);
-int		end_file(char *file);
+int		end_gnl(char *line, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 16:27:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 16:43:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ int main (int ac, char **av)
 	if (ac != 1)
 		return (1); // message error to print
 
-	fd = open("minimalist.cub", O_RDONLY);
+	fd = open("/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub", O_RDONLY);
 	if (fd < 0)
 		return (1);
 	line = get_next_line(fd);
 	printf("%s\n", line);
-	int end = end_file("minimalist.cub");
-	end_gnl(line, fd, end);
+	end_gnl(line, fd);
 }
