@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 15:58:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/09 18:00:40 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_map
 {
 	char	**full_map;
+	char	*file_name;
 	int		width;
 	int		height;
 	int		lines;
