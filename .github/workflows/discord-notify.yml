@@ -1,0 +1,48 @@
+name: Discord Push Notification
+
+on:
+  push:
+    branches:
+      - '**'   # toutes les branches : main, dev, feat/*, etc.
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          # On passe les valeurs par l'environnement (et pas en interpolation directe
+          # dans le shell) pour éviter toute injection via un message de commit.
+          COMMITS_JSON: ${{ toJson(github.event.commits) }}
+          PUSHER: ${{ github.actor }}
+          BRANCH: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+          COMPARE_URL: ${{ github.event.compare }}
+        run: |
+          # Liste à puces des commits (1re ligne du message + auteur)
+          COMMIT_LIST=$(printf '%s' "$COMMITS_JSON" \
+            | jq -r '.[] | "• \(.message | split("\n")[0]) — \(.author.name)"')
+          if [ -z "$COMMIT_LIST" ]; then
+            COMMIT_LIST="(aucun commit dans ce push)"
+          fi
+
+          # Construction sûre du payload JSON avec jq
+          PAYLOAD=$(jq -n \
+            --arg pusher "$PUSHER" \
+            --arg branch "$BRANCH" \
+            --arg repo   "$REPO" \
+            --arg commits "$COMMIT_LIST" \
+            --arg url    "$COMPARE_URL" \
+            '{
+              embeds: [{
+                title: "🚀 Nouveau push sur \($repo)",
+                description: "**Branche :** `\($branch)`\n**Par :** \($pusher)\n\n**Commits :**\n\($commits)\n\n[Voir les changements](\($url))",
+                color: 5793266
+              }]
+            }')
+
+          curl -sf -X POST \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            "$DISCORD_WEBHOOK"
