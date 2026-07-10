@@ -6,12 +6,14 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 16:41:24 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/10 16:47:46 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+#include "macro.h"
 
 typedef struct s_map
 {
