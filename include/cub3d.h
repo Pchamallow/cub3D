@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 16:47:46 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/10 17:09:42 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_player
 	int	pos_y;
 }			t_player;
 
+typedef struct s_color
+{
+	int				R;
+	int				G;
+	int				B;
+} 			t_color;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -57,6 +64,8 @@ typedef struct s_data
 	int				height;
 	int				max_width;
 	int				max_height;
+	t_color			ceiling;
+	t_color			floor;
 	t_player		player;
 	t_image			image;
 	t_map			map;
