@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
+#    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 15:52:20 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/10 17:24:35 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,9 @@ BUILD_DIR	:= .cub3d
 # Includes
 INCLUDES	:=							\
 				-Iincludes				\
-		   		-Ilib/minilibx-linux/	\
+				-Ilib/minilibx-linux/	\
 				-Ilib/libft/			\
+				-Ilib/get_next_line/
 
 NAME		:= cub3d
 
@@ -32,9 +33,20 @@ GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=	srcs/main.c			\
 
-OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
+ERROR_DIR	= srcs/error
+ERROR_SRCS	= $(ERROR_DIR)/error.c
+
+PARSER_DIR	= srcs/parser
+PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c
+
+# GNL (pas de Makefile : compilé avec les sources du projet)
+DIR_GNL		= lib/get_next_line
+GNL_SRCS	= $(DIR_GNL)/get_next_line.c $(DIR_GNL)/get_next_line_utils.c
+
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) $(GNL_SRCS)
+
+OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 
 
@@ -42,23 +54,19 @@ OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 
 # Minilibx
 DIR_MLX		:= lib/minilibx-linux
-MLX			:= lib/minilibx-linux/libmlx_Linux.a
-FLAGS_MLX	:= -L./lib/minilibx-linux
+MLX			:= $(DIR_MLX)/libmlx_Linux.a
+FLAGS_MLX	:= -L./$(DIR_MLX)
 ADD_LIB		:= -lmlx -lm -lX11 -lXext
 
-# GNL
-DIR_GNL	:= lib/get_next_line
-GNL		:= lib/get_next_line/get_next_line.a
-
 # Libft
-DIR_LIB	:= lib/libft
-LIBFT	:= lib/libft/libft.a
+DIR_LIB		:= lib/libft
+LIBFT		:= $(DIR_LIB)/libft.a
 
 
 
 # ================= COMMANDS ================= #
 
-all: $(MLX) $(LIBFT) $(NAME)
+all: $(NAME)
 	@clear
 	@echo $(GREEN)"💫 All compiled 💫\n"$(NC)
 
@@ -68,15 +76,12 @@ $(MLX):
 $(LIBFT):
 	@$(MAKE) -C $(DIR_LIB) -s
 
-$(NAME): $(BUILD_DIR) $(OBJS) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) $(INCLUDES) -o $(NAME)
+$(NAME): $(OBJS) $(MLX) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) -o $(NAME)
 	@echo $(GREEN)"\n✨ cub3d build created. ✨\n"$(NC)
 
-$(BUILD_DIR):
-	@mkdir -p $@
-
 # Compilation .c -> .o
-$(BUILD_DIR)/%.o: src/%.c
+$(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -91,7 +96,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo $(GREEN)"cub3d library is clean. 🧹"$(NC)
 
-re: fclean 
+re: fclean
 	$(MAKE) all
 
 .SILENT:
