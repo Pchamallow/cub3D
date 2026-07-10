@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   strlen_modifs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 16:22:36 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/02/06 10:52:20 by pswirgie          #+#    #+#             */
+/*   Updated: 2026/02/07 18:50:33 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main (int ac, char **av)
+#include "get_next_line.h"
+
+size_t	strlen_modifs(const char *s)
 {
-	(void)av;
-	if (ac != 1)
-		return (1); // message error to print
+	long int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i ++;
+	return (i);
 }
