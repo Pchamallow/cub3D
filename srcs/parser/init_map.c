@@ -12,31 +12,59 @@
 
 #include "../../include/cub3d.h"
 
-int	init_columns(t_game *game, int y)
+
+int	get_lines_columns(char *file)
 {
-	game->map.index[y] = (char *)malloc((sizeof(char))
-			* (game->map.columns + 1));
-	if (!game->map.index[y])
-		print_error_free(game, "Error\nMalloc failed.\n", 2);
+	int		fd;
+	char	*line;
+	int		end;
+
+	end = 0;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	line = get_next_line(fd);
+	if (!line)
+		return (close(fd), 0);
+	while (line)
+	{
+		end++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	
+	close(fd);
+	return (end);
+}
+
+int	init_columns(t_data *data, int y)
+{
+	data->map.full_map[y] = (char *)malloc((sizeof(char))
+			* (data->map.columns + 1));
+	// remettre securite
+	// if (!data->map.full_map[y])
+	// 	print_error_free(data, "Error\nMalloc failed.\n", 2);
 	return (0);
 }
 
-int	map_tab(t_game *game)
+int	map_tab(t_data *data)
 {
+	t_map *map;
 	char	*line;
 	int		fd;
 	int		y;
 
 	y = 0;
-	fd = open(game->file, O_RDONLY);
+	map = &data->map;
+	fd = open(map->file_name, O_RDONLY);
 	line = get_next_line(fd);
-	while (y < game->map.lines)
+	while (y < map->lines)
 	{
-		if (init_columns(game, y))
+		if (init_columns(data, y))
 			return (1);
-		ft_bzero(game->map.index[y], game->map.columns);
-		ft_strlcpy(game->map.index[y], (const char *)line,
-			(game->map.columns + 1));
+		ft_bzero(map->full_map[y], map->columns);
+		ft_strlcpy(map->full_map[y], (const char *)line,
+			(map->columns + 1));
 		free(line);
 		line = get_next_line(fd);
 		y++;
@@ -44,21 +72,19 @@ int	map_tab(t_game *game)
 	close(fd);
 	return (0);
 }
-print_error("Error\nMap is too small. Please, add some tree.\n", 2);
 
 int	init_map(t_data *data)
 {
-	int nb_lines;
-	int nb_columns;
-
-	nb_lines = end_file(data->map.file_name);
-	nb_columns = map_max_len(data->map.file_name);
-	data->map.full_map = (char **)malloc((sizeof(char *)) * (game->map.lines + 1));
-	if (!data->map.full_map )
-		print_error_free(game, "Error\nMalloc failed.\n", 2);
+	data->map.lines = end_file(data->map.file_name);
+	data->map.columns = map_max_len(data->map.file_name);
+	data->map.full_map = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
+	// remettre securite
+	// if (!data->map.full_map ) 
+	// 	print_error_free(data, "Error\nMalloc failed.\n", 2);
+	// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
 	if (data->map.full_map)
-		ft_bzero(game->map.index, game->map.lines + 1);
-	if (map_tab(game))
+		ft_bzero(data->map.full_map, data->map.lines + 1);
+	if (map_tab(data))
 		return (1);
 	return (0);
 }

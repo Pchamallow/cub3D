@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 18:01:04 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/10 12:37:14 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,20 +138,21 @@ int	check_path(t_data *data)
 
 int main (int ac, char **av)
 {
-	char	*line;
+	// char	*line;
+	// line = get_next_line(fd);
+	// printf("%s\n", line);
+	// end_gnl(line, fd);
 
 	(void)av;
 	if (ac != 1)
 		return (1); // message error to print
 
-	line = get_next_line(fd);
-	printf("%s\n", line);
-	end_gnl(line, fd);
 
 	t_data data;
 
 	data.map.file_name = "/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub";
-	init_map();
+	init_map(data);
+	return ;
 	check_path(&data);
 	
 }
