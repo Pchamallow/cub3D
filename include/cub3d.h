@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 13:59:50 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/10 16:41:24 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ typedef struct s_data
 
 // Parser
 
-int	args_not_valid(int ac, char **av);
+int		args_not_valid(int ac, char **av);
+
+// Error
+
+void	display_error(char *error_msg);
+void	display_perror(void);
+int		mlx_error(void);
 
 #endif
