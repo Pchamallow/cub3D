@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 12:52:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/10 13:34:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_map
 {
 	char	**full_map;
+	char	**maze_map;
 	char	*file_name;
 	int		width;
 	int		height;
@@ -68,7 +69,7 @@ typedef struct s_data
 }			t_data;
 
 
-int	init_map(t_data *data);
+int	init_full_map(t_data *data);
 int	get_columns(char *file);
 int	get_lines(char *file);
 

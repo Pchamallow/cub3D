@@ -12,6 +12,27 @@
 
 #include "../../../include/cub3d.h"
 
+// static int	is_whitespace(char c)
+// {
+// 	if (c == ' ' || (c >= '\t' && c <= '\r'))
+// 		return (1);
+// 	return (0);
+// }
+
+// static int	str_iswhitespaces(char *s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s && s[i])
+// 	{
+// 		if (!is_whitespace(s[i]))
+// 			return (0);
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
 static int	init_columns(t_data *data, int y)
 {
 	data->map.full_map[y] = (char *)malloc((sizeof(char))
@@ -22,7 +43,7 @@ static int	init_columns(t_data *data, int y)
 	return (0);
 }
 
-static int	map_tab(t_data *data)
+static int	map_columns(t_data *data)
 {
 	t_map *map;
 	char	*line;
@@ -39,7 +60,7 @@ static int	map_tab(t_data *data)
 			return (1);
 		ft_bzero(map->full_map[y], map->columns);
 		ft_strlcpy(map->full_map[y], (const char *)line,
-			(map->columns + 1));
+			ft_strlen(line));
 		free(line);
 		line = get_next_line(fd);
 		y++;
@@ -48,10 +69,25 @@ static int	map_tab(t_data *data)
 	return (0);
 }
 
-int	init_map(t_data *data)
+void	fill_null()
+{
+	int i = 0;
+	while (i < data->map.lines + 1)
+	{
+		data->map.full_map[i] = NULL;
+		i++;
+	}
+}
+
+int	init_full_map(t_data *data)
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
+	// if (game->map.lines <3 || game->map.columns < 3)
+	// securites, choisir les chiffres
+		// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
+	// if (game->map.lines > 15 || game->map.columns > 31)
+	// 	print_error("Error\nMap is too big. Please, remove some tree.\n", 2);
 	data->map.full_map = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
 	// remettre securite
 	// if (!data->map.full_map ) 
@@ -59,7 +95,13 @@ int	init_map(t_data *data)
 	// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
 	if (data->map.full_map)
 		ft_bzero(data->map.full_map, data->map.lines + 1);
-	if (map_tab(data))
+	// int i = 0;
+	// while (i < data->map.lines + 1)
+	// {
+	// 	data->map.full_map[i] = NULL;
+	// 	i++;
+	// }
+	if (map_columns(data))
 		return (1);
 	return (0);
 }
