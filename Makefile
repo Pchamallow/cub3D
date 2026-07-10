@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 16:24:59 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/10 12:50:19 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,10 @@ GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=	srcs/main.c				\
-				srcs/parser/map.c		\
+SRCS		:=	srcs/main.c						\
+				srcs/parser/map/map.c			\
+				srcs/parser/map/init_map.c		\
+				srcs/parser/map/get_lines.c		\
 
 OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
 

@@ -10,34 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
-
-int	get_lines_columns(char *file)
-{
-	int		fd;
-	char	*line;
-	int		end;
-
-	end = 0;
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	line = get_next_line(fd);
-	if (!line)
-		return (close(fd), 0);
-	while (line)
-	{
-		end++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	
-	close(fd);
-	return (end);
-}
-
-int	init_columns(t_data *data, int y)
+static int	init_columns(t_data *data, int y)
 {
 	data->map.full_map[y] = (char *)malloc((sizeof(char))
 			* (data->map.columns + 1));
@@ -47,7 +22,7 @@ int	init_columns(t_data *data, int y)
 	return (0);
 }
 
-int	map_tab(t_data *data)
+static int	map_tab(t_data *data)
 {
 	t_map *map;
 	char	*line;
@@ -75,8 +50,8 @@ int	map_tab(t_data *data)
 
 int	init_map(t_data *data)
 {
-	data->map.lines = end_file(data->map.file_name);
-	data->map.columns = map_max_len(data->map.file_name);
+	data->map.lines = get_lines(data->map.file_name);
+	data->map.columns = get_columns(data->map.file_name);
 	data->map.full_map = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
 	// remettre securite
 	// if (!data->map.full_map ) 
