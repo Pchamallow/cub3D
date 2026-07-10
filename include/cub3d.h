@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 17:25:47 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 01:51:49 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_direction
 
 typedef struct s_image
 {
+	char 	*path;
 	void	*image;
 	int		value;
 	int		width;
