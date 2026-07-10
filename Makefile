@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/10 17:24:35 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/07/10 17:43:00 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g
 MAKEFLAGS	+= --no-print-directory
-DATE		:= $(shell date +"%y_%m_%d_%H-%M-%S")
 BUILD_DIR	:= .cub3d
+
+NAME		:= cub3d
 
 # Includes
 INCLUDES	:=							\
@@ -25,8 +26,6 @@ INCLUDES	:=							\
 				-Ilib/minilibx-linux/	\
 				-Ilib/libft/			\
 				-Ilib/get_next_line/
-
-NAME		:= cub3d
 
 # Colors
 GREEN		:='\033[0;32m'
@@ -40,11 +39,7 @@ ERROR_SRCS	= $(ERROR_DIR)/error.c
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c
 
-# GNL (pas de Makefile : compilé avec les sources du projet)
-DIR_GNL		= lib/get_next_line
-GNL_SRCS	= $(DIR_GNL)/get_next_line.c $(DIR_GNL)/get_next_line_utils.c
-
-SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) $(GNL_SRCS)
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS)
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
@@ -52,11 +47,15 @@ OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 # ==================  LIBS  ================== #
 
-# Minilibx
+# Minilibx (submodule git)
 DIR_MLX		:= lib/minilibx-linux
 MLX			:= $(DIR_MLX)/libmlx_Linux.a
 FLAGS_MLX	:= -L./$(DIR_MLX)
 ADD_LIB		:= -lmlx -lm -lX11 -lXext
+
+# GNL
+DIR_GNL		:= lib/get_next_line
+GNL			:= $(DIR_GNL)/get_next_line.a
 
 # Libft
 DIR_LIB		:= lib/libft
@@ -67,17 +66,22 @@ LIBFT		:= $(DIR_LIB)/libft.a
 # ================= COMMANDS ================= #
 
 all: $(NAME)
-	@clear
 	@echo $(GREEN)"💫 All compiled 💫\n"$(NC)
 
 $(MLX):
+	@if [ ! -f "$(DIR_MLX)/Makefile" ]; then \
+		git submodule update --init $(DIR_MLX); \
+	fi
 	@$(MAKE) -C $(DIR_MLX) -s
 
 $(LIBFT):
 	@$(MAKE) -C $(DIR_LIB) -s
 
-$(NAME): $(OBJS) $(MLX) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) -o $(NAME)
+$(GNL):
+	@$(MAKE) -C $(DIR_GNL) -s
+
+$(NAME): $(OBJS) $(MLX) $(LIBFT) $(GNL)
+	@$(CC) $(CFLAGS) $(OBJS) $(GNL) $(LIBFT) $(FLAGS_MLX) $(ADD_LIB) -o $(NAME)
 	@echo $(GREEN)"\n✨ cub3d build created. ✨\n"$(NC)
 
 # Compilation .c -> .o
@@ -86,13 +90,15 @@ $(BUILD_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@$(MAKE) -C $(DIR_MLX) clean -s
+	@if [ -f "$(DIR_MLX)/Makefile" ]; then $(MAKE) -C $(DIR_MLX) clean -s; fi
 	@$(MAKE) -C $(DIR_LIB) clean -s
+	@$(MAKE) -C $(DIR_GNL) clean -s
 	@rm -rf $(BUILD_DIR)
 	@echo $(GREEN)"cub3d build is clean. 🧹"$(NC)
 
 fclean: clean
 	@$(MAKE) -C $(DIR_LIB) fclean -s
+	@$(MAKE) -C $(DIR_GNL) fclean -s
 	@rm -f $(NAME)
 	@echo $(GREEN)"cub3d library is clean. 🧹"$(NC)
 

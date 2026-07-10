@@ -3,30 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
+#    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 13:58:33 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/10 17:38:49 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = get_next_line.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+NAME	= get_next_line.a
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
+
 SRC		:= get_next_line.c			\
 			get_next_line_utils.c	\
-			strlen_modifs.c			\
+			strlen_modifs.c
 
-LIB = ../libft/libft.a
-
-OBJ = $(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIB)
-	ar rcs $(NAME) $(OBJ) $(LIB)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
-$(NAME)%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -1,4 +1,3 @@
 *.o
 *.a
 ./cub3d
-lib/minilibx-linux/
