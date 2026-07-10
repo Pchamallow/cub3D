@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 13:06:42 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/10 13:11:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,32 +142,32 @@ int	check_path(t_data *data)
 	return (0);
 }
 
-int main (int ac, char **av)
-{
-	// char	*line;
-	// line = get_next_line(fd);
-	// printf("%s\n", line);
-	// end_gnl(line, fd);
+// int main (int ac, char **av)
+// {
+// 	// char	*line;
+// 	// line = get_next_line(fd);
+// 	// printf("%s\n", line);
+// 	// end_gnl(line, fd);
 
-	(void)av;
-	if (ac != 1)
-		return (1); // message error to print
+// 	(void)av;
+// 	if (ac != 1)
+// 		return (1); // message error to print
 
 
-	t_data data;
+// 	t_data data;
 
-	data.map.file_name = "/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub";
-	init_map(&data);
+// 	data.map.file_name = "/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub";
+// 	init_map(&data);
 
-	// PRINT MAP COPY
-	// int y = 0;
-	// while (data.map.full_map[y])
-	// {
-	// 	printf("%s", data.map.full_map[y]);
-	// 	y++;
-	// }
+// 	// PRINT MAP COPY
+// 	// int y = 0;
+// 	// while (data.map.full_map[y])
+// 	// {
+// 	// 	printf("%s", data.map.full_map[y]);
+// 	// 	y++;
+// 	// }
 	
-	check_path(&data);
-	return (0);
+// 	check_path(&data);
+// 	return (0);
 	
-}
+// }
