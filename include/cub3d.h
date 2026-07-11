@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 09:42:43 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:52:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ typedef struct s_data
 // Parser
 
 int		ft_args_not_valid(int ac, char **av);
+
+// Init data
+
+int		ft_init_game(t_data *data);
 
 // Error
 

@@ -6,14 +6,14 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 09:41:50 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:52:02 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
 
-void	*init_window(t_data *data)
+static void	*init_window(t_data *data)
 {
 	void	*ptr;
 
@@ -23,7 +23,7 @@ void	*init_window(t_data *data)
 	return (ptr);
 }
 
-static int	init_game(t_data *data)
+int	ft_init_game(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
