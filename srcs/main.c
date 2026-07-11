@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 11:42:15 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:08:42 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int main (int ac, char **av)
 {
 	(void)av;
+	// init map
 	if (args_not_valid(ac, av))
 		return (1); // message error to print
 }

@@ -57,14 +57,16 @@ static int	map_columns(t_data *data)
 	while (y < map->lines)
 	{
 		if (init_columns(data, y))
-			return (1);
+			return (1); // rajouter au clean  {free(line), close(fd)}
 		ft_bzero(map->full_map[y], map->columns);
 		ft_strlcpy(map->full_map[y], (const char *)line,
 			ft_strlen(line));
 		free(line);
 		line = get_next_line(fd);
+		// rajouter securite si pas de line et close fd
 		y++;
 	}
+	// free line
 	close(fd);
 	return (0);
 }
@@ -79,7 +81,7 @@ void	fill_null(char **array, int len)
 	}
 }
 
-int	init_full_map(t_data *data)
+int	init_full_map(t_data *data) // mettre dans init data.c dans init
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
