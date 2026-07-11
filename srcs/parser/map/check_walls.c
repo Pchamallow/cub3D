@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 15:59:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:07:10 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,6 @@ static int	str_iswhitespaces(char *s)
 	}
 	return (1);
 }
-
-// void	free_maze(t_data *game, char **maze)
-// {
-// 	int	y;
-
-// 	if (!maze)
-// 		return ;
-// 	y = 0;
-// 	while (y < game->map.lines)
-// 	{
-// 		free(maze[y]);
-// 		y++;
-// 	}
-// 	free(maze);
-// 	maze = NULL;
-// 	return ;
-// }
 
 // //find a path to take all collectibles and exit
 void	find_path(t_data *game, t_map *map, int y, int x)

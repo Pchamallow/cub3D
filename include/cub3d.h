@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 15:25:40 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:07:52 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,18 @@ void	ft_display_error(char *error_msg);
 void	ft_display_perror(void);
 int		ft_mlx_error(void);
 
-// free
+// Free
 
 void	free_all(t_data *data);
 
-// utils
+// Utils
 
 void	fill_null(char **array, int len);
+
+// Debug
+
+void	print_maze(t_data *data);
+
 
 
 #endif

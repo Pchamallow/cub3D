@@ -6,24 +6,13 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 16:02:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:06:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "../lib/libft/libft.h"
 #include "../lib/minilibx-linux/mlx.h"
-
-// // FOR DEBUG ONLY
-// void	print_maze(t_data *data)
-// {
-// 	int y = 0;
-// 	while (data->map.maze_map[y])
-// 	{
-// 		printf("%s\n", data->map.maze_map[y]);
-// 		y++;
-// 	}
-// }
 
 int main (int ac, char **av)
 {
