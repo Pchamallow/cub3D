@@ -6,7 +6,7 @@
 #    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/10 17:43:00 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/07/11 08:49:39 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,13 @@ NC			:='\033[0m'
 ERROR_DIR	= srcs/error
 ERROR_SRCS	= $(ERROR_DIR)/error.c
 
+FREE_DIR	= srcs/free
+FREE_SRCS	= ${FREE_DIR}/free.c
+
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c
 
-SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS)
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS}
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 

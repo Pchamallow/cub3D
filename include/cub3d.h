@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 09:23:22 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:33:36 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,9 @@ int		args_not_valid(int ac, char **av);
 void	display_error(char *error_msg);
 void	display_perror(void);
 int		mlx_error(void);
+
+// free
+
+void	free_all(t_data *data);
 
 #endif
