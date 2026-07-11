@@ -6,28 +6,27 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/09 16:26:37 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 11:41:49 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = get_next_line.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRC		:=	get_next_line.c			\
+NAME	= get_next_line.a
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
+
+SRC		:= get_next_line.c			\
 			get_next_line_utils.c	\
-			strlen_modifs.c			\
+			strlen_modifs.c
 			end_gnl.c				\
 
-LIB = ../libft/libft.a
-
-OBJ = $(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIB)
-	ar rcs $(NAME) $(OBJ) $(LIB)
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
 
-$(NAME)%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

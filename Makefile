@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/10 12:50:19 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 11:40:34 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,54 +18,66 @@ CFLAGS		:= -Wall -Wextra -Werror -g
 MAKEFLAGS	+= --no-print-directory
 BUILD_DIR	:= .cub3d
 
-# Include
-INCLUDE	:=								\
-				-Iinclude				\
-		   		-Ilib/minilibx-linux/	\
-				-Ilib/libft/			\
-				-Ilib/get_next_line/	\
-
 NAME		:= cub3d
+
+# Includes
+INCLUDES	:=							\
+				-Iincludes				\
+				-Ilib/minilibx-linux/	\
+				-Ilib/libft/			\
+				-Ilib/get_next_line/
 
 # Colors
 GREEN		:='\033[0;32m'
 NC			:='\033[0m'
 
 # Sources
-SRCS		:=	srcs/main.c						\
-				srcs/parser/map/map.c			\
-				srcs/parser/map/init_map.c		\
-				srcs/parser/map/get_lines.c		\
 
-OBJS		:= $(SRCS:src/%.c=$(BUILD_DIR)/%.o)
+ERROR_DIR	= srcs/error
+ERROR_SRCS	= $(ERROR_DIR)/error.c
+
+FREE_DIR	= srcs/free
+FREE_SRCS	= ${FREE_DIR}/free.c
+
+PARSER_DIR	= srcs/parser
+PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c	\
+				$(PARSER_DIR)/map/get_lines.c	\
+				$(PARSER_DIR)/map/init_map.c	\
+				$(PARSER_DIR)/map/map.c			\
+
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS}
+
+OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
 
 
 # ==================  LIBS  ================== #
 
-# Minilibx
+# Minilibx (submodule git)
 DIR_MLX		:= lib/minilibx-linux
-MLX			:= lib/minilibx-linux/libmlx_Linux.a
-FLAGS_MLX	:= -L./lib/minilibx-linux
+MLX			:= $(DIR_MLX)/libmlx_Linux.a
+FLAGS_MLX	:= -L./$(DIR_MLX)
 ADD_LIB		:= -lmlx -lm -lX11 -lXext
 
 # GNL
-DIR_GNL	:= lib/get_next_line
-GNL		:= lib/get_next_line/get_next_line.a
+DIR_GNL		:= lib/get_next_line
+GNL			:= $(DIR_GNL)/get_next_line.a
 
 # Libft
-DIR_LIB	:= lib/libft
-LIBFT	:= lib/libft/libft.a
+DIR_LIB		:= lib/libft
+LIBFT		:= $(DIR_LIB)/libft.a
 
 
 
 # ================= COMMANDS ================= #
 
-all: $(MLX) $(LIBFT) $(GNL) $(NAME)
-	@clear
+all: $(NAME)
 	@echo $(GREEN)"💫 All compiled 💫\n"$(NC)
 
 $(MLX):
+	@if [ ! -f "$(DIR_MLX)/Makefile" ]; then \
+		git submodule update --init $(DIR_MLX); \
+	fi
 	@$(MAKE) -C $(DIR_MLX) -s
 
 $(LIBFT):
@@ -74,20 +86,17 @@ $(LIBFT):
 $(GNL):
 	@$(MAKE) -C $(DIR_GNL) -s
 
-$(NAME): $(BUILD_DIR) $(OBJS) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(FLAGS_MLX) $(ADD_LIB) $(LIBFT) $(GNL) $(INCLUDES) -o $(NAME)
+$(NAME): $(OBJS) $(MLX) $(LIBFT) $(GNL)
+	@$(CC) $(CFLAGS) $(OBJS) $(GNL) $(LIBFT) $(FLAGS_MLX) $(ADD_LIB) -o $(NAME)
 	@echo $(GREEN)"\n✨ cub3d build created. ✨\n"$(NC)
 
-$(BUILD_DIR):
-	@mkdir -p $@
-
 # Compilation .c -> .o
-$(BUILD_DIR)/%.o: src/%.c
+$(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	@$(MAKE) -C $(DIR_MLX) clean -s
+	@if [ -f "$(DIR_MLX)/Makefile" ]; then $(MAKE) -C $(DIR_MLX) clean -s; fi
 	@$(MAKE) -C $(DIR_LIB) clean -s
 	@$(MAKE) -C $(DIR_GNL) clean -s
 	@rm -rf $(BUILD_DIR)
@@ -99,7 +108,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo $(GREEN)"cub3d library is clean. 🧹"$(NC)
 
-re: fclean 
+re: fclean
 	$(MAKE) all
 
 .SILENT:

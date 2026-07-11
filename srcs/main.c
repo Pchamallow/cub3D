@@ -6,8 +6,15 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/09 16:14:40 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 11:42:15 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int main (int ac, char **av)
+{
+	(void)av;
+	if (args_not_valid(ac, av))
+		return (1); // message error to print
+}
