@@ -6,39 +6,26 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 13:57:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/10 17:25:06 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 08:25:47 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
 
-static int	ft_str_format(char *string, char *sub_string)
+static int	ft_str_format(char *str, char *sub)
 {
-	int	start;
-	int	k;
-	int	len_sub;
-	int	len_string;
+	size_t	len;
+	size_t	sub_len;
 
-	if (!sub_string || !sub_string[0] || !string || !string[0])
+	if (!str || !sub || !sub[0])
 		return (0);
-	len_sub = ft_strlen(sub_string);
-	len_string = ft_strlen(string);
-	start = len_string - len_sub;
-	k = 0;
-	while (string[start])
-	{
-		if (string[start++] == sub_string[k++])
-		{
-			if (sub_string[k] == '\0')
-				return (1);
-		}
-		else
-		{
-			start = start - k + 1;
-			k = 0;
-		}
-	}
+	len = ft_strlen(str);
+	sub_len = ft_strlen(sub);
+	if (len <= sub_len || str[len - sub_len - 1] == '/')
+		return (0);
+	if (ft_strncmp(str + len - sub_len, sub, sub_len + 1) == 0)
+		return (1);
 	return (0);
 }
 
