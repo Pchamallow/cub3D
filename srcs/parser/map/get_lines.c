@@ -6,15 +6,15 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 12:48:48 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 14:19:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:36:16 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-#include <fcntl.h>
-#include <stdlib.h>
 #include "../../../lib/get_next_line/get_next_line.h"
 #include "../../../lib/libft/libft.h"
+#include <fcntl.h>
+#include <stdlib.h>
 
 static int	len_no_newline(char *s)
 {

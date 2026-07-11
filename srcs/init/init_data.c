@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 15:58:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 17:58:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ int	ft_init_game(t_data *data)
 
 int	ft_init_data(t_data *data)
 {
-	if (init_full_map(data))
+	if (init_full_file(data) || init_maze(data))
 		return (1);
-	if (check_walls(data))
-		return (1);
-	if (init_player(data))
-		return (1);
+	// print_array(data->map.full_file);
+	// print_array(data->map.maze);
+	// if (check_walls(data))
+	// 	return (1);
+	// if (init_player(data))
+	// 	return (1);
 	// if ()
 	return (0);
 }

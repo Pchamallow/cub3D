@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 15:58:56 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:55:50 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	free_all(t_data *data)
 {
 	if (!data)
 		return ;
-	free_map(data->map.full_map);
-	free_map(data->map.maze_map);
+	free_map(data->map.full_file);
+	free_map(data->map.maze);
 	free_textures(&data->direction);
 	free_images(data);
 	if (data->mlx && data->win)

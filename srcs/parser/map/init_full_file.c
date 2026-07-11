@@ -42,17 +42,16 @@ static int	init_columns(t_data *data, char *line, int y)
 {
 	if (!line)
 		return (1);
-	data->map.full_map[y] = (char *)malloc((sizeof(char))
+	data->map.full_file[y] = (char *)malloc((sizeof(char))
 			* (data->map.columns + 1));
-	if (!data->map.full_map[y])
+	if (!data->map.full_file[y])
 	{
 		ft_display_error("Map - init columns - allocation memory failed");
 		return (1);
 	}
-	ft_bzero(data->map.full_map[y], data->map.columns);
-	ft_strlcpy(data->map.full_map[y], (const char *)line,
+	ft_bzero(data->map.full_file[y], data->map.columns);
+	ft_strlcpy(data->map.full_file[y], (const char *)line,
 		ft_strlen(line));
-	free(line);
 	return (0);
 }
 
@@ -67,7 +66,7 @@ static int	init_map_content(t_data *data)
 	map = &data->map;
 	fd = open(map->file_name, O_RDONLY);
 	line = get_next_line(fd);
-	while (y < map->lines)
+	while (y < data->map.lines)
 	{
 		if (init_columns(data, line, y))
 		{
@@ -76,6 +75,7 @@ static int	init_map_content(t_data *data)
 			close(fd);
 			return (1);
 		}
+		free(line);
 		line = get_next_line(fd);
 		y++;
 	}
@@ -84,28 +84,25 @@ static int	init_map_content(t_data *data)
 	return (0);
 }
 
-int	init_full_map(t_data *data)
+// en amount -> avoir bien tous les args
+// verification map existe
+int	init_full_file(t_data *data)
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
-	if (data->map.lines < 3 || data->map.columns < 3)
+	if (data->map.lines < 10 || data->map.columns < 6)
 	{
-		ft_display_error("Map is too small");
+		ft_display_error("Element is missing : arguments NO, SO, WE, EA, F, C and a valid map needed");
 		return (1);
 	}
-	if (data->map.lines > 50 || data->map.columns > 50)
+	data->map.full_file = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
+	if (!data->map.full_file)
 	{
-		ft_display_error("Map is too big, have to inbetween X and X (inclusive)");
+		ft_display_error("Map - init full_file - allocation memory failed");
 		return (1);
 	}
-	data->map.full_map = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
-	if (!data->map.full_map )
-	{
-		ft_display_error("Map - init full_map - allocation memory failed");
-		return (1);
-	}
-	if (data->map.full_map)
-		fill_null(data->map.full_map, data->map.lines);
+	if (data->map.full_file)
+		fill_null(data->map.full_file, data->map.lines);
 	if (init_map_content(data))
 		return (1);
 	return (0);
