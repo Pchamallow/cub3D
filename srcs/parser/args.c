@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 13:57:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 08:25:47 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:42:50 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ static int	map_invalid_format(char *map_str)
 {
 	if (!map_str || !map_str[0])
 	{
-		display_error("Empty map.");
+		ft_display_error("Empty map.");
 		return (1);
 	}
 	if (!ft_str_format(map_str, ".cub"))
 	{
-		display_error("Invalid map format, please use '.cub'");
+		ft_display_error("Invalid map format, please use '.cub'");
 		return (1);
 	}
 	return (0);
 }
 
-int	args_not_valid(int ac, char **av)
+int	ft_args_not_valid(int ac, char **av)
 {
 	if (ac != 2)
 	{
-		display_error("We accept only one arg that must be in .cub");
+		ft_display_error("We accept only one arg that must be in .cub");
 		return (1);
 	}
 	if (map_invalid_format(av[1]))
