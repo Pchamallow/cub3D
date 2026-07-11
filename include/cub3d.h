@@ -6,14 +6,14 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 09:52:02 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 10:09:24 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "macro.h"
+# include "macro.h"
 
 typedef struct s_map
 {
@@ -34,7 +34,7 @@ typedef struct s_direction
 
 typedef struct s_image
 {
-	char 	*path;
+	char	*path;
 	void	*image;
 	int		value;
 	int		width;
@@ -59,7 +59,7 @@ typedef struct s_color
 	int				r;
 	int				g;
 	int				b;
-} 			t_color;
+}			t_color;
 
 typedef struct s_data
 {
@@ -74,7 +74,7 @@ typedef struct s_data
 	t_player		player;
 	t_image			image;
 	t_map			map;
-	t_direction	direction;
+	t_direction		direction;
 }			t_data;
 
 // =============================
@@ -92,7 +92,7 @@ int		ft_init_game(t_data *data);
 // Error
 
 void	ft_display_error(char *error_msg);
-void	display_perror(void);
+void	ft_display_perror(void);
 int		ft_mlx_error(void);
 
 // free
