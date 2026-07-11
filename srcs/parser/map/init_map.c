@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "../../../lib/get_next_line/get_next_line.h"
+#include "../../../lib/libft/libft.h"
 
 // static int	is_whitespace(char c)
 // {
@@ -37,9 +42,10 @@ static int	init_columns(t_data *data, int y)
 {
 	data->map.full_map[y] = (char *)malloc((sizeof(char))
 			* (data->map.columns + 1));
-	// remettre securite
-	// if (!data->map.full_map[y])
-	// 	print_error_free(data, "Error\nMalloc failed.\n", 2);
+	if (!data->map.full_map[y])
+	{
+		ft_display_error("Invalid map format, please use '.cub'");
+	}
 	return (0);
 }
 

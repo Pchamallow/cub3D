@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 12:31:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 14:21:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_init_game(t_data *data)
 
 int	ft_init_data(t_data *data)
 {
-	init_full_map(data);
-	init_player(data);
+	init_full_map(data);// a securiser 
+	init_player(data); // a securiser
+	return (0);
 }

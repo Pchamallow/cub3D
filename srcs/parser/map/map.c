@@ -6,11 +6,14 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 12:26:58 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 14:20:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
+#include <stdlib.h>
+#include "../../../lib/get_next_line/get_next_line.h"
+#include "../../../lib/libft/libft.h"
 
 static int	is_whitespace(char c)
 {
@@ -151,7 +154,7 @@ int	check_path(t_data *data)
 	int		x;
 
 	init_maze(data);
-	init_player(&data->player, &data->map);
+	init_player(data);
 	y = data->player.y_start_p;
 	x = data->player.x_start_p;
 	// find_path(data, &data->map, y, x);
@@ -167,18 +170,10 @@ int	check_path(t_data *data)
 
 int main (int ac, char **av)
 {
-	// char	*line;
-	// line = get_next_line(fd);
-	// printf("%s\n", line);
-	// end_gnl(line, fd);
-
-	(void)av;
-	if (ac != 1)
-		return (1); // message error to print
-
-
 	t_data data;
 
+	(void)ac;
+	(void)av;
 	data.map.file_name = "/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub";
 	init_full_map(&data);
 	// init_maze_map(&data);

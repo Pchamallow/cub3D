@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 12:19:30 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 14:13:51 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ FREE_DIR	= srcs/free
 FREE_SRCS	= ${FREE_DIR}/free.c
 
 PARSER_DIR	= srcs/parser
-PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c	\
+PARSER_SRCS	= $(PARSER_DIR)/args.c				\
 				$(PARSER_DIR)/map/get_lines.c	\
 				$(PARSER_DIR)/map/init_map.c	\
 				$(PARSER_DIR)/map/map.c			\
