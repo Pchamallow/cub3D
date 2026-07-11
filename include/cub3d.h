@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 12:25:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 14:48:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,10 @@ int		ft_mlx_error(void);
 // free
 
 void	free_all(t_data *data);
+
+// utils
+
+void	fill_null(char **array, int len);
+
 
 #endif

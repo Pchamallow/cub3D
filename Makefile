@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 14:13:51 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 14:51:05 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,17 @@ FREE_DIR	= srcs/free
 FREE_SRCS	= ${FREE_DIR}/free.c
 
 PARSER_DIR	= srcs/parser
-PARSER_SRCS	= $(PARSER_DIR)/args.c				\
-				$(PARSER_DIR)/map/get_lines.c	\
-				$(PARSER_DIR)/map/init_map.c	\
-				$(PARSER_DIR)/map/map.c			\
+PARSER_SRCS	= $(PARSER_DIR)/args.c			\
+			$(PARSER_DIR)/map/get_lines.c	\
+			$(PARSER_DIR)/map/init_map.c	\
+			$(PARSER_DIR)/map/map.c
+
+UTILS_DIR	= srcs/utils
+UTILS_SRCS	= $(UTILS_DIR)/fill_null.c		\
+			$(UTILS_DIR)/image.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
-				${INIT_SRCS}
+				${INIT_SRCS} $(UTILS_SRCS)
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 

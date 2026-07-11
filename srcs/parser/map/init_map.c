@@ -45,6 +45,7 @@ static int	init_columns(t_data *data, int y)
 	if (!data->map.full_map[y])
 	{
 		ft_display_error("Invalid map format, please use '.cub'");
+		return (1);
 	}
 	return (0);
 }
@@ -63,28 +64,26 @@ static int	map_columns(t_data *data)
 	while (y < map->lines)
 	{
 		if (init_columns(data, y))
-			return (1); // rajouter au clean  {free(line), close(fd)}
+		{
+			free(line);
+			close(fd);
+			return (1);
+		}
 		ft_bzero(map->full_map[y], map->columns);
 		ft_strlcpy(map->full_map[y], (const char *)line,
 			ft_strlen(line));
 		free(line);
 		line = get_next_line(fd);
-		// rajouter securite si pas de line et close fd
+		if (!line)
+		{
+			close(fd);
+			return (1);
+		}
 		y++;
 	}
-	// free line
+	free(line);
 	close(fd);
 	return (0);
-}
-
-void	fill_null(char **array, int len)
-{
-	int i = 0;
-	while (i < len + 1)
-	{
-		array[i] = NULL;
-		i++;
-	}
 }
 
 int	init_full_map(t_data *data) // mettre dans init data.c dans init

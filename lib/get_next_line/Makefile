@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 11:41:49 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 14:41:52 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CFLAGS	= -Wall -Wextra -Werror
 
 SRC		:= get_next_line.c			\
 			get_next_line_utils.c	\
-			strlen_modifs.c
-			end_gnl.c				\
+			strlen_modifs.c			\
+			end_gnl.c
 
 OBJ		= $(SRC:.c=.o)
 
