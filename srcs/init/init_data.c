@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 10:20:42 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 15:58:24 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,18 @@ int	ft_init_game(t_data *data)
 	}
 	// init_textures(data);
 	// data->player.last_time = get_time(); animations
-	data->player.pos_x = data->player.x_start_p;
-	data->player.pos_y = data->player.y_start_p;
 	// init_hooks(data); --> event
+	return (0);
+}
+
+int	ft_init_data(t_data *data)
+{
+	if (init_full_map(data))
+		return (1);
+	if (check_walls(data))
+		return (1);
+	if (init_player(data))
+		return (1);
+	// if ()
 	return (0);
 }

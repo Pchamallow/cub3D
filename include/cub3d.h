@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 10:09:24 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:07:52 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct s_map
 {
 	char	**full_map;
+	char	**maze_map;
+	char	*file_name;
 	int		width;
 	int		height;
 	int		lines;
@@ -88,6 +90,12 @@ int		ft_args_not_valid(int ac, char **av);
 // Init data
 
 int		ft_init_game(t_data *data);
+int		ft_init_data(t_data *data);
+int		init_full_map(t_data *data);
+int		get_columns(char *file);
+int		get_lines(char *file);
+int		init_player(t_data *data);
+int		check_walls(t_data *data);
 
 // Error
 
@@ -95,8 +103,18 @@ void	ft_display_error(char *error_msg);
 void	ft_display_perror(void);
 int		ft_mlx_error(void);
 
-// free
+// Free
 
 void	free_all(t_data *data);
+
+// Utils
+
+void	fill_null(char **array, int len);
+
+// Debug
+
+void	print_maze(t_data *data);
+
+
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
+#    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 10:06:21 by nbaudoin         ###   ########.fr        #
+#    Updated: 2026/07/11 16:05:01 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,24 @@ INIT_DIR	= srcs/init
 INIT_SRCS	= ${INIT_DIR}/init_data.c
 
 ERROR_DIR	= srcs/error
-ERROR_SRCS	= $(ERROR_DIR)/error.c
+ERROR_SRCS	= $(ERROR_DIR)/error.c		\
+			$(ERROR_DIR)/debug.c
 
 FREE_DIR	= srcs/free
 FREE_SRCS	= ${FREE_DIR}/free.c
 
 PARSER_DIR	= srcs/parser
-PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c
+PARSER_SRCS	= $(PARSER_DIR)/args.c			\
+			$(PARSER_DIR)/map/get_lines.c	\
+			$(PARSER_DIR)/map/init_map.c	\
+			$(PARSER_DIR)/map/check_walls.c
+
+UTILS_DIR	= srcs/utils
+UTILS_SRCS	= $(UTILS_DIR)/fill_null.c		\
+			$(UTILS_DIR)/image.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
-				${INIT_SRCS}
+				${INIT_SRCS} $(UTILS_SRCS)
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
@@ -94,7 +102,7 @@ $(NAME): $(OBJS) $(MLX) $(LIBFT) $(GNL)
 # Compilation .c -> .o
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	@if [ -f "$(DIR_MLX)/Makefile" ]; then $(MAKE) -C $(DIR_MLX) clean -s; fi

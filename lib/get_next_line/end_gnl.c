@@ -10,27 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "get_next_line.h"
 
-int	len_no_newline(char *s)
-{
-	long int	i;
+/*
+* End get next line without leaks
+* 1. use gnl
+* fd = open(name_file, O_RDONLY);
+* 	if (fd < 0)
+*		return (1);
+*	line = get_next_line(fd);
+* 2. read until end
+* end_gnl(line, fd);
+*/
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != '\n')
-		i++;
-	return (i);
-}
-
-int	end_gnl(char *line, int fd, int end)
+int	end_gnl(char *line, int fd)
 {
 	free(line);
 	line = get_next_line(fd);
 	if (!line)
 		return (close(fd), 0);
-	while (end--)
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -39,50 +38,3 @@ int	end_gnl(char *line, int fd, int end)
 	return (0);
 }
 
-int	end_file(char *file)
-{
-	int		fd;
-	char	*line;
-	int		end;
-
-	end = 0;
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	line = get_next_line(fd);
-	if (!line)
-		return (close(fd), 0);
-	while (line)
-	{
-		end++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (end);
-}
-
-// find max len line
-int	map_max_len(char *file)
-{
-	int		fd;
-	char	*line;
-	int		max_len;
-
-	max_len = 0;
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	line = get_next_line(fd);
-	if (!line)
-		return (close(fd), 0);
-	while (line)
-	{
-		if (max_len <= len_no_newline(line))
-			max_len = len_no_newline(line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (max_len);
-}

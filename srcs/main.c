@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 14:27:43 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:09:30 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int main (int ac, char **av)
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_args_not_valid(ac, av))
 		return (1);
-	// parse map
-	if (ft_init_game(&data))
+	data.map.file_name = av[1];
+	if (ft_init_game(&data) || ft_init_data(&data))
 		return (1);
+	// if (parse map)
+	// return (1);
 	// mlx_loop_hook
-	mlx_loop(data.mlx);
+	// mlx_loop(data.mlx);
+	free_all(&data);
 	return (0);
 }
