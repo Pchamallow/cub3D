@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 15:45:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:26:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,32 +115,34 @@ static void init_maze(t_data *data)
 	return ;
 }
 
-void	init_player(t_player *player, t_map *map)
+void	init_player(t_data *data)// remplacer par data et renommer les variables
 {
 	int	y;
 	int	x;
 
 	y = 0;
 	// player->moves = 0;
-	while (map->maze_map[y])
+	while (data->map.maze_map[y])
 	{
 		x = 0;
-		while (map->maze_map[y][x])
+		while (data->map.maze_map[y][x])
 		{
-			if (map->maze_map[y][x] == 'N'
-				|| map->maze_map[y][x] == 'S'
-				|| map->maze_map[y][x] == 'E'
-				|| map->maze_map[y][x] == 'W')
+			if (data->map.maze_map[y][x] == 'N'
+				|| data->map.maze_map[y][x] == 'S'
+				|| data->map.maze_map[y][x] == 'E'
+				|| data->map.maze_map[y][x] == 'W')
 			{
-				player->x_start_p = x;
-				player->y_start_p = y;
-				printf("%c %c\n", player->x_start_p, player->y_start_p);
+				data->player.x_start_p = x;
+				data->player.y_start_p = y;
+				// printf("%c %c\n", data->player.x_start_p, data->player.y_start_p);
 				return ;
 			}
 			x++;
 		}
 		y++;
 	}
+	data->player.pos_x = data->player.x_start_p;
+	data->player.pos_y = data->player.y_start_p;
 }
 
 int	check_path(t_data *data)

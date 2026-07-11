@@ -99,6 +99,7 @@ int	init_full_map(t_data *data) // mettre dans init data.c dans init
 		fill_null(data->map.full_map, data->map.lines);
 	if (map_columns(data))
 		return (1);
+	// faire init player
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 12:19:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:32:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int main (int ac, char **av)
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_args_not_valid(ac, av))
 		return (1);
-	// parse map + init map
-	if (ft_init_game(&data))
+	if (ft_init_game(&data) || ft_init_data(&data))
 		return (1);
+	// if (parse map)
+	// return (1);
 	// mlx_loop_hook
 	mlx_loop(data.mlx);
 	return (0);
