@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 17:44:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 18:07:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_map
 	int		height;
 	int		lines;
 	int		columns;
+	int		wall_missing;
 }				t_map;
 
 typedef struct s_direction

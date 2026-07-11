@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 17:58:36 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 18:51:55 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static int	init_maze_content(t_data *data, int after_args)
 	while (data->map.full_file[i])
 	{
 		data->map.maze[j] = (char *)malloc((sizeof(char))
-				* (data->map.columns + 1));
+				* ft_strlen(data->map.full_file[i]) + 1);
 		if (!data->map.maze[j])
 		{
 			ft_display_error("Maze - content - allocation memory failed");
 			free_all(data);
 			return (1);
 		}
-		ft_bzero(data->map.maze[j], data->map.columns);
+		ft_bzero(data->map.maze[j], ft_strlen(data->map.full_file[i]));
 		ft_strlcpy(data->map.maze[j], (const char *)data->map.full_file[i],
 			(data->map.columns + 1));
 		i++;

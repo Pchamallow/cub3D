@@ -43,13 +43,13 @@ static int	init_columns(t_data *data, char *line, int y)
 	if (!line)
 		return (1);
 	data->map.full_file[y] = (char *)malloc((sizeof(char))
-			* (data->map.columns + 1));
+			* ft_strlen(line) + 1);
 	if (!data->map.full_file[y])
 	{
 		ft_display_error("Map - init columns - allocation memory failed");
 		return (1);
 	}
-	ft_bzero(data->map.full_file[y], data->map.columns);
+	ft_bzero(data->map.full_file[y], ft_strlen(line));
 	ft_strlcpy(data->map.full_file[y], (const char *)line,
 		ft_strlen(line));
 	return (0);
