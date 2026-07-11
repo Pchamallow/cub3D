@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 15:25:19 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 16:05:01 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ INIT_DIR	= srcs/init
 INIT_SRCS	= ${INIT_DIR}/init_data.c
 
 ERROR_DIR	= srcs/error
-ERROR_SRCS	= $(ERROR_DIR)/error.c
+ERROR_SRCS	= $(ERROR_DIR)/error.c		\
+			$(ERROR_DIR)/debug.c
 
 FREE_DIR	= srcs/free
 FREE_SRCS	= ${FREE_DIR}/free.c
