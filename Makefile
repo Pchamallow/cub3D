@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 11:40:34 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 12:19:30 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ NC			:='\033[0m'
 
 # Sources
 
+INIT_DIR	= srcs/init
+INIT_SRCS	= ${INIT_DIR}/init_data.c
+
 ERROR_DIR	= srcs/error
 ERROR_SRCS	= $(ERROR_DIR)/error.c
 
@@ -45,7 +48,8 @@ PARSER_SRCS	= $(PARSER_DIR)/args.c $(PARSER_DIR)/map.c	\
 				$(PARSER_DIR)/map/init_map.c	\
 				$(PARSER_DIR)/map/map.c			\
 
-SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS}
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
+				${INIT_SRCS}
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 

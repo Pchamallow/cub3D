@@ -6,14 +6,14 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 11:34:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:18:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "macro.h"
+# include "macro.h"
 
 typedef struct s_map
 {
@@ -36,7 +36,7 @@ typedef struct s_direction
 
 typedef struct s_image
 {
-	char 	*path;
+	char	*path;
 	void	*image;
 	int		value;
 	int		width;
@@ -46,18 +46,22 @@ typedef struct s_image
 
 typedef struct s_player
 {
-	int	x_start_p;
-	int	y_start_p;
-	int	pos_x;
-	int	pos_y;
+	int				x_start_p;
+	int				y_start_p;
+	int				pos_x;
+	int				pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 }			t_player;
 
 typedef struct s_color
 {
-	int				R;
-	int				G;
-	int				B;
-} 			t_color;
+	int				r;
+	int				g;
+	int				b;
+}			t_color;
 
 typedef struct s_data
 {
@@ -72,7 +76,7 @@ typedef struct s_data
 	t_player		player;
 	t_image			image;
 	t_map			map;
-	t_direction	direction;
+	t_direction		direction;
 }			t_data;
 
 // =============================
@@ -81,16 +85,20 @@ typedef struct s_data
 
 // Parser
 
-int		args_not_valid(int ac, char **av);
+int		ft_args_not_valid(int ac, char **av);
+
+// Init data
+
+int		ft_init_game(t_data *data);
 int		init_full_map(t_data *data);
 int		get_columns(char *file);
 int		get_lines(char *file);
 
 // Error
 
-void	display_error(char *error_msg);
-void	display_perror(void);
-int		mlx_error(void);
+void	ft_display_error(char *error_msg);
+void	ft_display_perror(void);
+int		ft_mlx_error(void);
 
 // free
 
