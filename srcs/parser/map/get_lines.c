@@ -6,11 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 12:48:48 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/10 12:53:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:00:45 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
+#include <fcntl.h>
 
 static int	len_no_newline(char *s)
 {
