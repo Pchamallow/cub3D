@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 16:46:20 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 10:09:49 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 10:20:05 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@
 
 # define MAX_WIDTH_WINDOW 1920
 # define MAX_HEIGHT_WINDOW 1080
+# define WIDTH_WINDOW 1280
+# define HEIGHT_WINDOW 720
 
 # ifndef ESC
 #  define ESC 65307

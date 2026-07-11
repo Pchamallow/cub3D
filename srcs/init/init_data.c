@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 10:07:16 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 10:20:42 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	*init_window(t_data *data)
 {
 	void	*ptr;
 
-	data->height = data->map.height;
-	data->width = data->map.width;
+	data->height = HEIGHT_WINDOW;
+	data->width = WIDTH_WINDOW;
 	ptr = mlx_new_window(data->mlx, data->width, data->height, "cub3d");
 	return (ptr);
 }
