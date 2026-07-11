@@ -69,12 +69,12 @@ static int	map_columns(t_data *data)
 	return (0);
 }
 
-void	fill_null()
+void	fill_null(char **array, int len)
 {
 	int i = 0;
-	while (i < data->map.lines + 1)
+	while (i < len + 1)
 	{
-		data->map.full_map[i] = NULL;
+		array[i] = NULL;
 		i++;
 	}
 }
@@ -94,13 +94,7 @@ int	init_full_map(t_data *data)
 	// 	print_error_free(data, "Error\nMalloc failed.\n", 2);
 	// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
 	if (data->map.full_map)
-		ft_bzero(data->map.full_map, data->map.lines + 1);
-	// int i = 0;
-	// while (i < data->map.lines + 1)
-	// {
-	// 	data->map.full_map[i] = NULL;
-	// 	i++;
-	// }
+		fill_null(data->map.full_map, data->map.lines);
 	if (map_columns(data))
 		return (1);
 	return (0);
