@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 15:08:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 15:59:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,24 @@ int	init_player(t_data *data)// remplacer par data et renommer les variables
 	return (1);
 }
 
-int	check_path(t_data *data)
+// FOR DEBUG ONLY
+void	print_maze(t_data *data)
+{
+	int y = 0;
+	while (data->map.maze_map[y])
+	{
+		printf("%s\n", data->map.maze_map[y]);
+		y++;
+	}
+}
+
+int	check_walls(t_data *data)
 {
 	int		y;
 	int		x;
 
 	init_maze(data);
+	print_maze(data);
 	y = data->player.y_start_p;
 	x = data->player.x_start_p;
 	// find_path(data, &data->map, y, x);
@@ -169,5 +181,3 @@ int	check_path(t_data *data)
 	// free_maze(game, maze);
 	return (0);
 }
-
-// 

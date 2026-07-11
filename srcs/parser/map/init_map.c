@@ -93,7 +93,7 @@ int	init_full_map(t_data *data)
 		ft_display_error("Map is too small");
 		return (1);
 	}
-	if (data->map.lines > 15 || data->map.columns > 31)
+	if (data->map.lines > 50 || data->map.columns > 50)
 	{
 		ft_display_error("Map is too big, have to inbetween X and X (inclusive)");
 		return (1);
