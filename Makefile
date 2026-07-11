@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
+#    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 16:05:01 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/11 16:25:27 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,13 @@ NC			:='\033[0m'
 INIT_DIR	= srcs/init
 INIT_SRCS	= ${INIT_DIR}/init_data.c
 
-ERROR_DIR	= srcs/error
-ERROR_SRCS	= $(ERROR_DIR)/error.c		\
-			$(ERROR_DIR)/debug.c
+EVENT_UI_DIR= srcs/events/ui
+EVENT_UI_SRCS= ${EVENT_UI_DIR}/close.c
 
-FREE_DIR	= srcs/free
-FREE_SRCS	= ${FREE_DIR}/free.c
+EVENT_DIR	= srcs/events
+EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c ${EVENT_UI_SRCS}
+
+
 
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c			\
@@ -49,12 +50,19 @@ PARSER_SRCS	= $(PARSER_DIR)/args.c			\
 			$(PARSER_DIR)/map/init_map.c	\
 			$(PARSER_DIR)/map/check_walls.c
 
+ERROR_DIR	= srcs/error
+ERROR_SRCS	= $(ERROR_DIR)/error.c		\
+			$(ERROR_DIR)/debug.c
+
+FREE_DIR	= srcs/free
+FREE_SRCS	= ${FREE_DIR}/free.c
+
 UTILS_DIR	= srcs/utils
 UTILS_SRCS	= $(UTILS_DIR)/fill_null.c		\
 			$(UTILS_DIR)/image.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
-				${INIT_SRCS} $(UTILS_SRCS)
+				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS}
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 

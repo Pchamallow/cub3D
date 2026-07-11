@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 13:57:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 15:00:50 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:30:55 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ int	ft_args_not_valid(int ac, char **av)
 		return (1);
 	return (0);
 }
-

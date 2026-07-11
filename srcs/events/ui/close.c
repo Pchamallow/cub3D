@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_null.c                                        :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 16:33:48 by nbaudoin         ###   ########.fr       */
+/*   Created: 2026/07/11 16:11:44 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/07/11 16:32:46 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../../include/cub3d.h"
 #include <stdlib.h>
 
-void	fill_null(char **array, int len)
+int	close_esc(int keycode, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < len + 1)
+	if (keycode == ESC)
 	{
-		array[i] = NULL;
-		i++;
+		free_all(data);
+		exit(0);
 	}
+	return (0);
+}
+
+int	close_window(t_data *data)
+{
+	free_all(data);
+	exit(0);
+	return (0);
 }

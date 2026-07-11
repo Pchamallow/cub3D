@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 15:58:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:35:34 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ int	ft_init_game(t_data *data)
 		ft_mlx_error();
 		return (1);
 	}
-	// init_textures(data);
-	// data->player.last_time = get_time(); animations
-	// init_hooks(data); --> event
+	ft_init_hooks(data);
 	return (0);
 }
 
@@ -53,6 +51,5 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (init_player(data))
 		return (1);
-	// if ()
 	return (0);
 }

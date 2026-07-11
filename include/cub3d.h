@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 16:07:52 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:29:53 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,13 @@ int		get_lines(char *file);
 int		init_player(t_data *data);
 int		check_walls(t_data *data);
 
+// Events
+
+int		close_esc(int keycode, t_data *data);
+int		close_window(t_data *data);
+int		handle_keypress(int keycode, void *param);
+void	ft_init_hooks(t_data *data);
+
 // Error
 
 void	ft_display_error(char *error_msg);
@@ -114,7 +121,5 @@ void	fill_null(char **array, int len);
 // Debug
 
 void	print_maze(t_data *data);
-
-
 
 #endif

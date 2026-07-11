@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 16:07:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 16:31:30 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	find_path(t_data *game, t_map *map, int y, int x)
 	columns = game->map.columns;
 	if (y < 0 || x < 0 || y >= lines || x >= columns
 		|| map->maze_map[y][x] == '1' || map->maze_map[y][x] == 'N')
-		// parcourir la map -> verifier s il y a plus d un au choix (N S, E  ou W)
+		// parcourir la map -> verifier s il y a plus d un au choix
+		// (N S, E  ou W)
 		// autre choses que 0 1 ou \n mais que pour le bout de lignes
 		return ;
 	else
@@ -64,7 +65,7 @@ void	find_path(t_data *game, t_map *map, int y, int x)
 	return ;
 }
 
-static void init_maze(t_data *data)
+static	void init_maze(t_data *data)
 {
 	int		i;
 	int		j;
@@ -76,7 +77,7 @@ static void init_maze(t_data *data)
 	int lines = data->map.lines - index_apres_les_args;
 	if (lines <= 0)
 		return ; // error :  pas de map
-	// 
+	//
 	data->map.maze_map = (char **)malloc((sizeof(char *)) * (lines + 1));
 	// if (!data->map.maze_map)
 	// 	print_error_free(game, "Error\nMalloc failed.\n", 2);
@@ -129,20 +130,9 @@ int	init_player(t_data *data)// remplacer par data et renommer les variables
 		}
 		y++;
 	}
-	// no player  start finded 
+	// no player  start finded
 	// print error message
 	return (1);
-}
-
-// FOR DEBUG ONLY
-void	print_maze(t_data *data)
-{
-	int y = 0;
-	while (data->map.maze_map[y])
-	{
-		printf("%s\n", data->map.maze_map[y]);
-		y++;
-	}
 }
 
 int	check_walls(t_data *data)
