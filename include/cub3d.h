@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 01:51:49 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:23:22 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,21 @@ typedef struct s_image
 
 typedef struct s_player
 {
-	int	x_start_p;
-	int	y_start_p;
-	int	pos_x;
-	int	pos_y;
+	int				x_start_p;
+	int				y_start_p;
+	int				pos_x;
+	int				pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 }			t_player;
 
 typedef struct s_color
 {
-	int				R;
-	int				G;
-	int				B;
+	int				r;
+	int				g;
+	int				b;
 } 			t_color;
 
 typedef struct s_data
