@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 14:48:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 15:06:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ int		ft_args_not_valid(int ac, char **av);
 // Init data
 
 int		ft_init_game(t_data *data);
+int		ft_init_data(t_data *data);
 int		init_full_map(t_data *data);
 int		get_columns(char *file);
 int		get_lines(char *file);
-void	init_player(t_data *data);
+int		init_player(t_data *data);
 
 // Error
 

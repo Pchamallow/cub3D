@@ -38,19 +38,25 @@
 // 	return (1);
 // }
 
-static int	init_columns(t_data *data, int y)
+static int	init_columns(t_data *data, char *line, int y)
 {
+	if (!line)
+		return (1);
 	data->map.full_map[y] = (char *)malloc((sizeof(char))
 			* (data->map.columns + 1));
 	if (!data->map.full_map[y])
 	{
-		ft_display_error("Invalid map format, please use '.cub'");
+		ft_display_error("Map - init columns - allocation memory failed");
 		return (1);
 	}
+	ft_bzero(data->map.full_map[y], data->map.columns);
+	ft_strlcpy(data->map.full_map[y], (const char *)line,
+		ft_strlen(line));
+	free(line);
 	return (0);
 }
 
-static int	map_columns(t_data *data)
+static int	init_map_content(t_data *data)
 {
 	t_map *map;
 	char	*line;
@@ -63,22 +69,14 @@ static int	map_columns(t_data *data)
 	line = get_next_line(fd);
 	while (y < map->lines)
 	{
-		if (init_columns(data, y))
+		if (init_columns(data, line, y))
 		{
-			free(line);
+			if (line)
+				free(line);
 			close(fd);
 			return (1);
 		}
-		ft_bzero(map->full_map[y], map->columns);
-		ft_strlcpy(map->full_map[y], (const char *)line,
-			ft_strlen(line));
-		free(line);
 		line = get_next_line(fd);
-		if (!line)
-		{
-			close(fd);
-			return (1);
-		}
 		y++;
 	}
 	free(line);
@@ -86,27 +84,33 @@ static int	map_columns(t_data *data)
 	return (0);
 }
 
-int	init_full_map(t_data *data) // mettre dans init data.c dans init
+int	init_full_map(t_data *data)
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
-	// if (game->map.lines <3 || game->map.columns < 3)
-	// securites, choisir les chiffres
-		// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
-	// if (game->map.lines > 15 || game->map.columns > 31)
-	// 	print_error("Error\nMap is too big. Please, remove some tree.\n", 2);
+	if (data->map.lines < 3 || data->map.columns < 3)
+	{
+		ft_display_error("Map is too small");
+		return (1);
+	}
+	if (data->map.lines > 15 || data->map.columns > 31)
+	{
+		ft_display_error("Map is too big, have to inbetween X and X (inclusive)");
+		return (1);
+	}
 	data->map.full_map = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
-	// remettre securite
-	// if (!data->map.full_map ) 
-	// 	print_error_free(data, "Error\nMalloc failed.\n", 2);
-	// print_error("Error\nMap is too small. Please, add some tree.\n", 2);
+	if (!data->map.full_map )
+	{
+		ft_display_error("Map - init full_map - allocation memory failed");
+		return (1);
+	}
 	if (data->map.full_map)
 		fill_null(data->map.full_map, data->map.lines);
-	if (map_columns(data))
+	if (init_map_content(data))
 		return (1);
-	// faire init player
 	return (0);
 }
+
 
 // // min 3 lines / min 5 columns
 // // first and last lines, begin and end (only 1), all lines = same len, 

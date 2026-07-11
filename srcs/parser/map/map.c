@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 14:48:59 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/11 15:08:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static void init_maze(t_data *data)
 	return ;
 }
 
-void	init_player(t_data *data)// remplacer par data et renommer les variables
+int	init_player(t_data *data)// remplacer par data et renommer les variables
 {
 	int	y;
 	int	x;
@@ -137,15 +137,18 @@ void	init_player(t_data *data)// remplacer par data et renommer les variables
 			{
 				data->player.x_start_p = x;
 				data->player.y_start_p = y;
+				data->player.pos_x = data->player.x_start_p;
+				data->player.pos_y = data->player.y_start_p;
 				// printf("%c %c\n", data->player.x_start_p, data->player.y_start_p);
-				return ;
+				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
-	data->player.pos_x = data->player.x_start_p;
-	data->player.pos_y = data->player.y_start_p;
+	// no player  start finded 
+	// print error message
+	return (1);
 }
 
 int	check_path(t_data *data)
@@ -154,7 +157,6 @@ int	check_path(t_data *data)
 	int		x;
 
 	init_maze(data);
-	init_player(data);
 	y = data->player.y_start_p;
 	x = data->player.x_start_p;
 	// find_path(data, &data->map, y, x);
@@ -168,34 +170,4 @@ int	check_path(t_data *data)
 	return (0);
 }
 
-int main (int ac, char **av)
-{
-	t_data data;
-	int y = 0;
-
-	(void)ac;
-	(void)av;
-	data.map.file_name = "/home/pswirgie/Documents/04_Milestone_04/cub3d/assets/minimalist.cub";
-	init_full_map(&data);
-
-	// // PRINT MAP COPY
-	y = 0;
-	while (data.map.full_map[y])
-	{
-		printf("index = %d, %s\n", y, data.map.full_map[y]);
-		y++;
-	}
-	
-	check_path(&data);
-
-	// // PRINT MAZE COPY
-	y = 0;
-	while (data.map.maze_map[y])
-	{
-		printf("%s\n", data.map.maze_map[y]);
-		y++;
-	}
-	
-	return (0);
-	
-}
+// 
