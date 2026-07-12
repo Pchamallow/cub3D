@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 13:50:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 14:02:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define CUB3D_H
 
 # include "macro.h"
+
+# define RED "\033[38;5;1m"
+# define RESET "\x1b[0m"
 
 typedef struct s_map
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 16:35:08 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 10:07:27 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/12 14:03:43 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	ft_display_error(char *error_msg)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_printf_fd(2, RED "Error\n");
 	ft_putstr_fd(error_msg, 2);
-	ft_putchar_fd('\n', 2);
+	ft_printf_fd(2, "\n" RESET);
 }
 
 void	ft_display_perror(void)

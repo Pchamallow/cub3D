@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 13:59:01 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 14:01:28 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int is_invalid_chr(t_data *data, int y)
 			&& c != 'N' && c != 'S' && c != 'E'
 			&& c != 'W')
 		{
-			ft_display_error("Invalid character : requiered only 0, 1, spaces and N/S/E/W");
+			ft_display_error("Invalid character: requiered only 0, 1, spaces and N/S/E/W");
 			free_all(data);
 			return (1);
 		}
