@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:18:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:01:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int		ft_args_not_valid(int ac, char **av);
 int		ft_init_game(t_data *data);
 int		ft_init_data(t_data *data);
 int		init_full_file(t_data *data);
-int		get_columns(char *file);
-int		get_lines(char *file);
+int		get_columns(t_data *data);
+int		get_lines(t_data *data);
 // int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
 

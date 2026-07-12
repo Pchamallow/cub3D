@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:14:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:04:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	init_maze_full(t_data *data, int after_args)
 	if (!data->map.maze)
 	{
 		ft_display_error("Maze - full_file - allocation memory failed");
-		free_all(data);
 		return (1);
 	}
 	fill_null(data->map.maze, data->map.lines + 2);
@@ -59,7 +58,6 @@ static int	get_index_after_args(t_data *data)
 		i++;
 	}
 	ft_display_error("Map is missing");
-	free_all(data);
 	return (0);
 }
 
@@ -83,13 +81,11 @@ static int	get_nblines_maze(t_data *data)
 	if (!data->map.start_count)
 	{
 		ft_display_error("Player starting position is missing");
-		free_all(data);
 		return (1);
 	}
 	if (lines <= 0)
 	{
 		ft_display_error("Map is missing");
-		free_all(data);
 		return (1);
 	}
 	data->map.lines = lines;
@@ -107,7 +103,6 @@ int init_maze(t_data *data)
 		|| data->map.lines > 300 || data->map.columns > 300)
 	{
 		ft_display_error("Map size is invalid, must be between 3x3 and 300x300 (inclusive)");
-		free_all(data);
 		return (1);
 	}
 	data->map.columns += 3;

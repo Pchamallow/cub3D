@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 09:25:45 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:02:15 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:04:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_valid_maze(t_data *data)
 	{
 		// message errreur pas player start trouve
 		ft_display_error("Player starting position is missing");
-		free_all(data);
 		return (1);
 	}
 	if (check_walls(data))

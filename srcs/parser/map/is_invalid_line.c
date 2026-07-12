@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:05:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:04:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int is_invalid_player(t_data *data, int y)
 			if (data->map.start_count > 1)
 			{
 				ft_display_error("Too many player starting positions, only one is allowed");
-				free_all(data);
 				return (1);
 			}
 		}
@@ -60,7 +59,6 @@ static int is_invalid_chr(t_data *data, int y)
 			else
 				ft_printf_fd(2, RED "Invalid character found: %c\n", c);
 			ft_printf_fd(2, "(only 0, 1, spaces and N/S/E/W are allowed)\n" RESET);
-			free_all(data);
 			return (1);
 		}
 		j++;

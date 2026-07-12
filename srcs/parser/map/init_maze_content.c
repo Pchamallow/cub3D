@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:14:44 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 15:33:03 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:04:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	init_fill_x(t_data *data, int y, int len)
 	if (!data->map.maze[y])
 	{
 		ft_display_error("Maze - content - allocation memory failed");
-		free_all(data);
 		return (1);
 	}
 	ft_bzero(data->map.maze[y], data->map.columns + 1);
@@ -62,7 +61,6 @@ static int	init_maze_line(t_data *data, int j, int i)
 	if (!data->map.maze[j])
 	{
 		ft_display_error("Maze - content - allocation memory failed");
-		free_all(data);
 		return (1);
 	}
 	ft_bzero(data->map.maze[j], data->map.columns + 1);

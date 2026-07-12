@@ -17,27 +17,6 @@
 #include "../../../lib/get_next_line/get_next_line.h"
 #include "../../../lib/libft/libft.h"
 
-// static int	is_whitespace(char c)
-// {
-// 	if (c == ' ' || (c >= '\t' && c <= '\r'))
-// 		return (1);
-// 	return (0);
-// }
-
-// static int	str_iswhitespaces(char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s && s[i])
-// 	{
-// 		if (!is_whitespace(s[i]))
-// 			return (0);
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
 static int	init_columns(t_data *data, char *line, int y)
 {
 	if (!line)
@@ -47,7 +26,6 @@ static int	init_columns(t_data *data, char *line, int y)
 	if (!data->map.full_file[y])
 	{
 		ft_display_error("Map - init columns - allocation memory failed");
-		free_all(data);
 		return (1);
 	}
 	ft_bzero(data->map.full_file[y], ft_strlen(line));
@@ -66,6 +44,11 @@ static int	init_map_content(t_data *data)
 	y = 0;
 	map = &data->map;
 	fd = open(map->file_name, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_display_perror();
+		return (1);
+	}
 	line = get_next_line(fd);
 	while (y < data->map.lines)
 	{
@@ -85,27 +68,23 @@ static int	init_map_content(t_data *data)
 	return (0);
 }
 
-// en amount -> avoir bien tous les args
-// verification map existe
 int	init_full_file(t_data *data)
 {
-	data->map.lines = get_lines(data->map.file_name);
-	data->map.columns = get_columns(data->map.file_name);
-	ft_printf_fd(2, "[DEBUG] lines = %d col = %d\n",
-		data->map.lines, data->map.columns);
+	if (get_lines(data)
+		|| get_columns(data))
+		return (1);
+	// ft_printf_fd(2, "[DEBUG] lines = %d col = %d\n",
+	// 	data->map.lines, data->map.columns);
 	if (data->map.lines < 10 || data->map.columns < 6
 		|| data->map.lines > 350 || data->map.columns > 350)
 	{
 		ft_display_error("Map size is invalid, must be 6x10 and 350x350 (inclusive)");
-		free_all(data);
-		// revoir formulation ??
 		return (1);
 	}
 	data->map.full_file = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
 	if (!data->map.full_file)
 	{
 		ft_display_error("Map - init full_file - allocation memory failed");
-		free_all(data);
 		return (1);
 	}
 	if (data->map.full_file)

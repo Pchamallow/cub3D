@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:18:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:43:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ int	main(int ac, char **av)
 
 	ft_bzero(&data, sizeof(t_data));
 	if (ft_args_not_valid(ac, av))
-		return (1);
+	{
+		free_all(&data);
+		exit (1);
+	}
 	data.map.file_name = av[1];
 	if (ft_init_game(&data) || ft_init_data(&data))
-		return (1);
+	{
+		free_all(&data);
+		exit (1);
+	}
 	mlx_loop(data.mlx);
 	free_all(&data);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 12:48:48 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:44:55 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:00:43 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,26 @@ static int	len_no_newline(char *s)
 	return (i);
 }
 
-int	get_columns(char *file)
+int	get_columns(t_data *data)
 {
 	int		fd;
 	char	*line;
 	int		max_len;
 
 	max_len = 0;
-	fd = open(file, O_RDONLY);
+	fd = open(data->map.file_name, O_RDONLY);
 	if (fd < 0)
+	{
+		ft_display_perror();
 		return (1);
+	}
 	line = get_next_line(fd);
 	if (!line)
-		return (close(fd), 0);
+	{
+		close(fd);
+		data->map.columns = 0;
+		return (0);
+	}
 	while (line)
 	{
 		if (max_len <= len_no_newline(line))
@@ -49,22 +56,30 @@ int	get_columns(char *file)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (max_len);
+	data->map.columns = max_len;
+	return (0);
 }
 
-int	get_lines(char *file)
+int	get_lines(t_data *data)
 {
 	int		fd;
 	char	*line;
 	int		end;
 
 	end = 0;
-	fd = open(file, O_RDONLY);
+	fd = open(data->map.file_name, O_RDONLY);
 	if (fd < 0)
+	{
+		ft_display_perror();
 		return (1);
+	}
 	line = get_next_line(fd);
 	if (!line)
-		return (close(fd), 0);
+	{
+		close(fd);
+		data->map.lines = 0;
+		return (0);
+	}
 	while (line)
 	{
 		end++;
@@ -72,5 +87,6 @@ int	get_lines(char *file)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (end);
+	data->map.lines = end;
+	return (0);
 }

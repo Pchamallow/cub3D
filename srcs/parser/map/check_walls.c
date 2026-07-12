@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:19:41 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:04:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,171 +15,6 @@
 #include "../../../lib/get_next_line/get_next_line.h"
 #include <stdlib.h>
 
-
-// V001
-// //find a path to take all collectibles and exit
-// void	find_path(t_data *data, int y, int x)
-// {
-// 	int	lines;
-// 	int	columns;
-
-// 	lines = data->map.lines;
-// 	columns = data->map.columns;
-// 	if (y < 0 || x < 0 || y >= lines || x >= columns
-// 		|| data->map.maze[y][x] == '1' || data->map.maze[y][x] == 'N')
-// 		// parcourir la map -> verifier s il y a plus d un au choix (N S, E  ou W)
-// 		// autre choses que 0 1 ou \n mais que pour le bout de lignes
-// 		return ;
-// 	else
-// 	{
-// 		// if (data->map.maze[y][x] == 'C')
-// 		// 	data->collect.value--;
-// 		if (data->map.maze[y][x] == '\0'
-// 			|| data->map.maze[y][x] == '\n')
-// 			data->map.wall_missing++;
-// 		data->map.maze[y][x] = 'N';
-// 		find_path(data, y + 1, x);
-// 		find_path(data, y - 1, x);
-// 		find_path(data, y, x + 1);
-// 		find_path(data, y, x - 1);
-// 	}
-// 	return ;
-// }
-		// if (data->map.maze[y][x] == 'C')
-		// 	data->collect.value--;
-		// if (data->map.maze[y][x] == '1')
-		// {
-		// 	int wall = 0;
-		// 	if (data->map.maze[y + 1] && data->map.maze[y + 1][x]
-		// 		&& data->map.maze[y + 1][x] == '1')
-		// 		wall++;
-		// 	if (data->map.maze[y - 1] && data->map.maze[y - 1][x]
-		// 		&& data->map.maze[y - 1][x] == '1')
-		// 		wall++;
-		// 	if (data->map.maze[y] && data->map.maze[y][x + 1]
-		// 		&& data->map.maze[y][x + 1] == '1')
-		// 		wall++;
-		// 	if (data->map.maze[y] && data->map.maze[y][x - 1]
-		// 		&& data->map.maze[y][x - 1] == '1')
-		// 		wall++;
-		// 	if (wall < 2)
-		// 		data->map.wall_missing++;
-		// 	// ft_printf_fd(2, "wall is missing"); // a reformuler
-		// 	// return ;
-		// }
-
-// V002
-// int	find_path(t_data *data, int y, int x)
-// {
-// 	int	lines;
-// 	// int	columns;
-
-// 	lines = data->map.lines;
-// 	// columns = data->map.columns;
-// 	if (y < 0 || x < 0
-// 		|| y >= lines
-// 		|| x >= (int)ft_strlen(data->map.maze[y])
-// 		|| is_whitespace(data->map.maze[y][x]))
-// 		// parcourir la map -> verifier s il y a plus d un au choix (N S, E  ou W)
-// 		// autre choses que 0 1 ou \n mais que pour le bout de lignes
-// 	{
-// 		data->map.wall_missing++;
-// 		return (1);
-// 	}
-// 	else
-// 	{
-// 		if (data->map.maze[y][x] == '1'
-// 			|| data->map.maze[y][x] == 'X')
-// 			// && data->map.maze[y][x] != '0'
-// 			// && data->map.maze[y][x] != 'N') // a remplacer par la lettre du player start
-// 		{
-// 			return (0);
-// 		}
-// 		data->map.maze[y][x] = 'X';
-// 		if (find_path(data, y + 1, x))
-// 			return (1);
-// 		if (find_path(data, y - 1, x))
-// 			return (1);
-// 		if (find_path(data, y, x + 1))
-// 			return (1);
-// 		if (find_path(data, y, x - 1))
-// 			return (1);
-// 	}
-// 	return (0);
-// }
-
-
-// int	is_wall(t_map *map, int y, int x)
-// {
-// 	if (y < 0 || y >= map->lines)
-// 		return (0);
-// 	if (x < 0 || x >= (int)ft_strlen(map->maze[y]))
-// 		return (0);
-// 	if (map->maze[y][x] == '1')
-// 		return (1);
-// 	return (0);
-// }
-
-// V003
-// trouver le 1er proche du start player comme point de depart
-// -> serach for que des 0 entre le Player start et le wall = 1
-// int	find_path(t_data *data, t_map *map, int y, int x)
-// {
-// 	// avancer vers la droite tant qu il y a un mur
-// 	if (is_wall(map, y, x + 1))
-// 	{
-// 		map->maze[y][x + 1] = 'X';
-// 		find_path(data, map, y, x + 1);
-// 	}
-// 	// bout de ligne, preferer le haut sinon bas
-// 	else if (!map->maze[y][x + 1]
-// 		|| map->maze[y][x + 1] == '\n')
-// 	{
-// 		// haut
-// 		if (is_wall(map, y - 1, x))
-// 		{
-// 			map->maze[y - 1][x] = 'X';
-// 			find_path(data, map, y - 1, x);
-// 		}
-// 		else if (is_wall(map, y + 1, x))
-// 		{
-// 			map->maze[y + 1][x] = 'X';
-// 			find_path(data, map, y + 1, x);
-// 		}
-// 		// pas mur au dessus et rien en dessous
-// 		else if (is_wall(map, y, x - 1))
-// 		{
-// 			map->maze[y][x - 1] = 'X';
-// 			find_path(data, map, y, x - 1);
-// 		}
-// 	}
-// 	else if (!is_wall(map, y, x + 1))
-// 	{
-// 		if (is_wall(map, y, x - 1))
-// 		{
-// 			map->maze[y][x - 1] = 'X';
-// 			find_path(data, map, y, x - 1);
-// 		}
-// 		// else
-// 		// 	data->map.wall_missing++;
-// 	}
-// 	// chercher pour chaque X de chaque ligne 
-// 	else
-// 	{
-
-// 	}
-
-	
-// 	// 	data->map.wall_missing++;
-// 	return (0);
-// }
-
-
-//V004
-// 1. fill X les lignes
-// 2. flodd fill sur X et non pas E
-
-//V005
 void	find_path(t_data *data, int y, int x)
 {
 	int	lines;
@@ -216,7 +51,6 @@ int	check_walls(t_data *data)
 	if (data->map.wall_missing)
 	{
 		ft_display_error("At least one wall is missing");
-		free_all(data);
 		return (1);
 	}
 	return (0);
