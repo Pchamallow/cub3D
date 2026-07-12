@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 13:59:52 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 18:55:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../lib/minilibx-linux/mlx.h"
 #include "stdlib.h"
 
-static void	free_map(char **map)
+void	free_map(char **map)
 {
 	int	i;
 

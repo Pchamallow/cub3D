@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 17:01:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 19:03:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,14 @@ int		ft_mlx_error(void);
 // Free
 
 void	free_all(t_data *data);
+void	free_map(char **map);
 
 // Utils
 
 void	fill_null(char **array, int len);
 int		is_whitespace(char c);
 int		str_iswhitespaces(char *s);
+char	**ft_split_rgb(t_data *data, char *e);
 
 // Debug
 
