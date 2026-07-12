@@ -47,6 +47,7 @@ static int	init_columns(t_data *data, char *line, int y)
 	if (!data->map.full_file[y])
 	{
 		ft_display_error("Map - init columns - allocation memory failed");
+		free_all(data);
 		return (1);
 	}
 	ft_bzero(data->map.full_file[y], ft_strlen(line));
@@ -93,11 +94,13 @@ int	init_full_file(t_data *data)
 	if (data->map.lines < 10 || data->map.columns < 6)
 	{
 		ft_display_error("Element is missing : arguments NO, SO, WE, EA, F, C and a valid map needed");
+		free_all(data);
 		return (1);
 	}
 	if (data->map.lines > 350 || data->map.columns > 350)
 	{
 		ft_display_error("File is too big, have to be inbetween H10/W6 and H350/W350 (inclusive)");
+		free_all(data);
 		// revoir formulation ??
 		return (1);
 	}
@@ -105,6 +108,7 @@ int	init_full_file(t_data *data)
 	if (!data->map.full_file)
 	{
 		ft_display_error("Map - init full_file - allocation memory failed");
+		free_all(data);
 		return (1);
 	}
 	if (data->map.full_file)

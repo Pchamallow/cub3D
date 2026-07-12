@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 13:52:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 13:59:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ static int is_invalid_player(t_data *data, int y)
 			data->map.start_count++;
 			data->player.y_start_p = y - data->map.begin_maze;
 			data->player.x_start_p = j + 1;
-			printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
+			// printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
 			if (data->map.start_count > 1)
 			{
 				ft_display_error("Too many player's start positions, needed only one");
+				free_all(data);
 				return (1);
 			}
 		}
@@ -93,6 +94,7 @@ static int is_invalid_chr(t_data *data, int y)
 			&& c != 'W')
 		{
 			ft_display_error("Invalid character : requiered only 0, 1, spaces and N/S/E/W");
+			free_all(data);
 			return (1);
 		}
 		j++;
@@ -226,12 +228,14 @@ int init_maze(t_data *data)
 	if (data->map.lines < 3 || data->map.columns < 3)
 	{
 		ft_display_error("Map is too small, have to be inbetween H3/W3 and H300/W300 (inclusive)");
+		free_all(data);
 		// revoir formulation ??
 		return (1);
 	}
 	if (data->map.lines > 300 || data->map.columns > 300)
 	{
 		ft_display_error("Map is too big, have to be inbetween H3/W3 and H300/W300 (inclusive)");
+		free_all(data);
 		// revoir formulation ??
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 13:04:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 13:58:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ int	check_walls(t_data *data)
 	if (data->map.wall_missing)
 	{
 		ft_display_error("At leats one brick is missing");
+		free_all(data);
 		return (1);
 	}
 	return (0);
