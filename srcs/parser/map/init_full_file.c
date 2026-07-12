@@ -95,6 +95,12 @@ int	init_full_file(t_data *data)
 		ft_display_error("Element is missing : arguments NO, SO, WE, EA, F, C and a valid map needed");
 		return (1);
 	}
+	if (data->map.lines > 350 || data->map.columns > 350)
+	{
+		ft_display_error("File is too big, have to be inbetween H10/W6 and H350/W350 (inclusive)");
+		// revoir formulation ??
+		return (1);
+	}
 	data->map.full_file = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
 	if (!data->map.full_file)
 	{

@@ -6,12 +6,13 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 09:26:28 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 11:39:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
+#include "../../lib/libft/libft.h"
 
 static void	*init_window(t_data *data)
 {
@@ -47,14 +48,15 @@ int	ft_init_game(t_data *data)
 
 int	ft_init_data(t_data *data)
 {
-	if (init_full_file(data) || init_maze(data))
+	if (init_full_file(data))
 		return (1);
-	if (is_valid_maze(data))
+	if (init_maze(data))// || is_valid_maze(data))
 		return (1);
 	// print_array(data->map.full_file);
+	print_array(data->map.full_file);
+	ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
+	// if (check_walls(data))
+	// 	return (1);
 	print_array(data->map.maze);
-
-	if (check_walls(data))
-		return (1);
 	return (0);
 }
