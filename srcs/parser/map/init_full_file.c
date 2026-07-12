@@ -91,10 +91,12 @@ int	init_full_file(t_data *data)
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
+	ft_printf_fd(2, "[DEBUG] lines = %d col = %d\n",
+		data->map.lines, data->map.columns);
 	if (data->map.lines < 10 || data->map.columns < 6
 		|| data->map.lines > 350 || data->map.columns > 350)
 	{
-		ft_display_error("Map size is invalid, must be 6x10 and 350x350 (inclusive) (inclusive)");
+		ft_display_error("Map size is invalid, must be 6x10 and 350x350 (inclusive)");
 		free_all(data);
 		// revoir formulation ??
 		return (1);
