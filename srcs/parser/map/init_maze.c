@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 11:48:13 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 13:52:21 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 #include "../../../lib/get_next_line/get_next_line.h"
 #include <stdlib.h>
 
-
+/*
+*while not first one = X
+*whitespace or empty = X
+*/
 static void	fill_x(t_map *map, int y, int len)
 {
 	int	i;
 
 	i = 0;
+	while (i < len && map->maze[y][i] != '1')
+	{
+		map->maze[y][i] = 'X';
+		i++;
+	}
 	while (i < len)
 	{
 		if (is_whitespace(map->maze[y][i])
@@ -39,8 +47,72 @@ static int	init_fill_x(t_data *data, int y, int len)
 		free_all(data);
 		return (1);
 	}
-	ft_bzero(data->map.maze[y], data->map.columns);
+	ft_bzero(data->map.maze[y], data->map.columns + 1);
 	fill_x(&data->map, y, len);
+	return (0);
+}
+
+static int is_invalid_player(t_data *data, int y)
+{
+	char	c;
+	int		j;
+
+	j = 0;
+	while (data->map.full_file[y][j])
+	{
+		c = data->map.full_file[y][j];
+		if (c == 'N' || c == 'S' || c == 'E'
+			|| c == 'W')
+		{
+			data->map.start_count++;
+			data->player.y_start_p = y - data->map.begin_maze;
+			data->player.x_start_p = j + 1;
+			printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
+			if (data->map.start_count > 1)
+			{
+				ft_display_error("Too many player's start positions, needed only one");
+				return (1);
+			}
+		}
+		j++;
+	}
+	return (0);
+}
+
+static int is_invalid_chr(t_data *data, int y)
+{
+	char	c;
+	int		j;
+
+	j = 0;
+	while (data->map.full_file[y][j])
+	{
+		c = data->map.full_file[y][j];
+		if (c != '0' && c != '1' && c != ' '
+			&& c != 'N' && c != 'S' && c != 'E'
+			&& c != 'W')
+		{
+			ft_display_error("Invalid character : requiered only 0, 1, spaces and N/S/E/W");
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
+/*is_valid_line
+* - is a line full of whitespaces
+* - is not 0, 1, empty space, N, S, E or W
+* - too many player's start position
+*/
+int is_valid_line(t_data *data, int i)
+{
+	if (str_iswhitespaces(data->map.full_file[i]))
+		return (1);
+	if (is_invalid_chr(data, i))
+		return (1);
+	if (is_invalid_player(data, i))
+		return (1);
 	return (0);
 }
 
@@ -56,6 +128,8 @@ static int	init_maze_content(t_data *data, int after_args)
 		return (1);
 	while (data->map.full_file[i])
 	{
+		if (is_valid_line(data, i)) // tester securites
+			return (1);
 		data->map.maze[j] = (char *)malloc((sizeof(char))
 				* data->map.columns + 2);
 		if (!data->map.maze[j])
@@ -92,49 +166,37 @@ static int	init_maze_full(t_data *data, int after_args)
 	return (0);
 }
 
-static int	is_full_one_or_whitespace(char *str)
+// est ce possible da voir des espaces avant les noms des args ?
+static int	is_arg(char *str)
 {
-	int	i;
-	int	one;
-
-	i = 0;
-	one = 0;
-	while (str[i])
-	{
-		if (str[i] == '1')
-			one++;
-		if (!is_whitespace(str[i]) && str[i] != '1')
-			return (0);
-		i++;
-	}
-	if (one)
+	if (!ft_strncmp(str, "NO", 2)
+		|| !ft_strncmp(str, "SO", 2)
+		|| !ft_strncmp(str, "WE", 2)
+		|| !ft_strncmp(str, "EA", 2)
+		|| !ft_strncmp(str, "F", 1)
+		|| !ft_strncmp(str, "C", 1))
 		return (1);
 	return (0);
 }
 
 static int	get_index_after_args(t_data *data)
 {
-	int	first;
 	int	i;
 
 	i = 0;
-	first = 0;
 	while (data->map.full_file[i])
 	{
-		if (is_full_one_or_whitespace(data->map.full_file[i]))
+		if (!is_arg(data->map.full_file[i])
+			&& !str_iswhitespaces(data->map.full_file[i]))
 		{
-			first = i;
-			break ;
+			data->map.begin_maze = i;
+			return (1);
 		}
 		i++;
 	}
-	if (!first)
-	{
-		ft_display_error("Map is missing");
-		free_all(data);
-		return (-1);
-	}
-	return (first);
+	ft_display_error("Map is missing");
+	free_all(data);
+	return (0);
 }
 
 static int	get_lines_maze(t_data *data, int end_args)
@@ -155,13 +217,12 @@ static int	get_lines_maze(t_data *data, int end_args)
 // index fin arg = faire une fonction get 1ere ligne avec au moins un 1
 int init_maze(t_data *data)
 {
-	int	after_args;
 
-	after_args = get_index_after_args(data);
-	if (after_args == -1)
+	if (!get_index_after_args(data))
 		return (1);
-	if (get_lines_maze(data, after_args))
+	if (get_lines_maze(data, data->map.begin_maze))
 		return (1);
+	ft_printf_fd(2, "[DEBUG]after_args %d l %d c %d\n", data->map.begin_maze, data->map.lines, data->map.columns);
 	if (data->map.lines < 3 || data->map.columns < 3)
 	{
 		ft_display_error("Map is too small, have to be inbetween H3/W3 and H300/W300 (inclusive)");
@@ -176,7 +237,7 @@ int init_maze(t_data *data)
 	}
 	data->map.columns++;
 	data->map.columns++;
-	if (init_maze_full(data, after_args))
+	if (init_maze_full(data, data->map.begin_maze))
 		return (1);
 	return (0);
 }

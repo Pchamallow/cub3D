@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 10:53:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 13:04:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,16 @@
 // }
 
 
-int	is_wall(t_map *map, int y, int x)
-{
-	if (y < 0 || y >= map->lines)
-		return (0);
-	if (x < 0 || x >= (int)ft_strlen(map->maze[y]))
-		return (0);
-	if (map->maze[y][x] == '1')
-		return (1);
-	return (0);
-}
+// int	is_wall(t_map *map, int y, int x)
+// {
+// 	if (y < 0 || y >= map->lines)
+// 		return (0);
+// 	if (x < 0 || x >= (int)ft_strlen(map->maze[y]))
+// 		return (0);
+// 	if (map->maze[y][x] == '1')
+// 		return (1);
+// 	return (0);
+// }
 
 // V003
 // trouver le 1er proche du start player comme point de depart
@@ -179,30 +179,29 @@ int	is_wall(t_map *map, int y, int x)
 // 1. fill X les lignes
 // 2. flodd fill sur X et non pas E
 
-int	fill_spaces(t_data *data)
+//V005
+void	find_path(t_data *data, int y, int x)
 {
-	int	y;
-	int	x;
+	int	lines;
+	int	columns;
 
-	y = 0;
-	x = 0;
-	while (y < data->map.lines)
+	lines = data->map.lines;
+	columns = data->map.columns;
+	if (y < 0 || x < 0 || y >= lines || x >= columns
+		|| data->map.maze[y][x] == '1'
+		|| data->map.maze[y][x] == 'G')
+		return ;
+	else
 	{
-		while (x < (int)ft_strlen(data->map.maze[y]))
-		{
-			if (data->map.maze[y][x] == '1')
-			{
-				while (data->map.maze[y][x] == '1'
-					&& x < (int)ft_strlen(data->map.maze[y]))
-					x++;
-			}
-			if (is_whitespace(data->map.maze[y][x]))
-				data->map.maze[y][x] = 'X';
-			x++;
-		}
-		y++;
+		if (data->map.maze[y][x] == 'X')
+			data->map.wall_missing++;
+		data->map.maze[y][x] = 'G';
+		find_path(data, y + 1, x);
+		find_path(data, y - 1, x);
+		find_path(data, y, x + 1);
+		find_path(data, y, x - 1);
 	}
-	return (0);
+	return ;
 }
 
 int	check_walls(t_data *data)
@@ -212,48 +211,41 @@ int	check_walls(t_data *data)
 
 	y = data->player.y_start_p;
 	x = data->player.x_start_p;
-	
-	fill_spaces(data);
-	// get_first_wall(&data->map, &y, &x);
-	// find_path(data, &data->map, 0, 2);
-	// if (data->map.maze[0][2] == '1')
-		// ft_display_error("At leats one brick is missing");
-	// if (!(game->collect.value <= 0 && game->exit.value <= 0))
-	// {
-	// 	free_maze(game, maze);
-	// 	return (1);
-	// }
-	// game->collect.value = j;
-	// free_maze(game, maze);
-	return (0);
-}
 
-int	is_player_start(t_data *data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (data->map.maze[y])
+	find_path(data, y, x);
+	if (data->map.wall_missing)
 	{
-		x = 0;
-		while (data->map.maze[y][x])
-		{
-			if (data->map.maze[y][x] == 'N'
-				|| data->map.maze[y][x] == 'S'
-				|| data->map.maze[y][x] == 'E'
-				|| data->map.maze[y][x] == 'W')
-			{
-				data->player.x_start_p = x;
-				data->player.y_start_p = y;
-				data->player.pos_x = data->player.x_start_p;
-				data->player.pos_y = data->player.y_start_p;
-				printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
-				return (1);
-			}
-			x++;
-		}
-		y++;
+		ft_display_error("At leats one brick is missing");
+		return (1);
 	}
 	return (0);
 }
+
+// int	is_player_start(t_data *data)
+// {
+// 	int	y;
+// 	int	x;
+
+// 	y = 0;
+// 	while (data->map.maze[y])
+// 	{
+// 		x = 0;
+// 		while (data->map.maze[y][x])
+// 		{
+// 			if (data->map.maze[y][x] == 'N'
+// 				|| data->map.maze[y][x] == 'S'
+// 				|| data->map.maze[y][x] == 'E'
+// 				|| data->map.maze[y][x] == 'W')
+// 			{
+// 				data->player.x_start_p = x;
+// 				data->player.y_start_p = y;
+// 				data->player.pos_x = data->player.x_start_p;
+// 				data->player.pos_y = data->player.y_start_p;
+// 				return (1);
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (0);
+// }

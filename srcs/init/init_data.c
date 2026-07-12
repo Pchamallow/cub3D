@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 11:39:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 12:06:16 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ int	ft_init_data(t_data *data)
 {
 	if (init_full_file(data))
 		return (1);
-	if (init_maze(data))// || is_valid_maze(data))
-		return (1);
 	// print_array(data->map.full_file);
-	print_array(data->map.full_file);
+	if (init_maze(data))
+		return (1);
 	ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
-	// if (check_walls(data))
-	// 	return (1);
 	print_array(data->map.maze);
+	if (is_valid_maze(data))
+		return (1);
+
+	
+	// print_array(data->map.full_file);
+
 	return (0);
 }

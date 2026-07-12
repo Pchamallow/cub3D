@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 09:36:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 13:50:46 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_map
 	int			lines;
 	int			columns;
 	int			wall_missing;
+	int			start_count;
+	int			begin_maze;
 }				t_map;
 
 typedef struct s_direction
@@ -95,10 +97,11 @@ int		ft_init_data(t_data *data);
 int		init_full_file(t_data *data);
 int		get_columns(char *file);
 int		get_lines(char *file);
-int		is_player_start(t_data *data);
+// int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
 int		init_maze(t_data *data);
 int		is_valid_maze(t_data *data);
+int		is_valid_line(t_data *data, int i);
 
 // Error
 
