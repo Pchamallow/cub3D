@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/11 16:04:40 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:19:01 by pswirgie         ###   ########.fr       */
+/*   Created: 2026/07/11 16:11:44 by nbaudoin          #+#    #+#             */
+/*   Updated: 2026/07/11 16:32:46 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
-#include "../../lib/libft/libft.h"
+#include "../../../include/cub3d.h"
+#include <stdlib.h>
 
-void	print_array(char **array)
+int	close_esc(int keycode, t_data *data)
 {
-	int y = 0;
-	while (array[y])
+	if (keycode == ESC)
 	{
-		printf("%s", array[y]);
-		y++;
+		free_all(data);
+		exit(0);
 	}
-	printf("\n");
+	return (0);
+}
+
+int	close_window(t_data *data)
+{
+	free_all(data);
+	exit(0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 15:11:13 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:19:13 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	ft_init_game(t_data *data)
 		ft_mlx_error();
 		return (1);
 	}
-	// init_textures(data);
-	// data->player.last_time = get_time(); animations
-	// init_hooks(data); --> event
+	ft_init_hooks(data);
 	return (0);
 }
 

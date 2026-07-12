@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:45:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:18:24 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,13 @@ int		get_columns(char *file);
 int		get_lines(char *file);
 // int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
+
+// Events
+
+int		close_esc(int keycode, t_data *data);
+int		close_window(t_data *data);
+int		handle_keypress(int keycode, void *param);
+void	ft_init_hooks(t_data *data);
 int		init_maze(t_data *data);
 int		is_valid_maze(t_data *data);
 int		is_invalid_line(t_data *data, int i);
@@ -126,7 +133,5 @@ int		str_iswhitespaces(char *s);
 // Debug
 
 void	print_array(char **array);
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 15:42:40 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:19:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	str_iswhitespaces(char *s)
 
 void	fill_null(char **array, int len)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < len + 1)
 	{
 		array[i] = NULL;
