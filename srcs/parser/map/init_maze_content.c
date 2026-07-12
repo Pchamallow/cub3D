@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:14:44 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:15:14 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 15:33:03 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 *while not first one = X
 *whitespace or empty = X
+*leave
 */
 static void	fill_x(t_map *map, int y, int len)
 {
@@ -24,16 +25,20 @@ static void	fill_x(t_map *map, int y, int len)
 	i = 0;
 	while (i < len && map->maze[y][i] != '1')
 	{
-		map->maze[y][i] = 'X';
+		// if (map->maze[y][i] != '\n')
+			map->maze[y][i] = 'X';
 		i++;
 	}
 	while (i < len)
 	{
-		if (is_whitespace(map->maze[y][i])
-			|| map->maze[y][i] == '\0')
-			map->maze[y][i] = 'X';
+		// si cest un \n de bout de line 
+		// tu ne X pas sinon tu X
+		if ((is_whitespace(map->maze[y][i])
+			|| map->maze[y][i] == '\0'))
+				map->maze[y][i] = 'X';
 		i++;
 	}
+	map->maze[y][len - 1] = '\n';
 }
 
 static int	init_fill_x(t_data *data, int y, int len)
@@ -79,8 +84,6 @@ int	init_maze_content(t_data *data, int after_args)
 		return (1);
 	while (data->map.full_file[i])
 	{
-		if (is_valid_line(data, i)) // tester securites
-			return (1);
 		if (init_maze_line(data, j, i))
 			return (1);
 		i++;

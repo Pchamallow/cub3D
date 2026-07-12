@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invalid_line.c                                     :+:      :+:    :+:   */
+/*   is_invalid_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:07:13 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 15:48:26 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,16 @@ static int is_invalid_chr(t_data *data, int y)
 	while (data->map.full_file[y][j])
 	{
 		c = data->map.full_file[y][j];
-		if (c != '0' && c != '1' && c != ' '
+		if (c != '0' && c != '1' && c != '\n' && c != ' '
 			&& c != 'N' && c != 'S' && c != 'E'
 			&& c != 'W')
 		{
-			ft_display_error("Invalid character: requiered only 0, 1, spaces and N/S/E/W");
+			ft_printf_fd(2, RED "Error\n");
+			if (is_whitespace(c))
+				ft_printf_fd(2, RED "Invalid character find: [whitespace]\n");
+			else
+				ft_printf_fd(2, RED "Invalid character find: %c\n", c);
+			ft_printf_fd(2, "Requiered only 0, 1, spaces and N/S/E/W\n" RESET);
 			free_all(data);
 			return (1);
 		}
@@ -63,15 +68,21 @@ static int is_invalid_chr(t_data *data, int y)
 	return (0);
 }
 
-/*is_valid_line
+/*is_invalid_line
 * - is a line full of whitespaces
 * - is not 0, 1, empty space, N, S, E or W
 * - too many player's start position
 */
-int is_valid_line(t_data *data, int i)
+int is_invalid_line(t_data *data, int i)
 {
+	if (!data->map.full_file[i])
+		return (0);
 	if (str_iswhitespaces(data->map.full_file[i]))
+	{
+		ft_display_error("Invalid map : please remove empty lines");
+		ft_printf_fd(2, "[DEBUG] line = %d\n", i);
 		return (1);
+	}
 	if (is_invalid_chr(data, i))
 		return (1);
 	if (is_invalid_player(data, i))

@@ -52,7 +52,7 @@ static int	init_columns(t_data *data, char *line, int y)
 	}
 	ft_bzero(data->map.full_file[y], ft_strlen(line));
 	ft_strlcpy(data->map.full_file[y], (const char *)line,
-		ft_strlen(line));
+		ft_strlen(line) + 1);
 	return (0);
 }
 

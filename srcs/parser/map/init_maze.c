@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:15:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 15:52:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	init_maze_full(t_data *data, int after_args)
 	return (0);
 }
 
-// est ce possible da voir des espaces avant les noms des args ?
 static int	is_arg(char *str)
+// est ce possible da voir des espaces avant les noms des args ?
 {
 	if (!ft_strncmp(str, "NO", 2)
 		|| !ft_strncmp(str, "SO", 2)
@@ -63,9 +63,25 @@ static int	get_index_after_args(t_data *data)
 	return (0);
 }
 
-static int	get_lines_maze(t_data *data, int end_args)
+static int	get_nblines_maze(t_data *data)
 {
-	int lines = data->map.lines - end_args;
+	int	i;
+	int	lines;
+
+	i = data->map.begin_maze;
+	lines = 0;
+	while (data->map.full_file[i])
+	{
+		if (is_invalid_line(data, i))// tester securites
+		{
+			// est ce que les lignes vide sont autorise apres la map
+			return (1);
+		}
+		lines++;
+		i++;
+	}
+	if (is_invalid_line(data, i))
+		return (1);
 	if (lines <= 0)
 	{
 		ft_display_error("No map found");
@@ -73,18 +89,18 @@ static int	get_lines_maze(t_data *data, int end_args)
 		return (1);
 	}
 	data->map.lines = lines;
+	// regarder sil reste du contenu apres la map 
+	// -> ligne qui fqit partis de la map 
+	// while char authoriser, lignes pas empty 
 	return (0);
 }
 
-// verifer s apres la maze s il y a du contenu, 
-// lequel est autoriser
-// index fin arg = faire une fonction get 1ere ligne avec au moins un 1
 int init_maze(t_data *data)
 {
 
 	if (!get_index_after_args(data))
 		return (1);
-	if (get_lines_maze(data, data->map.begin_maze))
+	if (get_nblines_maze(data))
 		return (1);
 	ft_printf_fd(2, "[DEBUG]after_args %d l %d c %d\n", data->map.begin_maze, data->map.lines, data->map.columns);
 	if (data->map.lines < 3 || data->map.columns < 3)
@@ -101,8 +117,7 @@ int init_maze(t_data *data)
 		// revoir formulation ??
 		return (1);
 	}
-	data->map.columns++;
-	data->map.columns++;
+	data->map.columns += 3;
 	if (init_maze_full(data, data->map.begin_maze))
 		return (1);
 	return (0);

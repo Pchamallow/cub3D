@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 13:59:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 14:32:17 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int main (int ac, char **av)
 	// if (parse map)
 	// return (1);
 	// mlx_loop_hook()
-	// mlx_loop(data.mlx);
+	// return (0);
+	mlx_loop(data.mlx);
 	free_all(&data);
 	return (0);
 }

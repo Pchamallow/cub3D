@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 17:44:03 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 15:42:40 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	str_iswhitespaces(char *s)
 	int	i;
 
 	i = 0;
+	if (!s || !s[i])
+		return (0);
 	while (s && s[i])
 	{
 		if (!is_whitespace(s[i]))

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 14:15:29 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 14:45:24 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		get_lines(char *file);
 int		check_walls(t_data *data);
 int		init_maze(t_data *data);
 int		is_valid_maze(t_data *data);
-int		is_valid_line(t_data *data, int i);
+int		is_invalid_line(t_data *data, int i);
 int		init_maze_content(t_data *data, int after_args);
 
 // Error
