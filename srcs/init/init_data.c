@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 17:24:28 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 17:32:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ int	ft_init_data(t_data *data)
 {
 	if (init_full_file(data))
 		return (1);
-	
+	data->direction.no = get_direction(data, "NO");
+	data->direction.no = get_direction(data, "SO");
+	data->direction.no = get_direction(data, "WE");
+	data->direction.no = get_direction(data, "EA");
+	init_rgb(data);
+
 	// print_array(data->map.full_file);
 	// ft_printf_fd(2, "-------\n");
 
