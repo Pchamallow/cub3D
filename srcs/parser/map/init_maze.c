@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 15:52:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:08:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,48 +73,41 @@ static int	get_nblines_maze(t_data *data)
 	while (data->map.full_file[i])
 	{
 		if (is_invalid_line(data, i))// tester securites
-		{
 			// est ce que les lignes vide sont autorise apres la map
 			return (1);
-		}
 		lines++;
 		i++;
 	}
 	if (is_invalid_line(data, i))
 		return (1);
+	if (!data->map.start_count)
+	{
+		ft_display_error("Player starting position is missing");
+		free_all(data);
+		return (1);
+	}
 	if (lines <= 0)
 	{
-		ft_display_error("No map found");
+		ft_display_error("Map is missing");
 		free_all(data);
 		return (1);
 	}
 	data->map.lines = lines;
-	// regarder sil reste du contenu apres la map 
-	// -> ligne qui fqit partis de la map 
-	// while char authoriser, lignes pas empty 
 	return (0);
 }
 
 int init_maze(t_data *data)
 {
-
 	if (!get_index_after_args(data))
 		return (1);
 	if (get_nblines_maze(data))
 		return (1);
 	ft_printf_fd(2, "[DEBUG]after_args %d l %d c %d\n", data->map.begin_maze, data->map.lines, data->map.columns);
-	if (data->map.lines < 3 || data->map.columns < 3)
+	if (data->map.lines < 3 || data->map.columns < 3
+		|| data->map.lines > 300 || data->map.columns > 300)
 	{
-		ft_display_error("Map is too small, have to be inbetween H3/W3 and H300/W300 (inclusive)");
+		ft_display_error("Map size is invalid, must be between 3x3 and 300x300 (inclusive)");
 		free_all(data);
-		// revoir formulation ??
-		return (1);
-	}
-	if (data->map.lines > 300 || data->map.columns > 300)
-	{
-		ft_display_error("Map is too big, have to be inbetween H3/W3 and H300/W300 (inclusive)");
-		free_all(data);
-		// revoir formulation ??
 		return (1);
 	}
 	data->map.columns += 3;

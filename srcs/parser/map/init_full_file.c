@@ -91,15 +91,10 @@ int	init_full_file(t_data *data)
 {
 	data->map.lines = get_lines(data->map.file_name);
 	data->map.columns = get_columns(data->map.file_name);
-	if (data->map.lines < 10 || data->map.columns < 6)
+	if (data->map.lines < 10 || data->map.columns < 6
+		|| data->map.lines > 350 || data->map.columns > 350)
 	{
-		ft_display_error("Element is missing : arguments NO, SO, WE, EA, F, C and a valid map needed");
-		free_all(data);
-		return (1);
-	}
-	if (data->map.lines > 350 || data->map.columns > 350)
-	{
-		ft_display_error("File is too big, have to be inbetween H10/W6 and H350/W350 (inclusive)");
+		ft_display_error("Map size is invalid, must be 6x10 and 350x350 (inclusive) (inclusive)");
 		free_all(data);
 		// revoir formulation ??
 		return (1);

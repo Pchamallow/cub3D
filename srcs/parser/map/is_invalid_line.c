@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 15:48:26 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 16:05:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int is_invalid_player(t_data *data, int y)
 			// printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
 			if (data->map.start_count > 1)
 			{
-				ft_display_error("Too many player's start positions, needed only one");
+				ft_display_error("Too many player starting positions, only one is allowed");
 				free_all(data);
 				return (1);
 			}
@@ -56,10 +56,10 @@ static int is_invalid_chr(t_data *data, int y)
 		{
 			ft_printf_fd(2, RED "Error\n");
 			if (is_whitespace(c))
-				ft_printf_fd(2, RED "Invalid character find: [whitespace]\n");
+				ft_printf_fd(2, RED "Invalid character found: [whitespace]\n");
 			else
-				ft_printf_fd(2, RED "Invalid character find: %c\n", c);
-			ft_printf_fd(2, "Requiered only 0, 1, spaces and N/S/E/W\n" RESET);
+				ft_printf_fd(2, RED "Invalid character found: %c\n", c);
+			ft_printf_fd(2, "(only 0, 1, spaces and N/S/E/W are allowed)\n" RESET);
 			free_all(data);
 			return (1);
 		}
@@ -79,8 +79,8 @@ int is_invalid_line(t_data *data, int i)
 		return (0);
 	if (str_iswhitespaces(data->map.full_file[i]))
 	{
-		ft_display_error("Invalid map : please remove empty lines");
-		ft_printf_fd(2, "[DEBUG] line = %d\n", i);
+		ft_display_error("Invalid map: empty lines are not allowed");
+		// ft_printf_fd(2, "[DEBUG] line = %d\n", i);
 		return (1);
 	}
 	if (is_invalid_chr(data, i))
