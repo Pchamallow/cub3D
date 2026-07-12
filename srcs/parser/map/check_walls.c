@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 18:48:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 09:28:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,12 @@ int	check_walls(t_data *data)
 	return (0);
 }
 
-int	init_player(t_data *data)// remplacer par data et renommer les variables
+int	is_player_start(t_data *data)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	// player->moves = 0;
 	while (data->map.maze[y])
 	{
 		x = 0;
@@ -150,13 +149,11 @@ int	init_player(t_data *data)// remplacer par data et renommer les variables
 				data->player.pos_x = data->player.x_start_p;
 				data->player.pos_y = data->player.y_start_p;
 				printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
-				return (0);
+				return (1);
 			}
 			x++;
 		}
 		y++;
 	}
-	// no player  start finded 
-	// print error message
-	return (1);
+	return (0);
 }

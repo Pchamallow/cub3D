@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/11 16:56:44 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/12 09:35:36 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ PARSER_SRCS	= $(PARSER_DIR)/args.c				\
 			$(PARSER_DIR)/map/get_lines.c		\
 			$(PARSER_DIR)/map/init_full_file.c	\
 			$(PARSER_DIR)/map/check_walls.c		\
-			$(PARSER_DIR)/map/init_maze.c
+			$(PARSER_DIR)/map/init_maze.c		\
+			$(PARSER_DIR)/map/is_valid_maze.c
 
 UTILS_DIR	= srcs/utils
 UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\

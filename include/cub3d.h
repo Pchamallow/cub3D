@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/11 18:07:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/12 09:36:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@
 
 typedef struct s_map
 {
-	char	**full_file;
-	char	**maze;
-	char	*file_name;
-	int		width;
-	int		height;
-	int		lines;
-	int		columns;
-	int		wall_missing;
+	char		**full_file;
+	char		**maze;
+	char		*file_name;
+	int			width;
+	int			height;
+	int			lines;
+	int			columns;
+	int			wall_missing;
 }				t_map;
 
 typedef struct s_direction
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
 }				t_direction;
 
 typedef struct s_image
 {
-	char	*path;
-	void	*image;
-	int		value;
-	int		width;
-	int		height;
-	int		check;
+	char			*path;
+	void			*image;
+	int				value;
+	int				width;
+	int				height;
+	int				check;
 }			t_image;
 
 typedef struct s_player
@@ -95,9 +95,10 @@ int		ft_init_data(t_data *data);
 int		init_full_file(t_data *data);
 int		get_columns(char *file);
 int		get_lines(char *file);
-int		init_player(t_data *data);
+int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
 int		init_maze(t_data *data);
+int		is_valid_maze(t_data *data);
 
 // Error
 
