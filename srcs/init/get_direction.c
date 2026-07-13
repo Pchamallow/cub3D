@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:00:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:20:41 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	len_path(t_data *data, int i, int *j)
 
 	len_dir = 0;
 	while (data->map.full_file[i][*j]
-		&& (data->map.full_file[i][*j] != ' ' || data->map.full_file[i][*j] != '\n'))
+		&& (data->map.full_file[i][*j] != ' ' && data->map.full_file[i][*j] != '\n'))
 	{
 		len_dir++;
 		*j += 1;
@@ -29,7 +29,16 @@ static int	len_path(t_data *data, int i, int *j)
 		ft_display_error("Wrong argument detected, usage: [direction (2 letters)] [./path]");
 		return (-1);
 	}
-	// erreur s il y a du contenu apres qui n est ni un espace ni un \n
+	while (data->map.full_file[i][*j])
+	{
+		if (data->map.full_file[i][*j] != ' '
+			&& data->map.full_file[i][*j] != '\n')
+		{
+			ft_display_error("Content after path argument forbidden");
+			return (-1);
+		}
+		*j += 1;
+	}
 	return (len_dir);
 }
 
@@ -130,5 +139,6 @@ int	get_all_directions(t_data *data)
 	data->direction.ea = get_direction(data, "EA");
 	if (!data->direction.ea)
 		return (1);
+	print_directions(data);
 	return (0);
 }

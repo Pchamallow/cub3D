@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:14:44 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 17:04:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:13:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /*
 *while not first one = X
 *whitespace or empty = X
-*leave
 */
 static void	fill_x(t_map *map, int y, int len)
 {
@@ -25,14 +24,11 @@ static void	fill_x(t_map *map, int y, int len)
 	i = 0;
 	while (i < len && map->maze[y][i] != '1')
 	{
-		// if (map->maze[y][i] != '\n')
-			map->maze[y][i] = 'X';
+		map->maze[y][i] = 'X';
 		i++;
 	}
 	while (i < len)
 	{
-		// si cest un \n de bout de line 
-		// tu ne X pas sinon tu X
 		if ((is_whitespace(map->maze[y][i])
 			|| map->maze[y][i] == '\0'))
 				map->maze[y][i] = 'X';

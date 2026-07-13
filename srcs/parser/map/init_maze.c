@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:08:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:15:21 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	get_nblines_maze(t_data *data)
 	lines = 0;
 	while (data->map.full_file[i])
 	{
-		if (is_invalid_line(data, i))// tester les securites
+		if (is_invalid_line(data, i))
 			return (1);
 		lines++;
 		i++;
@@ -96,7 +96,6 @@ int init_maze(t_data *data)
 		return (1);
 	if (get_nblines_maze(data))
 		return (1);
-	// ft_printf_fd(2, "[DEBUG]after_args %d l %d c %d\n", data->map.begin_maze, data->map.lines, data->map.columns);
 	if (data->map.lines < 3 || data->map.columns < 3
 		|| data->map.lines > 300 || data->map.columns > 300)
 	{
