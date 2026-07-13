@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 17:04:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 13:40:42 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int is_invalid_player(t_data *data, int y)
 			data->map.start_count++;
 			data->player.y_start_p = y - data->map.begin_maze;
 			data->player.x_start_p = j + 1;
-			// printf("[DEBUG] player = %d %d\n", data->player.x_start_p, data->player.y_start_p);
 			if (data->map.start_count > 1)
 			{
 				ft_display_error("Too many player starting positions, only one is allowed");
@@ -78,7 +77,6 @@ int is_invalid_line(t_data *data, int i)
 	if (str_iswhitespaces(data->map.full_file[i]))
 	{
 		ft_display_error("Invalid map: empty lines are not allowed");
-		// ft_printf_fd(2, "[DEBUG] line = %d\n", i);
 		return (1);
 	}
 	if (is_invalid_chr(data, i))

@@ -73,8 +73,6 @@ int	init_full_file(t_data *data)
 	if (get_lines(data)
 		|| get_columns(data))
 		return (1);
-	// ft_printf_fd(2, "[DEBUG] lines = %d col = %d\n",
-	// 	data->map.lines, data->map.columns);
 	if (data->map.lines < 10 || data->map.columns < 6
 		|| data->map.lines > 350 || data->map.columns > 350)
 	{
@@ -93,21 +91,3 @@ int	init_full_file(t_data *data)
 		return (1);
 	return (0);
 }
-
-
-// // min 3 lines / min 5 columns
-// // first and last lines, begin and end (only 1), all lines = same len, 
-// // 1 P, 1 E, at least 1 C
-// // A intruder (not PCE01)
-// // path is valid
-// int	map_is_valid(t_game *game)
-// {
-// 	if (check_file(game))
-// 		print_error("Error\nWrong map.\n", 2);
-// 	if (init_map(game) == 1 || check_lines_len(game)
-// 		|| begin_end_one(game) || check_elements(game))
-// 		print_error_free(game, "Error\nAt least one tree is missing.\n", 2);
-// 	if (check_path(game))
-// 		print_error_free(game, "Error\nPath is invalid.\n", 2);
-// 	return (0);
-// }

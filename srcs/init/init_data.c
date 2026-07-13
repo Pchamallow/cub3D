@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 19:06:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 13:29:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,6 @@ int	ft_init_game(t_data *data)
 	return (0);
 }
 
-static char *get_direction(t_data *data, char *dir)
-{
-	char	**file;
-	int		i;
-	int		j;
-	int		len_dir;
-	char	*ret;
-	
-	file = data->map.full_file;
-	i = 0;
-	len_dir = 0;
-	while (file[i])
-	{
-		j = 2;
-		if (ft_strnstr(file[i], dir, 2)) // voir protection coller NO et son path ok ou non
-		{
-			while (file[i][j] && (file[i][j] == ' '))
-				j++;
-			while (file[i][j++] && (file[i][j] != ' ' || file[i][j] != '\n'))
-				len_dir++;
-			ret = ft_substr(file[i], j - len_dir - 1, len_dir);
-			// ft_printf_fd(2, "ret = %s", ret);
-			return (ret);
-		}
-		i++;
-	}
-	return NULL;
-}
-
 static int	init_rgb(t_data *data)
 {
 	char **floor;
@@ -99,11 +70,10 @@ int	ft_init_data(t_data *data)
 {
 	if (init_full_file(data))
 		return (1);
-	// rajouter print message error si direction null
-	data->direction.no = get_direction(data, "NO");
-	data->direction.so = get_direction(data, "SO");
-	data->direction.we = get_direction(data, "WE");
-	data->direction.ea = get_direction(data, "EA");
+
+	if(get_all_directions(data))
+		return (1);
+
 	if (init_rgb(data))
 		return (1);
 
@@ -119,8 +89,6 @@ int	ft_init_data(t_data *data)
 
 	if (is_valid_maze(data))
 		return (1);
-
-	
 
 	return (0);
 }

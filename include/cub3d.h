@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 19:03:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 13:31:13 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int		get_columns(t_data *data);
 int		get_lines(t_data *data);
 // int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
+int		get_all_directions(t_data *data);
 
 // Events
 
@@ -135,5 +136,7 @@ char	**ft_split_rgb(t_data *data, char *e);
 // Debug
 
 void	print_array(char **array);
+void	print_directions(t_data *data);
+
 
 #endif

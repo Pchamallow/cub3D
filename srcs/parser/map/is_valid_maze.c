@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 09:25:45 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 17:04:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 13:41:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	is_valid_maze(t_data *data)
 	// ou avec des whistoaces entre deux lignes du mze
 	if (!data->map.start_count)
 	{
-		// message errreur pas player start trouve
 		ft_display_error("Player starting position is missing");
 		return (1);
 	}
