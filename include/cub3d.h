@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:04:50 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:42:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		is_tabs(char **str);
 
 void	print_array(char **array);
 void	print_directions(t_data *data);
+void	print_rgb(t_data *data);
 
 
 #endif

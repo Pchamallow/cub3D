@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/13 14:02:33 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:39:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	init_rgb(t_data *data)
 	data->floor.r = ft_atol(floor[0]); 
 	data->floor.g = ft_atol(floor[1]); 
 	data->floor.b = ft_atol(floor[2]); 
+	
+	print_rgb(data);
 	// ajouter securite max et min
 	free_map(floor);
 	free_map(ceiling);
@@ -71,7 +73,6 @@ int	ft_init_data(t_data *data)
 	if (init_full_file(data))
 		return (1);
 	if (is_tabs(data->map.full_file))
-			// error message
 		return (1);
 	if (get_all_directions(data))
 		return (1);
