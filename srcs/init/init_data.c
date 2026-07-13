@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/13 14:39:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:38:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_init_data(t_data *data)
 	if (init_rgb(data))
 		return (1);
 
-	// print_array(data->map.full_file);
-	// ft_printf_fd(2, "-------\n");
+	print_array(data->map.full_file);
+	ft_printf_fd(2, "-------\n");
 
 	if (init_maze(data))
 		return (1);

@@ -34,35 +34,39 @@ static int	init_columns(t_data *data, char *line, int y)
 	return (0);
 }
 
-static int	init_map_content(t_data *data)
+static int	init_map_lines(t_data *data, char **line, int fd)
 {
-	t_map *map;
-	char	*line;
-	int		fd;
-	int		y;
+	int	y;
 
 	y = 0;
-	map = &data->map;
-	fd = open(map->file_name, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_display_perror();
-		return (1);
-	}
-	line = get_next_line(fd);
 	while (y < data->map.lines)
 	{
-		if (init_columns(data, line, y))
+		if (init_columns(data, *line, y))
 		{
-			if (line)
-				free(line);
+			if (*line)
+				free(*line);
 			close(fd);
 			return (1);
 		}
-		free(line);
-		line = get_next_line(fd);
+		free(*line);
+		*line = get_next_line(fd);
 		y++;
 	}
+	return (0);
+}
+
+static int	init_map_content(t_data *data)
+{
+	t_map	*map;
+	char	*line;
+	int		fd;
+
+	map = &data->map;
+	if (open_fd(data->map.file_name, &fd))
+		return (1);
+	line = get_next_line(fd);
+	if (init_map_lines(data, &line, fd))
+		return (1);
 	free(line);
 	close(fd);
 	return (0);
@@ -70,16 +74,17 @@ static int	init_map_content(t_data *data)
 
 int	init_full_file(t_data *data)
 {
-	if (get_lines(data)
-		|| get_columns(data))
+	if (get_lines_columns(data))
 		return (1);
 	if (data->map.lines < 10 || data->map.columns < 6
 		|| data->map.lines > 350 || data->map.columns > 350)
 	{
-		ft_display_error("Map size is invalid, must be 6x10 and 350x350 (inclusive)");
+		ft_display_error("Map size is invalid,"
+			" must be 6x10 and 350x350 (inclusive)");
 		return (1);
 	}
-	data->map.full_file = (char **)malloc((sizeof(char *)) * (data->map.lines + 1));
+	data->map.full_file = (char **)malloc((sizeof(char *))
+			* (data->map.lines + 1));
 	if (!data->map.full_file)
 	{
 		ft_display_error("Map - init full_file - allocation memory failed");

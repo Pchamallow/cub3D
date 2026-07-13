@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 17:04:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 15:48:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ void	find_path(t_data *data, int y, int x)
 
 int	check_walls(t_data *data)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	y = data->player.y_start_p;
 	x = data->player.x_start_p;
-
 	find_path(data, y, x);
 	if (data->map.wall_missing)
 	{

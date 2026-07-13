@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:15:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:43:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ static int	init_maze_full(t_data *data, int after_args)
 	}
 	fill_null(data->map.maze, data->map.lines + 2);
 	if (init_maze_content(data, after_args))
-		return (1);
-	return (0);
-}
-
-static int	is_arg(char *str)
-{
-	if (!ft_strncmp(str, "NO", 2)
-		|| !ft_strncmp(str, "SO", 2)
-		|| !ft_strncmp(str, "WE", 2)
-		|| !ft_strncmp(str, "EA", 2)
-		|| !ft_strncmp(str, "F", 1)
-		|| !ft_strncmp(str, "C", 1))
 		return (1);
 	return (0);
 }
@@ -60,6 +48,21 @@ static int	get_index_after_args(t_data *data)
 	return (0);
 }
 
+static int	error_lines_maze(t_data *data, int lines)
+{
+	if (!data->map.start_count)
+	{
+		ft_display_error("Player starting position is missing");
+		return (1);
+	}
+	if (lines <= 0)
+	{
+		ft_display_error("Map is missing");
+		return (1);
+	}
+	return (0);
+}
+
 static int	get_nblines_maze(t_data *data)
 {
 	int	i;
@@ -76,16 +79,8 @@ static int	get_nblines_maze(t_data *data)
 	}
 	if (is_invalid_line(data, i))
 		return (1);
-	if (!data->map.start_count)
-	{
-		ft_display_error("Player starting position is missing");
+	if (error_lines_maze(data, lines))
 		return (1);
-	}
-	if (lines <= 0)
-	{
-		ft_display_error("Map is missing");
-		return (1);
-	}
 	data->map.lines = lines;
 	return (0);
 }

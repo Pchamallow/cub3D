@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/13 13:32:10 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/13 16:33:59 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ FREE_SRCS	= ${FREE_DIR}/free.c
 
 UTILS_DIR	= srcs/utils
 UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\
-			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c
+			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c	\
+			$(UTILS_DIR)/open_fd.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
 				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS}
