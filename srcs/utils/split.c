@@ -6,12 +6,18 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 19:01:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 15:30:22 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 15:42:40 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
+
+static void	print_invalid_rgb(void)
+{
+	ft_display_error("Invalid format element RGB detected, "
+		"usage: [e] [R], [G], [B]");
+}
 
 static int	is_invalid_numbers(char *file, int *j, int *nb)
 {
@@ -20,7 +26,7 @@ static int	is_invalid_numbers(char *file, int *j, int *nb)
 	*j += skip_spaces(&file[*j]);
 	if (*nb < 3 && file[*j] != ',')
 	{
-		ft_display_error("Invalid format element RGB detected, usage: [e] [R], [G], [B]");
+		print_invalid_rgb();
 		return (1);
 	}
 	else if (*nb == 3)
@@ -28,7 +34,8 @@ static int	is_invalid_numbers(char *file, int *j, int *nb)
 		*j += skip_spaces(&file[*j]);
 		if (file[*j] && file[*j] != '\n')
 		{
-			ft_display_error("Content after element RGB detected, usage: [e] [R], [G], [B]");
+			ft_display_error("Content after element RGB"
+				" detected, usage: [e] [R], [G], [B]");
 			return (1);
 		}
 	}
@@ -60,24 +67,28 @@ static int	is_invalid_rgb(char *file, int j)
 	}
 	if (nb != 3)
 	{
-		ft_display_error("Invalid format element RGB detected, usage: [e] [R], [G], [B]");
+		print_invalid_rgb();
 		return (1);
 	}
 	return (0);
 }
 
-
-static char **get_rgb(char *file, int *j)
+static char	**get_rgb(char *file, int *j)
 {
 	char	**rgb;
 
 	rgb = NULL;
+	if (!file[*j] || (file[*j] && file[*j] != ' '))
+	{
+		print_invalid_rgb();
+		return (NULL);
+	}
 	if (file[*j] && file[*j] == ' ')
 	{
 		*j += skip_spaces(&file[*j]);
 		if (!file[*j] || !ft_isdigit(file[*j]))
 		{
-			ft_display_error("Missing RGB, usage: [e] [R], [G], [B]");
+			print_invalid_rgb();
 			return (NULL);
 		}
 		if (is_invalid_rgb(file, *j))
@@ -110,11 +121,6 @@ char	**ft_split_rgb(t_data *data, char *e)
 		j = 1;
 		if (!ft_strncmp(file[i], e, 1))
 		{
-			if (!file[i][j] || (file[i][j] && file[i][j] != ' '))
-			{
-				ft_display_error("Invalid format element RGB detected, usage: [e] [R], [G], [B]");
-				return (NULL);
-			}
 			rgb = get_rgb(file[i], &j);
 			return (rgb);
 		}

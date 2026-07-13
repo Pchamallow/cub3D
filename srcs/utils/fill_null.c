@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:57:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 15:34:42 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	is_tabs(char **str)
 				|| str[i][j] == '\f' || str[i][j] == '\r')
 			{
 				ft_printf_fd(2, RED "Error\n");
-				ft_printf_fd(2, "A forbidden whitespaces is detected on line %d, only space are allowed", i);
+				ft_printf_fd(2, "A forbidden whitespaces is "
+					"detected on line %d, only spaces are allowed", i);
 				ft_printf_fd(2, "\n" RESET);
 				return (1);
 			}
