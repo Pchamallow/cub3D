@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 16:43:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:46:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	get_nblines_maze(t_data *data)
 	return (0);
 }
 
-int init_maze(t_data *data)
+int	init_maze(t_data *data)
 {
 	if (!get_index_after_args(data))
 		return (1);
@@ -94,7 +94,8 @@ int init_maze(t_data *data)
 	if (data->map.lines < 3 || data->map.columns < 3
 		|| data->map.lines > 300 || data->map.columns > 300)
 	{
-		ft_display_error("Map size is invalid, must be between 3x3 and 300x300 (inclusive)");
+		ft_display_error("Map size is invalid,"
+			" must be between 3x3 and 300x300 (inclusive)");
 		return (1);
 	}
 	data->map.columns += 3;

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 15:48:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:48:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,3 @@ int	check_walls(t_data *data)
 	}
 	return (0);
 }
-
-// int	is_player_start(t_data *data)
-// {
-// 	int	y;
-// 	int	x;
-
-// 	y = 0;
-// 	while (data->map.maze[y])
-// 	{
-// 		x = 0;
-// 		while (data->map.maze[y][x])
-// 		{
-// 			if (data->map.maze[y][x] == 'N'
-// 				|| data->map.maze[y][x] == 'S'
-// 				|| data->map.maze[y][x] == 'E'
-// 				|| data->map.maze[y][x] == 'W')
-// 			{
-// 				data->player.x_start_p = x;
-// 				data->player.y_start_p = y;
-// 				data->player.pos_x = data->player.x_start_p;
-// 				data->player.pos_y = data->player.y_start_p;
-// 				return (1);
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (0);
-// }

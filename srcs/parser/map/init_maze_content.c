@@ -6,12 +6,24 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:14:44 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:13:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:49:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 #include "../../../lib/libft/libft.h"
+
+int	is_valid_maze(t_data *data)
+{
+	if (!data->map.start_count)
+	{
+		ft_display_error("Player starting position is missing");
+		return (1);
+	}
+	if (check_walls(data))
+		return (1);
+	return (0);
+}
 
 /*
 *while not first one = X
@@ -31,7 +43,7 @@ static void	fill_x(t_map *map, int y, int len)
 	{
 		if ((is_whitespace(map->maze[y][i])
 			|| map->maze[y][i] == '\0'))
-				map->maze[y][i] = 'X';
+			map->maze[y][i] = 'X';
 		i++;
 	}
 	map->maze[y][len - 1] = '\n';
@@ -53,7 +65,7 @@ static int	init_fill_x(t_data *data, int y, int len)
 static int	init_maze_line(t_data *data, int j, int i)
 {
 	data->map.maze[j] = (char *)malloc((sizeof(char))
-		* data->map.columns + 2);
+			* data->map.columns + 2);
 	if (!data->map.maze[j])
 	{
 		ft_display_error("Maze - content - allocation memory failed");

@@ -6,14 +6,14 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 13:40:42 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 16:48:16 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 #include "../../../lib/libft/libft.h"
 
-static int is_invalid_player(t_data *data, int y)
+static int	is_invalid_player(t_data *data, int y)
 {
 	char	c;
 	int		j;
@@ -30,7 +30,8 @@ static int is_invalid_player(t_data *data, int y)
 			data->player.x_start_p = j + 1;
 			if (data->map.start_count > 1)
 			{
-				ft_display_error("Too many player starting positions, only one is allowed");
+				ft_display_error("Too many player starting"
+					" positions, only one is allowed");
 				return (1);
 			}
 		}
@@ -39,7 +40,7 @@ static int is_invalid_player(t_data *data, int y)
 	return (0);
 }
 
-static int is_invalid_chr(t_data *data, int y)
+static int	is_invalid_chr(t_data *data, int y)
 {
 	char	c;
 	int		j;
@@ -54,10 +55,13 @@ static int is_invalid_chr(t_data *data, int y)
 		{
 			ft_printf_fd(2, RED "Error\n");
 			if (is_whitespace(c))
-				ft_printf_fd(2, RED "Invalid character found: [whitespace]\n");
+				ft_printf_fd(2, RED "Invalid character"
+					" found: [whitespace]\n");
 			else
-				ft_printf_fd(2, RED "Invalid character found: %c\n", c);
-			ft_printf_fd(2, "(only 0, 1, spaces and N/S/E/W are allowed)\n" RESET);
+				ft_printf_fd(2, RED "Invalid character "
+					"found: %c\n", c);
+			ft_printf_fd(2, "(only 0, 1, spaces "
+				"and N/S/E/W are allowed)\n" RESET);
 			return (1);
 		}
 		j++;
@@ -70,7 +74,7 @@ static int is_invalid_chr(t_data *data, int y)
 * - is not 0, 1, empty space, N, S, E or W
 * - too many player's start position
 */
-int is_invalid_line(t_data *data, int i)
+int	is_invalid_line(t_data *data, int i)
 {
 	if (!data->map.full_file[i])
 		return (0);
