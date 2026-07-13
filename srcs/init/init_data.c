@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/13 13:29:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:02:33 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int	ft_init_data(t_data *data)
 {
 	if (init_full_file(data))
 		return (1);
-
-	if(get_all_directions(data))
+	if (is_tabs(data->map.full_file))
+			// error message
+		return (1);
+	if (get_all_directions(data))
 		return (1);
 
 	if (init_rgb(data))

@@ -6,10 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 16:19:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:05:15 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/cub3d.h"
+#include "../../lib/libft/libft.h"
 #include <stdlib.h>
 
 int	is_whitespace(char c)
@@ -33,6 +35,32 @@ int	str_iswhitespaces(char *s)
 		i++;
 	}
 	return (1);
+}
+
+int	is_tabs(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '\t' || str[i][j] == '\v'
+				|| str[i][j] == '\f' || str[i][j] == '\r')
+			{
+				ft_printf_fd(2, RED "Error\n");
+				ft_printf_fd(2, "A forbidden whitespaces is detected on line %d, only space are allowed", i);
+				ft_printf_fd(2, "\n" RESET);
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	fill_null(char **array, int len)

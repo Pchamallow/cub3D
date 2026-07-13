@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 13:31:13 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:04:50 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	fill_null(char **array, int len);
 int		is_whitespace(char c);
 int		str_iswhitespaces(char *s);
 char	**ft_split_rgb(t_data *data, char *e);
+int		is_tabs(char **str);
 
 // Debug
 

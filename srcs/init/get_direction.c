@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 13:49:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:00:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	len_path(t_data *data, int i, int *j)
 		ft_display_error("Wrong argument detected, usage: [direction (2 letters)] [./path]");
 		return (-1);
 	}
+	// erreur s il y a du contenu apres qui n est ni un espace ni un \n
 	return (len_dir);
 }
 

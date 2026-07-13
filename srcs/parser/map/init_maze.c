@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 12:55:14 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:08:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	init_maze_full(t_data *data, int after_args)
 }
 
 static int	is_arg(char *str)
-// est ce possible da voir des espaces avant les noms des args ?
 {
 	if (!ft_strncmp(str, "NO", 2)
 		|| !ft_strncmp(str, "SO", 2)
@@ -70,8 +69,7 @@ static int	get_nblines_maze(t_data *data)
 	lines = 0;
 	while (data->map.full_file[i])
 	{
-		if (is_invalid_line(data, i))// tester securites
-			// est ce que les lignes vide sont autorise apres la map
+		if (is_invalid_line(data, i))// tester les securites
 			return (1);
 		lines++;
 		i++;
