@@ -6,13 +6,23 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 14:47:41 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:05:15 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:57:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
 #include <stdlib.h>
+
+int	skip_spaces(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	return (i);
+}
 
 int	is_whitespace(char c)
 {

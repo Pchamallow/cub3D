@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:04:40 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:42:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:50:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	print_directions(t_data *data)
 
 void	print_rgb(t_data *data)
 {
-	ft_printf(2, "ceiling = \n");
-	ft_printf(2, "R %d\n", data->ceiling.r);
-	ft_printf(2, "G %d\n", data->ceiling.g);
-	ft_printf(2, "B %d\n", data->ceiling.b);
+	ft_printf_fd(2, "ceiling = \n");
+	ft_printf_fd(2, "R %d\n", data->ceiling.r);
+	ft_printf_fd(2, "G %d\n", data->ceiling.g);
+	ft_printf_fd(2, "B %d\n", data->ceiling.b);
 
-	ft_printf(2, "floor = \n");
-	ft_printf(2, "R %d\n", data->floor.r);
-	ft_printf(2, "G %d\n", data->floor.g);
-	ft_printf(2, "B %d\n", data->floor.b);
+	ft_printf_fd(2, "floor = \n");
+	ft_printf_fd(2, "R %d\n", data->floor.r);
+	ft_printf_fd(2, "G %d\n", data->floor.g);
+	ft_printf_fd(2, "B %d\n", data->floor.b);
 }

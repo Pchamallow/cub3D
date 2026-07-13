@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:20:41 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/13 14:56:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static int	len_path(t_data *data, int i, int *j)
 	return (len_dir);
 }
 
-/* skip_spaces
+/* dir_handle_error
 * no spaces between the dir and the path = error
 * skip spaces
 * no character or "./" = error
 */
-static void	skip_spaces(t_data *data, int i, int *j)
+static void	dir_handle_error(t_data *data, int i, int *j)
 {
 	if (data->map.full_file[i][*j] != ' ')
 	{
@@ -78,7 +78,7 @@ static int	search_direction(t_data *data, int i, char *dir, char **ret)
 	file = data->map.full_file;
 	if (ft_strnstr(file[i], dir, 2))
 	{
-		skip_spaces(data, i, &j);
+		dir_handle_error(data, i, &j);
 		if (j == -1)
 			return (-1);
 		len_dir = len_path(data, i, &j);
