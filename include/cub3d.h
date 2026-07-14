@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 10:18:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:05:20 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_data
 	int				max_width;
 	int				max_height;
 	t_color			ceiling;
-	t_color			floor;
+	t_color			ground;
 	t_player		player;
 	t_image			image;
 	t_map			map;
