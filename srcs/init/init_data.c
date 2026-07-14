@@ -66,7 +66,6 @@ static int	init_rgb(t_data *data)
 	}
 	ceiling = ft_split_rgb(data, "C");
 	if (!ceiling)
-<<<<<<< HEAD
 	{
 
 		free(ground);
@@ -82,18 +81,6 @@ static int	init_rgb(t_data *data)
 
 	print_rgb(data);
 	free_map(ground);
-=======
-		return (1);
-	data->ceiling.r = ft_atol(ceiling[0]);
-	data->ceiling.g = ft_atol(ceiling[1]); 
-	data->ceiling.b = ft_atol(ceiling[2]); 
-	data->floor.r = ft_atol(floor[0]); 
-	data->floor.g = ft_atol(floor[1]); 
-	data->floor.b = ft_atol(floor[2]); 
-	// print_rgb(data);
-	// ajouter securite max et min
-	free_map(floor);
->>>>>>> dev
 	free_map(ceiling);
 	return (0);
 }
@@ -110,21 +97,10 @@ int	ft_init_data(t_data *data)
 	{
 		ft_display_error("rgb allocation failed");
 		return (1);
-<<<<<<< HEAD
-	}
-
-	print_array(data->map.full_file);
-	ft_printf_fd(2, "-------\n");
-
-	if (init_maze(data))
-		return (1);
-
-=======
 	// print_array(data->map.full_file);
 	// ft_printf_fd(2, "-------\n");
 	if (init_maze(data))
 		return (1);
->>>>>>> dev
 	// ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
 	// print_array(data->map.maze);
 	// ft_printf_fd(2, "-------\n");
