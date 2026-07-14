@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
+#    By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/14 11:00:12 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/14 17:28:07 by nbaudoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ FREE_SRCS	= ${FREE_DIR}/free.c
 UTILS_DIR	= srcs/utils
 UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\
 			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c	\
-			$(UTILS_DIR)/open_fd.c
+			$(UTILS_DIR)/open_fd.c ${UTILS_DIR}/rgb_checks.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
 				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS}

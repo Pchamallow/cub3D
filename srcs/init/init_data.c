@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 17:12:16 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:18:36 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,7 @@ int	ft_init_game(t_data *data)
 	return (0);
 }
 
-int	secure_rgb(long rgb)
-{
-	if (rgb < 0 || rgb > 255)
-		return (-1);
-	return (rgb);
-}
+
 
 static int	init_rgb(t_data *data)
 {
@@ -63,7 +58,7 @@ static int	init_rgb(t_data *data)
 	ceiling = ft_split_rgb(data, "C");
 	if (!ceiling)
 	{
-
+		ft_display_error("rgb allocation failed");
 		free(ground);
 		return (1);
 	}

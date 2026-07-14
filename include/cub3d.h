@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 17:06:52 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:41:40 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ typedef struct s_data
 // Parser
 
 int		ft_args_not_valid(int ac, char **av);
+int		secure_rgb(long rgb);
+int		check_double_rgb(t_data *data, char *e);
 
 // Init data
 
