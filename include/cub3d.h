@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 12:32:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:16:39 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
+	char			*render;
 	int				width;
 	int				height;
 	int				max_width;
@@ -111,6 +112,10 @@ int		init_full_file(t_data *data);
 int		get_lines_columns(t_data *data);
 int		check_walls(t_data *data);
 int		get_all_directions(t_data *data);
+
+// Math
+
+int		render(t_data *data, void **image);
 
 // Events
 

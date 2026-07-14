@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 11:57:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:16:55 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ static void	*init_window(t_data *data)
 	return (ptr);
 }
 
+// create an image to show
+// create a buffer image in order to write in
+static int	init_render(t_data *data)
+{
+	void *image = mlx_new_image(data->mlx, data->width, data->height);
+	// protection
+	if (render(data, &image))
+		return (1);
+	mlx_put_image_to_window(data->mlx, data->win, image, 0, 0);
+	return (0);
+}
+
 int	ft_init_game(t_data *data)
 {
 	data->mlx = mlx_init();
@@ -39,6 +51,8 @@ int	ft_init_game(t_data *data)
 		return (1);
 	}
 	ft_init_hooks(data);
+	if (init_render(data))
+		return (1);
 	return (0);
 }
 
