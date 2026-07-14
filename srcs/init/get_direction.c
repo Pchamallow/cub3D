@@ -6,14 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:56:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:57:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
-
-
 
 static int	len_path(t_data *data, int i, int *j)
 {

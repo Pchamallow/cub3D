@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 10:57:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:57:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ static int	init_rgb(t_data *data)
 	data->ceiling.r = ft_atol(ceiling[0]);
 	data->ceiling.g = ft_atol(ceiling[1]); 
 	data->ceiling.b = ft_atol(ceiling[2]); 
-
 	data->floor.r = ft_atol(floor[0]); 
 	data->floor.g = ft_atol(floor[1]); 
 	data->floor.b = ft_atol(floor[2]); 
-	
 	// print_rgb(data);
 	// ajouter securite max et min
 	free_map(floor);
@@ -76,22 +74,16 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (get_all_directions(data))
 		return (1);
-
 	if (init_rgb(data))
 		return (1);
-
 	// print_array(data->map.full_file);
 	// ft_printf_fd(2, "-------\n");
-
 	if (init_maze(data))
 		return (1);
-	
 	// ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
 	// print_array(data->map.maze);
 	// ft_printf_fd(2, "-------\n");
-
 	if (is_valid_maze(data))
 		return (1);
-
 	return (0);
 }
