@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:20:12 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 16:46:48 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:45:18 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,6 @@ static int	init_maze_full(t_data *data, int after_args)
 	fill_null(data->map.maze, data->map.lines + 2);
 	if (init_maze_content(data, after_args))
 		return (1);
-	return (0);
-}
-
-static int	get_index_after_args(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (data->map.full_file[i])
-	{
-		if (!is_arg(data->map.full_file[i])
-			&& !str_iswhitespaces(data->map.full_file[i]))
-		{
-			data->map.begin_maze = i;
-			return (1);
-		}
-		i++;
-	}
-	ft_display_error("Map is missing");
 	return (0);
 }
 
@@ -87,15 +68,13 @@ static int	get_nblines_maze(t_data *data)
 
 int	init_maze(t_data *data)
 {
-	if (!get_index_after_args(data))
-		return (1);
 	if (get_nblines_maze(data))
 		return (1);
 	if (data->map.lines < 3 || data->map.columns < 3
-		|| data->map.lines > 300 || data->map.columns > 300)
+		|| data->map.lines > 150 || data->map.columns > 150)
 	{
 		ft_display_error("Map size is invalid,"
-			" must be between 3x3 and 300x300 (inclusive)");
+			" must be between 3x3 and 150x150 (inclusive)");
 		return (1);
 	}
 	data->map.columns += 3;

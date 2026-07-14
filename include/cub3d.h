@@ -6,7 +6,7 @@
 /*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:05:20 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:06:52 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int		ft_init_game(t_data *data);
 int		ft_init_data(t_data *data);
 int		init_full_file(t_data *data);
 int		get_lines_columns(t_data *data);
-// int		is_player_start(t_data *data);
 int		check_walls(t_data *data);
 int		get_all_directions(t_data *data);
 
@@ -135,11 +134,13 @@ int		is_tabs(char **str);
 int		skip_spaces(char *str);
 int		open_fd(char *file, int *fd);
 int		is_arg(char *str);
+int		is_space_or_nl(char c);
 
 // Debug
 
 void	print_array(char **array);
 void	print_directions(t_data *data);
 void	print_rgb(t_data *data);
+void	print_invalid_args(void);
 
 #endif
