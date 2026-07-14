@@ -97,6 +97,7 @@ int	ft_init_data(t_data *data)
 	{
 		ft_display_error("rgb allocation failed");
 		return (1);
+	}
 	// print_array(data->map.full_file);
 	// ft_printf_fd(2, "-------\n");
 	if (init_maze(data))
