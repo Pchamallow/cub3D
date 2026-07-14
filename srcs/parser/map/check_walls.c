@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 16:14:32 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 16:48:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:57:56 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	find_path(t_data *data, int y, int x)
 	int	lines;
 	int	columns;
 
-	lines = data->map.lines;
-	columns = data->map.columns;
-	if (y < 0 || x < 0 || y >= lines || x >= columns
+	lines = data->map.lines + 1;
+	columns = data->map.columns + 1;
+	if (y < 0 || x < 0 || y > lines || x >= columns
 		|| data->map.maze[y][x] == '1'
 		|| data->map.maze[y][x] == 'G')
 		return ;

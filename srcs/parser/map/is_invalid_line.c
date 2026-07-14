@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 16:48:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:50:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_invalid_player(t_data *data, int y)
 			|| c == 'W')
 		{
 			data->map.start_count++;
-			data->player.y_start_p = y - data->map.begin_maze;
+			data->player.y_start_p = y - data->map.begin_maze + 1;
 			data->player.x_start_p = j + 1;
 			if (data->map.start_count > 1)
 			{

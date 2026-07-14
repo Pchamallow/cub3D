@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 14:56:01 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 10:57:39 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,6 @@ int	get_all_directions(t_data *data)
 	data->direction.ea = get_direction(data, "EA");
 	if (!data->direction.ea)
 		return (1);
-	print_directions(data);
+	// print_directions(data);
 	return (0);
 }
