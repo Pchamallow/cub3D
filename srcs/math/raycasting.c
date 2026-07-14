@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 15:19:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 15:57:54 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "../../lib/minilibx-linux/mlx.h"
 #include <stdint.h>
 
-// verLine(x, drawStart, drawEnd, color);
 
+// TEST V001
 static void	modifiy_render(t_data *data, t_render *render)
 {
 	
@@ -48,8 +48,26 @@ static void	modifiy_render(t_data *data, t_render *render)
 int	raycasting(t_data *data)
 {
 
-	
+	double posX = data->player.x_start_p;
+	double posY = data->player.x_start_p;  //x and y start position
+	double dirX = -1.0, dirY = 0.0; //initial direction vector
+	double planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
 
+	double time = 0; //time of current frame
+	double oldTime = 0; //time of previous frame
+
+	int	*texture[8];
+
+	// 1. test une image sur les murs
+	data->image.path = "srcs/texture/NO.xpm";
+
+	// 2. remplacer une image uniforme par les images par direction
+	// data->direction.no
+	// 3. mettre une couleur au sol et au plafond
+	
+	data->image.image = mlx_xpm_file_to_image(data->mlx, data->image.path, 3000, 4000);
+	// securite
+	
 }
 
 int	render(t_data *data)
