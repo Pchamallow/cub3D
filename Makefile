@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/14 11:00:12 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/14 12:42:52 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ ERROR_SRCS	= $(ERROR_DIR)/error.c		\
 EVENT_DIR	= srcs/events
 EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c ${EVENT_UI_SRCS}
 
-
+MATH_DIR= srcs/math
+MATH_SRCS= ${MATH_DIR}/raytracing.c
 
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c					\
@@ -71,7 +72,7 @@ UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\
 			$(UTILS_DIR)/open_fd.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
-				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS}
+				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS} ${MATH_SRCS}
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
