@@ -6,33 +6,39 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 10:57:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:53:09 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
 
+static void	print_invalid_args(void)
+{
+	ft_display_error("Invalid format direction detected, "
+		"usage: [direction (2 letters)] [./path]");
+}
+
+
+
 static int	len_path(t_data *data, int i, int *j)
 {
 	int	len_dir;
 
 	len_dir = 0;
-	while (data->map.full_file[i][*j]
-		&& (data->map.full_file[i][*j] != ' ' && data->map.full_file[i][*j] != '\n'))
+	while (is_space_or_newline(data->map.full_file[i][*j]))
 	{
 		len_dir++;
 		*j += 1;
 	}
 	if (len_dir == 0)
 	{
-		ft_display_error("Wrong argument detected, usage: [direction (2 letters)] [./path]");
+		print_invalid_args();
 		return (-1);
 	}
 	while (data->map.full_file[i][*j])
 	{
-		if (data->map.full_file[i][*j] != ' '
-			&& data->map.full_file[i][*j] != '\n')
+		if (is_space_or_newline(data->map.full_file[i][*j]))
 		{
 			ft_display_error("Content after path argument forbidden");
 			return (-1);
@@ -51,7 +57,7 @@ static void	dir_handle_error(t_data *data, int i, int *j)
 {
 	if (data->map.full_file[i][*j] != ' ')
 	{
-		ft_display_error("Wrong argument detected, usage: [direction (2 letters)] [./path]");
+		print_invalid_args();
 		*j = -1;
 		return ;
 	}
@@ -61,7 +67,7 @@ static void	dir_handle_error(t_data *data, int i, int *j)
 		&& !ft_strnstr(&data->map.full_file[i][*j], "./", 2))
 		|| !data->map.full_file[i][*j] || !data->map.full_file[i][*j + 1])
 	{
-		ft_display_error("Wrong argument or path detected, usage: [direction (2 letters)] [./path]");
+		print_invalid_args();
 		*j = -1;
 		return ;
 	}

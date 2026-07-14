@@ -6,13 +6,20 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:26:33 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/13 16:45:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:53:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
 #include <fcntl.h>
+
+int	is_space_or_newline(char c)
+{
+	if (c && (c == ' ' || c == '\n'))
+		return (1);
+	return (0);
+}
 
 int	is_arg(char *str)
 {

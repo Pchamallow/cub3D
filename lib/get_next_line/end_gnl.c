@@ -37,4 +37,3 @@ int	end_gnl(char *line, int fd)
 	close(fd);
 	return (0);
 }
-
