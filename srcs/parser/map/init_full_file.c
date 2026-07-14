@@ -72,15 +72,34 @@ static int	init_map_content(t_data *data)
 	return (0);
 }
 
+static int	get_index_after_args(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map.full_file[i])
+	{
+		if (!is_arg(data->map.full_file[i])
+			&& !str_iswhitespaces(data->map.full_file[i]))
+		{
+			data->map.begin_maze = i;
+			return (1);
+		}
+		i++;
+	}
+	ft_display_error("Map is missing");
+	return (0);
+}
+
 int	init_full_file(t_data *data)
 {
 	if (get_lines_columns(data))
 		return (1);
 	if (data->map.lines < 10 || data->map.columns < 6
-		|| data->map.lines > 350 || data->map.columns > 350)
+		|| data->map.lines > 300 || data->map.columns > 300)
 	{
 		ft_display_error("Map size is invalid,"
-			" must be 6x10 and 350x350 (inclusive)");
+			" must be 6x10 and 300x300 (inclusive)");
 		return (1);
 	}
 	data->map.full_file = (char **)malloc((sizeof(char *))
@@ -92,7 +111,7 @@ int	init_full_file(t_data *data)
 	}
 	if (data->map.full_file)
 		fill_null(data->map.full_file, data->map.lines);
-	if (init_map_content(data))
+	if (init_map_content(data) || !get_index_after_args(data))
 		return (1);
 	return (0);
 }
