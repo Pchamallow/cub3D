@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/14 14:43:24 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/14 16:59:30 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ EVENT_DIR	= srcs/events
 EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c ${EVENT_UI_SRCS}
 
 MATH_DIR= srcs/math
-MATH_SRCS= ${MATH_DIR}/raycatsing.c		\
+MATH_SRCS= ${MATH_DIR}/raycasting.c		\
 			${MATH_DIR}/move_player.c
 
 PARSER_DIR	= srcs/parser

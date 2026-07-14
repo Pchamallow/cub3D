@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 15:57:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 16:59:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,42 @@ static void	modifiy_render(t_data *data, t_render *render)
 	}
 }
 
-int	raycasting(t_data *data)
-{
+// int	raycasting(t_data *data)
+// {
+// 	// facilite pour l algo
+// 	int tmp;
+// 	tmp = data->player.pos_x;
+// 	data->player.pos_x = data->player.pos_y;
+// 	data->player.pos_y =  tmp;
 
-	double posX = data->player.x_start_p;
-	double posY = data->player.x_start_p;  //x and y start position
-	double dirX = -1.0, dirY = 0.0; //initial direction vector
-	double planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
+// 	int posX = data->player.pos_x;
+// 	int posY = data->player.pos_y;  //x and y start position
+// 	int dirX = -1.0, dirY = 0.0; //initial direction vector
+// 	int planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
 
-	double time = 0; //time of current frame
-	double oldTime = 0; //time of previous frame
+// 	int time = 0; //time of current frame
+// 	int oldTime = 0; //time of previous frame
 
-	int	*texture[8];
+// 	int	*texture[8];
 
-	// 1. test une image sur les murs
-	data->image.path = "srcs/texture/NO.xpm";
+// 	// 1. test une image sur les murs
+// 	data->image.path = "srcs/texture/NO.xpm";
 
-	// 2. remplacer une image uniforme par les images par direction
-	// data->direction.no
-	// 3. mettre une couleur au sol et au plafond
+// 	// 2. remplacer une image uniforme par les images par direction
+// 	// data->direction.no
+// 	// 3. mettre une couleur au sol et au plafond
 	
-	data->image.image = mlx_xpm_file_to_image(data->mlx, data->image.path, 3000, 4000);
-	// securite
-	
-}
+// 	data->image.image = mlx_xpm_file_to_image(data->mlx, data->image.path, 2000, 3000);
+// 	// securite
+
+
+// 	}
+// }
 
 int	render(t_data *data)
 {
 	t_render	*render = &data->render;
-	raycasting();
+	// raycasting();
 	modifiy_render(data, render);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
