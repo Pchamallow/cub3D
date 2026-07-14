@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:20:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 13:27:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:58:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	move_player(t_data *data, int dx, int dy)
 
 	new_x = data->player.pos_x + dx;
 	new_y = data->player.pos_y + dy;
-	if (data->map.maze[new_y][new_x] != '1')
+	if (data->map.maze[new_y]
+		&& data->map.maze[new_y][new_x]
+		&& data->map.maze[new_y][new_x] != '1')
 	{
 		data->player.pos_x  = new_x;
 		data->player.pos_y = new_y;

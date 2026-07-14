@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 13:55:14 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:56:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	refresh_map(t_data *data)
 	// int	y;
 
 	mlx_clear_window(data->mlx, data->win);
+	render(data);
 	// recalcul de render
 	return (0);
 }

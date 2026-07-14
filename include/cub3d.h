@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 13:52:51 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:56:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int		get_all_directions(t_data *data);
 
 int		render(t_data *data);
 void	move_player(t_data *data, int dx, int dy);
+int		refresh_map(t_data *data);
 
 // Events
 
