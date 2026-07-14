@@ -6,12 +6,13 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 13:56:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 14:13:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
+#include "../../lib/libft/libft.h"
 
 // en pause, d abord avoir le move player pour voir si ca marche
 // static int	key_press(int keycode, t_data *data)

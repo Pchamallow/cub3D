@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 13:56:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 14:07:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_render
 	int		pixel_bits;
 	int		line_bytes;
 	int		endian;
+	int		debug_color;
 	void	*image;
 	char	*buffer;
 }			t_render;
