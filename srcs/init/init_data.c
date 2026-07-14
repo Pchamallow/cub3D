@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 13:16:55 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:50:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ static void	*init_window(t_data *data)
 // create a buffer image in order to write in
 static int	init_render(t_data *data)
 {
-	void *image = mlx_new_image(data->mlx, data->width, data->height);
+
 	// protection
-	if (render(data, &image))
+	if (render(data))
 		return (1);
-	mlx_put_image_to_window(data->mlx, data->win, image, 0, 0);
 	return (0);
 }
 

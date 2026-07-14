@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 13:16:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:52:51 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@
 # define RED "\033[38;5;1m"
 # define RESET "\x1b[0m"
 
-typedef struct s_keys {
+typedef struct s_render
+{
+	int		pixel_bits;
+	int		line_bytes;
+	int		endian;
+	void	*image;
+	char	*buffer;
+}			t_render;
+
+typedef struct s_keys
+{
 	int	w;
 	int	s;
 	int	a;
@@ -82,7 +92,6 @@ typedef struct s_data
 {
 	void			*mlx;
 	void			*win;
-	char			*render;
 	int				width;
 	int				height;
 	int				max_width;
@@ -93,6 +102,7 @@ typedef struct s_data
 	t_image			image;
 	t_map			map;
 	t_keys			key;
+	t_render		render;
 	t_direction		direction;
 }			t_data;
 
@@ -115,7 +125,8 @@ int		get_all_directions(t_data *data);
 
 // Math
 
-int		render(t_data *data, void **image);
+int		render(t_data *data);
+void	move_player(t_data *data, int dx, int dy);
 
 // Events
 
