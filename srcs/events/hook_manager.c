@@ -3,19 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   hook_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/11 16:33:01 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/14 12:34:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
 
+// en pause, d abord avoir le move player pour voir si ca marche
+// static int	key_press(int keycode, t_data *data)
+// {
+// 	if (keycode == ESC)
+// 		close_esc(keycode, data);
+// 	if (keycode == KEY_W)
+// 		data->key.w = 1;
+// }
+
 void	ft_init_hooks(t_data *data)
 {
 	mlx_key_hook(data->win, handle_keypress, data);
+	// mlx_hook(data->win, 2, 1, key_press, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
 }
 

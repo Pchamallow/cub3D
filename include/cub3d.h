@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:56:35 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 12:32:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 
 # define RED "\033[38;5;1m"
 # define RESET "\x1b[0m"
+
+typedef struct s_keys {
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
 
 typedef struct s_map
 {
@@ -82,6 +91,7 @@ typedef struct s_data
 	t_player		player;
 	t_image			image;
 	t_map			map;
+	t_keys			key;
 	t_direction		direction;
 }			t_data;
 
