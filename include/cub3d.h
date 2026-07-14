@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:53:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:56:35 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,13 @@ int		is_tabs(char **str);
 int		skip_spaces(char *str);
 int		open_fd(char *file, int *fd);
 int		is_arg(char *str);
-int		is_space_or_newline(char c);
+int		is_space_or_nl(char c);
 
 // Debug
 
 void	print_array(char **array);
 void	print_directions(t_data *data);
 void	print_rgb(t_data *data);
+void	print_invalid_args(void);
 
 #endif

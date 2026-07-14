@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 16:26:33 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:53:22 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:56:26 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include "../../lib/libft/libft.h"
 #include <fcntl.h>
 
-int	is_space_or_newline(char c)
+void	print_invalid_args(void)
+{
+	ft_display_error("Invalid format direction detected, "
+		"usage: [direction (2 letters)] [./path]");
+}
+
+int	is_space_or_nl(char c)
 {
 	if (c && (c == ' ' || c == '\n'))
 		return (1);

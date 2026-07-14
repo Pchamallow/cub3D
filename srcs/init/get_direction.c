@@ -6,18 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:53:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:56:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/libft/libft.h"
-
-static void	print_invalid_args(void)
-{
-	ft_display_error("Invalid format direction detected, "
-		"usage: [direction (2 letters)] [./path]");
-}
 
 
 
@@ -26,7 +20,7 @@ static int	len_path(t_data *data, int i, int *j)
 	int	len_dir;
 
 	len_dir = 0;
-	while (is_space_or_newline(data->map.full_file[i][*j]))
+	while (is_space_or_nl(data->map.full_file[i][*j]))
 	{
 		len_dir++;
 		*j += 1;
@@ -38,7 +32,7 @@ static int	len_path(t_data *data, int i, int *j)
 	}
 	while (data->map.full_file[i][*j])
 	{
-		if (is_space_or_newline(data->map.full_file[i][*j]))
+		if (is_space_or_nl(data->map.full_file[i][*j]))
 		{
 			ft_display_error("Content after path argument forbidden");
 			return (-1);
@@ -105,13 +99,13 @@ static int	search_direction(t_data *data, int i, char *dir, char **ret)
 * only space are allowed between informations
 * Information have to be seperated by at least one space
 */
-static char *get_direction(t_data *data, char *dir)
+static char	*get_direction(t_data *data, char *dir)
 {
 	char	**file;
 	char	*ret;
 	int		is_find;
 	int		i;
-	
+
 	i = 0;
 	file = data->map.full_file;
 	ret = NULL;
@@ -126,7 +120,8 @@ static char *get_direction(t_data *data, char *dir)
 			i++;
 	}
 	ft_printf_fd(2, RED "Error\n");
-	ft_printf_fd(2, "Missing at least one argument: %s, usage: [%s] [./path]", dir, dir);
+	ft_printf_fd(2, "Missing at least one argument:"
+		" %s, usage: [%s] [./path]", dir, dir);
 	ft_printf_fd(2, "\n" RESET);
 	return (NULL);
 }
