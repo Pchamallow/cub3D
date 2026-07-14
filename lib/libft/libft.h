@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 10:50:27 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/05/27 17:25:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:25:38 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list
 }					t_list;
 
 // Part 1 - Libc functions
+int			ft_atoi(const char *nptr);
 long		ft_atol(char *str);
 long long	ft_atoll(char *str);
 void		ft_bzero(void *s, size_t n);
