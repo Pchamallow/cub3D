@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 14:15:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 14:36:55 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ static void	*init_window(t_data *data)
 static int	init_render(t_data *data)
 {
 	data->render.debug_color = 0xABCDEF;
-
+	data->render.image = mlx_new_image(data->mlx, data->width, data->height);
+	if (!data->render.image)
+		return (1);
+	// add message error
+	
+	data->render.buffer = mlx_get_data_addr(data->render.image, &data->render.pixel_bits,
+		&data->render.line_bytes, &data->render.endian);
+	if (!data->render.buffer)
+		return (1);
 	// protection
 	if (render(data))
 		return (1);
