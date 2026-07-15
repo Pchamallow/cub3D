@@ -34,7 +34,3 @@ int	main(int ac, char **av)
 	free_all(&data);
 	return (0);
 }
-// between init game and mlx loop :
-// // if (parse map)
-// return (1);
-// mlx_loop_hook()
