@@ -57,11 +57,9 @@ static int	init_map_lines(t_data *data, char **line, int fd)
 
 static int	init_map_content(t_data *data)
 {
-	t_map	*map;
 	char	*line;
 	int		fd;
 
-	map = &data->map;
 	if (open_fd(data->map.file_name, &fd))
 		return (1);
 	line = get_next_line(fd);
