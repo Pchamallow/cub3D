@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/15 12:05:56 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 15:16:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int		skip_spaces(char *str);
 int		open_fd(char *file, int *fd);
 int		is_arg(char *str);
 int		is_space_or_nl(char c);
+void	*load_image(t_data *data, char *path);
 
 // Debug
 

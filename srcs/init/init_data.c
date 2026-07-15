@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/15 12:08:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 14:59:43 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,21 @@ int	ft_init_game(t_data *data)
 	}
 	ft_init_hooks(data);
 	if (init_render(data))
+		return (1);
+	return (0);
+}
+
+static int	set_colors(t_data *data, char **ceiling, char **ground)
+{
+	data->ceiling.r = secure_rgb(ft_atol(ceiling[0]));
+	data->ceiling.g = secure_rgb(ft_atol(ceiling[1]));
+	data->ceiling.b = secure_rgb(ft_atol(ceiling[2]));
+	data->ground.r = secure_rgb(ft_atol(ground[0]));
+	data->ground.g = secure_rgb(ft_atol(ground[1]));
+	data->ground.b = secure_rgb(ft_atol(ground[2]));
+	if (data->ceiling.r == -1 || data->ceiling.g == -1
+		|| data->ceiling.b == -1 || data->ground.r == -1
+		|| data->ground.g == -1 || data->ground.b == -1)
 		return (1);
 	return (0);
 }
