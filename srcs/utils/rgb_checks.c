@@ -27,21 +27,22 @@ int	check_double_rgb(t_data *data, char *e)
 {
 	char	**file;
 	int		i;
-	int		exist;
+	int		count;
 
 	file = data->map.full_file;
 	i = 0;
+	count = 0;
 	while (file[i])
 	{
-		if (exist)
-		{
-			ft_display_error("multiple same rgb detected, \
-				please use only one C and one F");
-			return (1);
-		}
-		if (!ft_strncmp(file[i], e, 1))
-			exist = 1;
+		if (!ft_strncmp(file[i], e, ft_strlen(e)))
+			count++;
 		i++;
+	}
+	if (count > 1)
+	{
+		ft_display_error("multiple same rgb detected,"
+			" please use only one C and one F");
+		return (1);
 	}
 	return (0);
 }
