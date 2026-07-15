@@ -6,13 +6,15 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/15 15:22:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 17:26:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
 #include <stdint.h>
+#include <math.h>
+#include "../../lib/libft/libft.h"
 
 
 // TEST V001
@@ -77,14 +79,47 @@
 // 	}
 // }
 #include <stdio.h>
+
+
+
+// V0001
+// int	render(t_data *data)
+// {
+// 	t_render	*render = &data->render;
+// 	modifiy_render(data, render);
+// 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
+// 	return (0);
+// }
+
+// V0002
 int	render(t_data *data)
 {
-	// t_render	*render = &data->render;
-	// raycasting();
-	// int x = 1000, y = 1000;
-	// modifiy_render(data, render);
-	void *img = load_image(data, NO_image);
-	mlx_put_image_to_window(data->mlx, data->win, img, 32, 32);
+	// start position
+	double posX = data->player.pos_x;
+	double posY = data->player.pos_y;
+
+	// direction : NO SE etc
+	// a remplacer par la dir du player
+	double dirX = -1, dirY = 0;
+
+	// the camera plane, perpandicular at dir
+	double planeX = 0, planeY = 0.66;
+
+	
+	while (1)
+	{
+		// screen =   left = -1   middle = 0   right = 1
+
+		double width = data->width;
+		
+		for(int x = 0; x < width; x++)
+		{
+		//calculate ray position and direction
+		double cameraX = 2 * x / width - 1; //x-coordinate in camera space
+		double rayDirX = dirX + planeX * cameraX;
+		double rayDirY = dirY + planeY * cameraX;
+		}
+	}
 	// mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
 }
