@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 14:07:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 12:05:56 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_data
 	int				max_width;
 	int				max_height;
 	t_color			ceiling;
-	t_color			floor;
+	t_color			ground;
 	t_player		player;
 	t_image			image;
 	t_map			map;
@@ -114,6 +114,8 @@ typedef struct s_data
 // Parser
 
 int		ft_args_not_valid(int ac, char **av);
+int		secure_rgb(long rgb);
+int		check_double_rgb(t_data *data, char *e);
 
 // Init data
 

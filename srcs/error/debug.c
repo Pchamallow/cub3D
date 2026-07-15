@@ -40,8 +40,8 @@ void	print_rgb(t_data *data)
 	ft_printf_fd(2, "R %d\n", data->ceiling.r);
 	ft_printf_fd(2, "G %d\n", data->ceiling.g);
 	ft_printf_fd(2, "B %d\n", data->ceiling.b);
-	ft_printf_fd(2, "floor = \n");
-	ft_printf_fd(2, "R %d\n", data->floor.r);
-	ft_printf_fd(2, "G %d\n", data->floor.g);
-	ft_printf_fd(2, "B %d\n", data->floor.b);
+	ft_printf_fd(2, "ground = \n");
+	ft_printf_fd(2, "R %d\n", data->ground.r);
+	ft_printf_fd(2, "G %d\n", data->ground.g);
+	ft_printf_fd(2, "B %d\n", data->ground.b);
 }

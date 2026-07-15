@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:45:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/12 18:11:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/14 17:07:57 by nbaudoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,3 @@ int	main(int ac, char **av)
 	free_all(&data);
 	return (0);
 }
-// between init game and mlx loop :
-// // if (parse map)
-// return (1);
-// mlx_loop_hook()

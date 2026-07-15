@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 12:54:03 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 12:06:39 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	len_path(t_data *data, int i, int *j)
 	int	len_dir;
 
 	len_dir = 0;
-	while (!is_space_or_nl(data->map.full_file[i][*j]))
+	while (data->map.full_file[i][*j]
+		&& !is_space_or_nl(data->map.full_file[i][*j]))
 	{
 		len_dir++;
 		*j += 1;
@@ -28,14 +29,12 @@ static int	len_path(t_data *data, int i, int *j)
 		print_invalid_args();
 		return (-1);
 	}
-	while (data->map.full_file[i][*j])
-	{
-		if (!is_space_or_nl(data->map.full_file[i][*j]))
-		{
-			ft_display_error("Content after path argument forbidden");
-			return (-1);
-		}
+	while (is_space_or_nl(data->map.full_file[i][*j]))
 		*j += 1;
+	if (data->map.full_file[i][*j])
+	{
+		ft_display_error("Content after path argument forbidden");
+		return (-1);
 	}
 	return (len_dir);
 }
@@ -69,28 +68,27 @@ static int	search_direction(t_data *data, int i, char *dir, char **ret)
 {
 	char	**file;
 	int		len_dir;
+	int		start;
 	int		j;
 
 	j = 2;
-	len_dir = 0;
 	file = data->map.full_file;
-	if (ft_strnstr(file[i], dir, 2))
+	if (ft_strncmp(file[i], dir, 2) != 0)
+		return (0);
+	dir_handle_error(data, i, &j);
+	if (j == -1)
+		return (-1);
+	start = j;
+	len_dir = len_path(data, i, &j);
+	if (len_dir == -1)
+		return (-1);
+	*ret = ft_substr(file[i], start, len_dir);
+	if (!*ret)
 	{
-		dir_handle_error(data, i, &j);
-		if (j == -1)
-			return (-1);
-		len_dir = len_path(data, i, &j);
-		if (len_dir == -1)
-			return (-1);
-		*ret = ft_substr(file[i], j - len_dir - 1, len_dir);
-		if (!*ret)
-		{
-			ft_display_error("Get direction - allocation memory failed");
-			return (-1);
-		}
-		return (1);
+		ft_display_error("Get direction - allocation memory failed");
+		return (-1);
 	}
-	return (0);
+	return (1);
 }
 
 /* get_direction
@@ -138,6 +136,5 @@ int	get_all_directions(t_data *data)
 	data->direction.ea = get_direction(data, "EA");
 	if (!data->direction.ea)
 		return (1);
-	// print_directions(data);
 	return (0);
 }

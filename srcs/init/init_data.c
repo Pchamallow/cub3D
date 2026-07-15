@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 14:36:55 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/15 12:08:39 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,25 @@ int	ft_init_game(t_data *data)
 
 static int	init_rgb(t_data *data)
 {
-	char **floor;
-	char **ceiling;
-	
-	floor =ft_split_rgb(data, "F");
-	if (!floor)
+	char	**ground;
+	char	**ceiling;
+	int		error;
+
+	if (check_double_rgb(data, "F") || check_double_rgb(data, "C"))
+		return (1);
+	ground = ft_split_rgb(data, "F");
+	if (!ground)
 		return (1);
 	ceiling = ft_split_rgb(data, "C");
 	if (!ceiling)
+	{
+		free_map(ground);
 		return (1);
-	data->ceiling.r = ft_atol(ceiling[0]);
-	data->ceiling.g = ft_atol(ceiling[1]); 
-	data->ceiling.b = ft_atol(ceiling[2]); 
-	data->floor.r = ft_atol(floor[0]); 
-	data->floor.g = ft_atol(floor[1]); 
-	data->floor.b = ft_atol(floor[2]); 
-	// print_rgb(data);
-	// ajouter securite max et min
-	free_map(floor);
+	}
+	error = set_colors(data, ceiling, ground);
+	free_map(ground);
 	free_map(ceiling);
-	return (0);
+	return (error);
 }
 
 int	ft_init_data(t_data *data)
@@ -98,13 +97,11 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (init_rgb(data))
 		return (1);
-	// print_array(data->map.full_file);
-	// ft_printf_fd(2, "-------\n");
 	if (init_maze(data))
 		return (1);
-	ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
-	print_array(data->map.maze);
-	ft_printf_fd(2, "-------\n");
+	// ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
+	// print_array(data->map.maze);
+	// ft_printf_fd(2, "-------\n");
 	if (is_valid_maze(data))
 		return (1);
 	return (0);
