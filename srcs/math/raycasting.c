@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 15:35:29 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:11:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ int	render(t_data *data)
 int	refresh_map(t_data *data)
 {
 	render(data);
+	print_array(data->map.maze);
 	return (0);
 }

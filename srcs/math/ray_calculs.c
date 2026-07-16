@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 16:03:36 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:13:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double	reach_wall(t_data *data)
 	// invert
 	double playerx = data->player.pos_y;
 	double playery = data->player.pos_x;
-	int	t = 0;
+	double	t = 0;
 	double wallx = playerx;
 	double wally = playery;
 	// ft_printf_fd(2, "wallx = %d\n wally = %d\n", data->player.pos_y,
@@ -70,10 +70,11 @@ double	reach_wall(t_data *data)
 	{
 		wallx = playerx + dirx_norm * t;
 		wally = playery + diry_norm * t;
-		printf("wallx = %f, wally = %f"
-			" , playerx = %f playery = %f, dirx_norm = %f"
-			" diry_norm = %f, t = %d\n",
-			wallx, wally, playerx, playery, dirx_norm, diry_norm, t);
+		// printf("wallx = %f, wally = %f"
+		// 	" , playerx = %f playery = %f, dirx_norm = %f"
+		// 	" diry_norm = %f, t = %f\n",
+		// 	wallx, wally, playerx, playery, dirx_norm, diry_norm, t);
+		// t += 0.1;
 		t++;
 	}
 	printf("its a wall ! : wallx =  %f, wally = %f\n", 
