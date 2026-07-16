@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 16:46:20 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/15 15:20:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 10:17:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@
 // Images
 
 # define NO_image "srcs/texture/NO.xpm"
+
+// Math
+# define PIE 3.141592654
+
 
 // @map
 

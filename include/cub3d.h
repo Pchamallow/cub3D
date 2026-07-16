@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/15 15:16:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 11:15:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_render
 	int		debug_color;
 	void	*image;
 	char	*buffer;
+	double	dirp;
 }			t_render;
 
 typedef struct s_keys
@@ -131,6 +132,8 @@ int		get_all_directions(t_data *data);
 int		render(t_data *data);
 void	move_player(t_data *data, int dx, int dy);
 int		refresh_map(t_data *data);
+void	ray_orientation(t_data *data);
+double	reach_wall(t_data *data);
 
 // Events
 

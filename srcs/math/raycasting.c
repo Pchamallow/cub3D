@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/15 17:26:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 11:14:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,59 @@
 // V0002
 int	render(t_data *data)
 {
-	// start position
-	double posX = data->player.pos_x;
-	double posY = data->player.pos_y;
+	int y = 0;
+	int x = 0;
+
+	while (y < WIDTH_WINDOW)
+	{
+		while (x < HEIGHT_WINDOW)
+		{
+			// 1. calculer orientation de mon rayon
+			ray_orientation(data);
+			
+			// 2. faire le calcul de la distance parcouru par le rayon
+			double distance = reach_wall(data);
+			
+			// 3. Mettre la texture dans le buffer image
+			
+			
+			// 4. Put pixel
+			data->render.buffer = data->render.line_bytes + (x << 2);
+			
+			// 5. Put image
+			mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
+		}
+		y++;
+	}
+
+
+
+	
+
 
 	// direction : NO SE etc
 	// a remplacer par la dir du player
-	double dirX = -1, dirY = 0;
+	// double dirX = -1, dirY = 0;
 
-	// the camera plane, perpandicular at dir
-	double planeX = 0, planeY = 0.66;
+	// // the camera plane, perpandicular at dir
+	// double planeX = 0, planeY = 0.66;
 
 	
-	while (1)
-	{
-		// screen =   left = -1   middle = 0   right = 1
+	// while (1)
+	// {
+	// 	// screen =   left = -1   middle = 0   right = 1
 
-		double width = data->width;
+	// 	double width = data->width;
 		
-		for(int x = 0; x < width; x++)
-		{
-		//calculate ray position and direction
-		double cameraX = 2 * x / width - 1; //x-coordinate in camera space
-		double rayDirX = dirX + planeX * cameraX;
-		double rayDirY = dirY + planeY * cameraX;
-		}
-	}
+	// 	for(int x = 0; x < width; x++)
+	// 	{
+	// 	//calculate ray position and direction
+	// 	double cameraX = 2 * x / width - 1; //x-coordinate in camera space
+	// 	double rayDirX = dirX + planeX * cameraX;
+	// 	double rayDirY = dirY + planeY * cameraX;
+	// 	}
+	// }
+	
 	// mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
 }
