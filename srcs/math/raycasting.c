@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 13:39:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:54:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,28 +80,58 @@
 // }
 #include <stdio.h>
 
-static void	put_texture_pixel(t_data *data, int distance)
+
+static void	put_pixel(t_data *data, int start, int end, int color)
 {
-	int h = 1;
+	char *dst;
+	dst = data->render.buffer + (start * data->render.line_bytes
+		+ end  * (data->render.pixel_bits/ 8));
+	*(unsigned int*)dst = color;
+}
+
+static void	put_texture_pixel(t_data *data, int x, double distance)
+{
+	int h = HEIGHT_WINDOW;
 	//Calculate height of line to draw on screen
-	int lineHeight = (int)(h / distance);
+	(void)distance;
+	int h_wall = (int)(h / distance);
 
 	//calculate lowest and highest pixel to fill in current stripe
-	int drawStart = -lineHeight / 2 + h / 2;
-	if(drawStart < 0)drawStart = 0;
-	int drawEnd = lineHeight / 2 + h / 2;
+	int drawStart = h_wall / 2 - h / 2;
+	if(drawStart < 0)
+		drawStart = 0;
+
+	int drawEnd = h_wall / 2 + h / 2;
 	if(drawEnd >= h)drawEnd = h - 1;
+
 	printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
 		drawStart, drawEnd);
-	drawStart = 4;
-	drawEnd = 5;
-		
-	char *dst;
 
-	dst = data->render.buffer + (drawStart * data->render.line_bytes
-		+ drawEnd  * (data->render.pixel_bits/ 8));
-	*(unsigned int*)dst = 0xABCDEF;
-	// mlx_pixel_put()
+	// drawStart = 50;
+	// drawEnd = 500;
+	
+	int y = 0;
+
+	while (y < drawStart)
+	{
+		put_pixel(data, y, x, 0x87CEEB);
+		printf(" ca print : y = %d, x = %d\n", y, x);
+		y++;
+	}
+
+	while (y <= drawEnd)
+	{
+		put_pixel(data, y, x, 0xABCDEF);
+		printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
+		y++;
+	}
+
+	while (y < HEIGHT_WINDOW)
+	{
+		put_pixel(data, y, x, 0x555555);
+		printf(" ca print : y = %d, x = %d\n", y, x);
+		y++;
+	}
 }
 
 
@@ -120,35 +150,31 @@ int	render(t_data *data)
 	int y = 0;
 	int x = 0;
 
-	while (y < WIDTH_WINDOW)
+	while (x <= WIDTH_WINDOW)
 	{
-		while (x < HEIGHT_WINDOW)
-		{
-			// 1. calculer orientation de mon rayon
-			ray_orientation(data);
-			
-			// 2. faire le calcul de la distance parcouru par le rayon
-			double distance = reach_wall(data);
-			// (void)distance;
+		// while (x < HEIGHT_WINDOW)
+		// {
+		// 1. calculer orientation de mon rayon
+		ray_orientation(data);
 		
-			// 3. Mettre la texture dans le buffer image
-			put_texture_pixel(data, (int)distance);
-			
-			// 4. Put pixel
-
-			//5. put image
-			mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
-			// break ;
-			x++;
-		}
-		// break ;
-		y++;
-	}
-
-
-
+		// 2. faire le calcul de la distance parcouru par le rayon
+		double distance = reach_wall(data);
+		// (void)distance;
 	
+		// utilisation distance pour generer la perspective avec le mur
+		
 
+		// 3. Mettre la texture dans le buffer image
+		put_texture_pixel(data, x, distance);
+		
+		//4. put image
+		// break ;
+		// x++;
+		// }
+		// break ;
+		mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
+		x++;
+	}
 
 	// direction : NO SE etc
 	// a remplacer par la dir du player

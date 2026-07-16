@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 13:25:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 14:38:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ double	reach_wall(t_data *data)
 		wally = playery + diry_norm * t;
 		t++;
 	}
-	ft_printf_fd(2, "its a wall !\n");
+	printf("its a wall ! : wallx =  %f, wally = %f\n", 
+		wallx, wally);
 		
 	// // pour le nord
 	// double dirx = 1;
@@ -91,7 +92,7 @@ double	reach_wall(t_data *data)
 }
 
 /*
-* Direction : 
+* Direction : h_wall
 * Est = 0, West =  pie, North = 1.5 pie, South = 0.5 pie
 *		- number choosen by position on circule
 * User sin and cos to have x and y from dirp point
@@ -125,7 +126,7 @@ void	ray_orientation(t_data *data)
 	}
 	else if (dir == 'E')
 	{
-		dirp = 0 * PIE;
+		dirp = 2 * PIE;
 		data->render.dirx = sin(dirp);
 		data->render.diry = cos(dirp);
 	}
