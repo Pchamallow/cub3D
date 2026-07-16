@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 13:14:51 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:39:08 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,29 @@
 // }
 #include <stdio.h>
 
+static void	put_texture_pixel(t_data *data, int distance)
+{
+	int h = 1;
+	//Calculate height of line to draw on screen
+	int lineHeight = (int)(h / distance);
+
+	//calculate lowest and highest pixel to fill in current stripe
+	int drawStart = -lineHeight / 2 + h / 2;
+	if(drawStart < 0)drawStart = 0;
+	int drawEnd = lineHeight / 2 + h / 2;
+	if(drawEnd >= h)drawEnd = h - 1;
+	printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
+		drawStart, drawEnd);
+	drawStart = 4;
+	drawEnd = 5;
+		
+	char *dst;
+
+	dst = data->render.buffer + (drawStart * data->render.line_bytes
+		+ drawEnd  * (data->render.pixel_bits/ 8));
+	*(unsigned int*)dst = 0xABCDEF;
+	// mlx_pixel_put()
+}
 
 
 // V0001
@@ -106,18 +129,19 @@ int	render(t_data *data)
 			
 			// 2. faire le calcul de la distance parcouru par le rayon
 			double distance = reach_wall(data);
-			(void)distance;
+			// (void)distance;
+		
 			// 3. Mettre la texture dans le buffer image
-			
+			put_texture_pixel(data, (int)distance);
 			
 			// 4. Put pixel
-			// data->render.buffer = data->render.line_bytes + (x << 2);
-			
-			// 5. Put image
-			// mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
-			break ;
+
+			//5. put image
+			mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
+			// break ;
+			x++;
 		}
-		break ;
+		// break ;
 		y++;
 	}
 

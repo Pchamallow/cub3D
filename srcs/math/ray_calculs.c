@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 13:17:35 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:25:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 // distance between player and the wall
 double	distance(t_data *data, int	wallx, int wally)
 {
-	printf("(double)data->player.pos_x %f,"
-		" (double)data->player.pos_y = %f\n",
-		(double)data->player.pos_x, (double)data->player.pos_y);
+	// printf("(double)data->player.pos_x %f,"
+	// 	" (double)data->player.pos_y = %f\n",
+	// 	(double)data->player.pos_x, (double)data->player.pos_y);
 	
 	// if (data->player.pos_y > wallx)
 	// 	printf("sqrt x %f", sqrt(((double)data->player.pos_y - wallx)));
@@ -44,7 +44,7 @@ double	distance(t_data *data, int	wallx, int wally)
 		y = (wally - (double)data->player.pos_x);
 	
 	double distance = sqrt(x + y);
-	printf("distance = %f\n", distance);
+	printf("distance player wall = %f\n", distance);
 	return (distance);
 }
 
@@ -60,10 +60,6 @@ double	reach_wall(t_data *data)
 	double dirx_norm = render->dirx / len;
 	double diry_norm = render->diry / len;
 	
-	// begin after Xs
-	// int x = 1;
-	// int y = 1;
-
 	// invert
 	double playerx = data->player.pos_y;
 	double playery = data->player.pos_x;
@@ -83,17 +79,7 @@ double	reach_wall(t_data *data)
 		t++;
 	}
 	ft_printf_fd(2, "its a wall !\n");
-	
-	// if (data->render.dirp < PIE)
-	// {
-	// 	// sin = 0 et cose = -1
-	// }
-	// else if (data->render.dirp == PIE)
-	// 	// sin = 0 et cose = -1
-	// else if (data->render.dirp > PIE)
-	// 	;	
-		// sin = 0 et cose = -1
-	
+		
 	// // pour le nord
 	// double dirx = 1;
 	// double diry = 0;
@@ -126,10 +112,22 @@ void	ray_orientation(t_data *data)
 		data->render.diry = cos(dirp);
 	}
 	else if (dir == 'S')
+	{
 		dirp = 0.5 * PIE;
+		data->render.dirx = -sin(dirp);
+		data->render.diry = cos(dirp);
+	}
 	else if (dir == 'W')
+	{
 		dirp = PIE;
+		data->render.dirx = sin(dirp);
+		data->render.diry = -cos(dirp);
+	}
 	else if (dir == 'E')
+	{
 		dirp = 0 * PIE;
+		data->render.dirx = sin(dirp);
+		data->render.diry = cos(dirp);
+	}
 	data->render.dirp = dirp;
 }
