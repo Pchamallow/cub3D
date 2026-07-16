@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 12:20:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:04:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_color
 	int				r;
 	int				g;
 	int				b;
+	int				color;
 }			t_color;
 
 typedef struct s_data
@@ -171,6 +172,7 @@ int		open_fd(char *file, int *fd);
 int		is_arg(char *str);
 int		is_space_or_nl(char c);
 void	*load_image(t_data *data, char *path);
+int		create_trgb(int t, int r, int g, int b);
 
 // Debug
 

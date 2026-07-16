@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 14:54:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:01:24 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 	*(unsigned int*)dst = color;
 }
 
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+
 static void	put_texture_pixel(t_data *data, int x, double distance)
 {
 	int h = HEIGHT_WINDOW;
@@ -128,7 +134,8 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 
 	while (y < HEIGHT_WINDOW)
 	{
-		put_pixel(data, y, x, 0x555555);
+		put_pixel(data, y, x, create_trgb(1,
+			data->ceiling.r, data->ceiling.g, data->ceiling.b));
 		printf(" ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}

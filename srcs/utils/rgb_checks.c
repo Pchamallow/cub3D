@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbaudoin <nbaudoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 17:14:01 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/14 17:40:27 by nbaudoin         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:04:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../lib/libft/libft.h"
 #include "../../include/cub3d.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 int	secure_rgb(long rgb)
 {

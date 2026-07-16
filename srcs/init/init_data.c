@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/16 12:53:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:04:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	ft_init_game(t_data *data)
 	return (0);
 }
 
+
+
 static int	set_colors(t_data *data, char **ceiling, char **ground)
 {
 	data->ceiling.r = secure_rgb(ft_atol(ceiling[0]));
@@ -76,6 +78,10 @@ static int	set_colors(t_data *data, char **ceiling, char **ground)
 		|| data->ceiling.b == -1 || data->ground.r == -1
 		|| data->ground.g == -1 || data->ground.b == -1)
 		return (1);
+	data->ceiling.color = create_trgb(1, data->ceiling.r,
+		data->ceiling.g, data->ceiling.b);
+	data->ground.color = create_trgb(1, data->ground.r,
+		data->ground.g, data->ground.b);
 	return (0);
 }
 
