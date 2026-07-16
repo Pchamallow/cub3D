@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/16 15:04:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:05:08 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	ft_init_game(t_data *data)
 		return (1);
 	return (0);
 }
-
-
 
 static int	set_colors(t_data *data, char **ceiling, char **ground)
 {

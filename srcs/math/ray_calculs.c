@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 14:38:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 16:03:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,19 @@ double	distance(t_data *data, int	wallx, int wally)
 	double x = 0;
 	double y = 0;
 
-	if (data->player.pos_y > wallx)
-		x = ((double)data->player.pos_y - wallx);
-	else
-		x = (wallx - (double)data->player.pos_y);
+	x = (wallx - (double)data->player.pos_y);
+	x = x * x;
 
-	if (data->player.pos_x > wally)
-		y = ((double)data->player.pos_x - wally);
-	else
-		y = (wally - (double)data->player.pos_x);
+	y = (wally - (double)data->player.pos_x);
+	y = y * y;
 	
 	double distance = sqrt(x + y);
-	printf("distance player wall = %f\n", distance);
+	// printf("distance player wall = %f\n", distance);
 	return (distance);
 }
 
 /*
 * Use sin and cos in to calcul coordinates
-8 
 */
 double	reach_wall(t_data *data)
 {
@@ -73,9 +68,12 @@ double	reach_wall(t_data *data)
 	while (data->map.maze[(int)wallx][(int)wally]
 			&& data->map.maze[(int)wallx][(int)wally] != '1')
 	{
-		printf("wallx = %f, wally = %f\n", wallx, wally);
 		wallx = playerx + dirx_norm * t;
 		wally = playery + diry_norm * t;
+		printf("wallx = %f, wally = %f"
+			" , playerx = %f playery = %f, dirx_norm = %f"
+			" diry_norm = %f, t = %d\n",
+			wallx, wally, playerx, playery, dirx_norm, diry_norm, t);
 		t++;
 	}
 	printf("its a wall ! : wallx =  %f, wally = %f\n", 
@@ -115,18 +113,18 @@ void	ray_orientation(t_data *data)
 	else if (dir == 'S')
 	{
 		dirp = 0.5 * PIE;
-		data->render.dirx = -sin(dirp);
+		data->render.dirx = sin(dirp);
 		data->render.diry = cos(dirp);
 	}
 	else if (dir == 'W')
 	{
-		dirp = PIE;
+		dirp = 0;
 		data->render.dirx = sin(dirp);
-		data->render.diry = -cos(dirp);
+		data->render.diry = cos(dirp);
 	}
 	else if (dir == 'E')
 	{
-		dirp = 2 * PIE;
+		dirp = PIE;
 		data->render.dirx = sin(dirp);
 		data->render.diry = cos(dirp);
 	}

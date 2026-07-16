@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 15:01:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 15:35:29 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,6 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-
 static void	put_texture_pixel(t_data *data, int x, double distance)
 {
 	int h = HEIGHT_WINDOW;
@@ -110,8 +104,8 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 	int drawEnd = h_wall / 2 + h / 2;
 	if(drawEnd >= h)drawEnd = h - 1;
 
-	printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
-		drawStart, drawEnd);
+	// printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
+	// 	drawStart, drawEnd);
 
 	// drawStart = 50;
 	// drawEnd = 500;
@@ -121,22 +115,21 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 	while (y < drawStart)
 	{
 		put_pixel(data, y, x, 0x87CEEB);
-		printf(" ca print : y = %d, x = %d\n", y, x);
+		// printf(" ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
 
 	while (y <= drawEnd)
 	{
 		put_pixel(data, y, x, 0xABCDEF);
-		printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
+		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
 
 	while (y < HEIGHT_WINDOW)
 	{
-		put_pixel(data, y, x, create_trgb(1,
-			data->ceiling.r, data->ceiling.g, data->ceiling.b));
-		printf(" ca print : y = %d, x = %d\n", y, x);
+		put_pixel(data, y, x, data->ceiling.color);
+		// printf(" after drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
 }
@@ -154,7 +147,7 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 // V0002
 int	render(t_data *data)
 {
-	int y = 0;
+	// int y = 0;
 	int x = 0;
 
 	while (x <= WIDTH_WINDOW)
@@ -179,9 +172,9 @@ int	render(t_data *data)
 		// x++;
 		// }
 		// break ;
-		mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
 		x++;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 
 	// direction : NO SE etc
 	// a remplacer par la dir du player
