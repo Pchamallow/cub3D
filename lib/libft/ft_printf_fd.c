@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:45:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 12:46:44 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:49:21 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static int	helper(const char **format, va_list args)
 static int	is_arg_valid(char c)
 {
 	if (!ft_strchr("cdipsuxX%", c))
+	{
+		write(2, "Error\n ft_printf_fd - Invalid format\n", 37);
 		return (0);
+	}
 	return (1);
 }
 
