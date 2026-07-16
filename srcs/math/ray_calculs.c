@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 12:47:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:17:35 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,35 @@
 #include <stdint.h>
 #include <stdio.h>
 
-// double	distance(t_data *data)
-// {
-
+// distance between player and the wall
+double	distance(t_data *data, int	wallx, int wally)
+{
+	printf("(double)data->player.pos_x %f,"
+		" (double)data->player.pos_y = %f\n",
+		(double)data->player.pos_x, (double)data->player.pos_y);
 	
-// 	// a completer avec le reach wall
-// 	double wallx = 0;
-// 	double wally = 0;
+	// if (data->player.pos_y > wallx)
+	// 	printf("sqrt x %f", sqrt(((double)data->player.pos_y - wallx)));
+	// if (data->player.pos_x > wally)
+	// 	printf("sqrt y %f", sqrt(((double)data->player.pos_x - wally)));
 
-// 	// distance parcourue
-// 	// double distance = sqrt((wallx - playerx) + (wally - playery));
-// 	return (distance);
-// }
+	double x = 0;
+	double y = 0;
+
+	if (data->player.pos_y > wallx)
+		x = ((double)data->player.pos_y - wallx);
+	else
+		x = (wallx - (double)data->player.pos_y);
+
+	if (data->player.pos_x > wally)
+		y = ((double)data->player.pos_x - wally);
+	else
+		y = (wally - (double)data->player.pos_x);
+	
+	double distance = sqrt(x + y);
+	printf("distance = %f\n", distance);
+	return (distance);
+}
 
 /*
 * Use sin and cos in to calcul coordinates
@@ -51,18 +68,18 @@ double	reach_wall(t_data *data)
 	double playerx = data->player.pos_y;
 	double playery = data->player.pos_x;
 	int	t = 0;
-	double rayx = playerx;
-	double rayy = playery;
-	ft_printf_fd(2, "rayx = %d\n rayy = %d\n", data->player.pos_y,
-		 data->player.pos_x);
-	ft_printf_fd(2, "rayx = %f\n rayy = %f\n", data->player.pos_y,
-		 data->player.pos_x);
-	printf("rayx = %f, rayy = %f\n", rayx, rayy);
-	
-	while (data->map.maze[(int)rayx][(int)rayy] != 1)
+	double wallx = playerx;
+	double wally = playery;
+	// ft_printf_fd(2, "wallx = %d\n wally = %d\n", data->player.pos_y,
+	// 	data->player.pos_x);
+	// printf("data->map.maze[(int)wallx][(int)wally] = %c\n", data->map.maze[ data->player.pos_y][ data->player.pos_x]);
+		 
+	while (data->map.maze[(int)wallx][(int)wally]
+			&& data->map.maze[(int)wallx][(int)wally] != '1')
 	{
-		rayx = playerx + dirx_norm * t;
-		rayy = playery + diry_norm * t;
+		printf("wallx = %f, wally = %f\n", wallx, wally);
+		wallx = playerx + dirx_norm * t;
+		wally = playery + diry_norm * t;
 		t++;
 	}
 	ft_printf_fd(2, "its a wall !\n");
@@ -83,8 +100,7 @@ double	reach_wall(t_data *data)
 
 	// double 
 	
-	double dis = 0;
-	// double dis = distance(data);
+	double dis = distance(data, wallx, wally);
 	return (dis);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 12:35:35 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 13:14:51 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ int	render(t_data *data)
 			// data->render.buffer = data->render.line_bytes + (x << 2);
 			
 			// 5. Put image
-			mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
+			// mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);
+			break ;
 		}
+		break ;
 		y++;
 	}
 
