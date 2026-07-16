@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 11:14:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:35:35 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ int	render(t_data *data)
 			
 			// 2. faire le calcul de la distance parcouru par le rayon
 			double distance = reach_wall(data);
-			
+			(void)distance;
 			// 3. Mettre la texture dans le buffer image
 			
 			
 			// 4. Put pixel
-			data->render.buffer = data->render.line_bytes + (x << 2);
+			// data->render.buffer = data->render.line_bytes + (x << 2);
 			
 			// 5. Put image
 			mlx_put_image_to_window(data->mlx, data->win, data->render.image, x, y);

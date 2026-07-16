@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:45:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/02/15 17:25:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/16 12:46:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ static int	helper(const char **format, va_list args)
 	return (0);
 }
 
+static int	is_arg_valid(char c)
+{
+	if (!ft_strchr("cdipsuxX%", c))
+		return (0);
+	return (1);
+}
+
 int	ft_printf_fd(int fd, const char *format, ...)
 {
 	int		count;
@@ -63,6 +70,8 @@ int	ft_printf_fd(int fd, const char *format, ...)
 		if (*format == '%')
 		{
 			if (helper(&format, args) == -1)
+				return (-1);
+			if (!is_arg_valid(*format))
 				return (-1);
 			count += ft_format[(int)*format](args, fd);
 		}
