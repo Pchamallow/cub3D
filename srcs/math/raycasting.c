@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 16:11:04 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 10:09:16 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,18 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 
 static void	put_texture_pixel(t_data *data, int x, double distance)
 {
-	int h = HEIGHT_WINDOW;
 	//Calculate height of line to draw on screen
 	(void)distance;
-	int h_wall = (int)(h / distance);
+	int h_wall = (int)(HEIGHT_WINDOW / distance);
 
 	//calculate lowest and highest pixel to fill in current stripe
-	int drawStart = h_wall / 2 - h / 2;
+	int drawStart = -h_wall / 2 + HEIGHT_WINDOW / 2;
 	if(drawStart < 0)
 		drawStart = 0;
 
-	int drawEnd = h_wall / 2 + h / 2;
-	if(drawEnd >= h)drawEnd = h - 1;
+	int drawEnd = h_wall / 2 + HEIGHT_WINDOW / 2;
+	if(drawEnd >= HEIGHT_WINDOW)
+		drawEnd = HEIGHT_WINDOW - 1;
 
 	// printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
 	// 	drawStart, drawEnd);
@@ -121,14 +121,14 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 
 	while (y <= drawEnd)
 	{
-		put_pixel(data, y, x, 0xABCDEF);
+		put_pixel(data, y, x, 0xF5F5DC);
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
 
 	while (y < HEIGHT_WINDOW)
 	{
-		put_pixel(data, y, x, data->ceiling.color);
+		put_pixel(data, y, x, 0x808080); //data->ceiling.color)
 		// printf(" after drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
@@ -176,30 +176,6 @@ int	render(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 
-	// direction : NO SE etc
-	// a remplacer par la dir du player
-	// double dirX = -1, dirY = 0;
-
-	// // the camera plane, perpandicular at dir
-	// double planeX = 0, planeY = 0.66;
-
-	
-	// while (1)
-	// {
-	// 	// screen =   left = -1   middle = 0   right = 1
-
-	// 	double width = data->width;
-		
-	// 	for(int x = 0; x < width; x++)
-	// 	{
-	// 	//calculate ray position and direction
-	// 	double cameraX = 2 * x / width - 1; //x-coordinate in camera space
-	// 	double rayDirX = dirX + planeX * cameraX;
-	// 	double rayDirY = dirY + planeY * cameraX;
-	// 	}
-	// }
-	
-	// mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
 }
 

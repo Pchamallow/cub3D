@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 15:04:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 10:00:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ typedef struct s_render
 	int		debug_color;
 	void	*image;
 	char	*buffer;
-	double	dirp;
-	double	diry;
-	double	dirx;
 }			t_render;
 
 typedef struct s_keys
@@ -79,10 +76,13 @@ typedef struct s_player
 	int				y_start_p;
 	int				pos_x;
 	int				pos_y;
+	double			dirp;
 	double			dir_x;
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			right;
+	double			left;
 }			t_player;
 
 typedef struct s_color

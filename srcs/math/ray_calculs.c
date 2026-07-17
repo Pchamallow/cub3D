@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 16:13:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 10:06:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,42 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
+
+// VERSION AVEC PLANE
+// static void rotate_player(t_data *data, double rot_speed)
+// {
+// 	double old_dir_x = data->player.dir_x;
+// 	data->player.dir_x = data->player.dir_x * cos(rot_speed) - data->player.dir_y * sin(rot_speed);
+// 	data->player.dir_y = old_dir_x * sin(rot_speed) + data->player.dir_y * cos(rot_speed);
+
+// 	double old_plane_x = data->player.plane_x;
+// 	data->player.plane_x = data->player.plane_x * cos(rot_speed) - data->player.plane_y * sin(rot_speed);
+// 	data->player.plane_y = old_plane_x * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
+// }
+
+static void rotate_player(t_data *data, double rot_speed)
+{
+	(void) rot_speed;
+	if (data->player.dirp < 0)
+		data->player.dirp += 2 * PI;
+	if (data->player.dirp >= 2 * PI)
+		data->player.dirp -= 2 * PI;
+}
+
+static int	is_rotate(t_data *data)
+{
+	if (data->player.right || data->player.left)
+	{
+		int delta = 5;
+		double rot_speed = 2.0 * delta; 
+		if (data->player.right)
+			rotate_player(data, rot_speed);
+		if (data->player.left)
+			rotate_player(data, -rot_speed);
+		return (1);
+	}
+	return (0);
+}
 
 // distance between player and the wall
 double	distance(t_data *data, int	wallx, int wally)
@@ -49,11 +85,11 @@ double	distance(t_data *data, int	wallx, int wally)
 */
 double	reach_wall(t_data *data)
 {
-	t_render *render = &data->render;
+	t_player *player = &data->player;
 
-	double len = sqrt(pow(render->dirx, 2) + pow(render->diry, 2)) ;
-	double dirx_norm = render->dirx / len;
-	double diry_norm = render->diry / len;
+	double len = sqrt(pow(player->dir_x, 2) + pow(player->dir_y, 2)) ;
+	double dirx_norm = player->dir_x / len;
+	double diry_norm = player->dir_y / len;
 	
 	// invert
 	double playerx = data->player.pos_y;
@@ -77,22 +113,18 @@ double	reach_wall(t_data *data)
 		// t += 0.1;
 		t++;
 	}
-	printf("its a wall ! : wallx =  %f, wally = %f\n", 
-		wallx, wally);
-		
-	// // pour le nord
-	// double dirx = 1;
-	// double diry = 0;
-
-	// double 
+	// printf("its a wall ! : wallx =  %f, wally = %f\n", 
+	// 	wallx, wally);
 	
 	double dis = distance(data, wallx, wally);
 	return (dis);
 }
 
+
+
 /*
 * Direction : h_wall
-* Est = 0, West =  pie, North = 1.5 pie, South = 0.5 pie
+* Est = 0, West =  PI, North = 1.5 PI, South = 0.5 PI
 *		- number choosen by position on circule
 * User sin and cos to have x and y from dirp point
 */
@@ -105,29 +137,36 @@ void	ray_orientation(t_data *data)
 	double dirp = 0;
 
 	// orientation rayon 
+
+	data->player.plane_x = 0.66;
+	data->player.plane_x = 0;
+
+	if (is_rotate(data))
+		return ;
+	
 	if (dir == 'N')
 	{
-		dirp = 1.5 * PIE;
-		data->render.dirx = sin(dirp);
-		data->render.diry = cos(dirp);
+		dirp = 1.5 * PI;
+		data->player.dir_x = sin(dirp);
+		data->player.dir_y = cos(dirp);
 	}
 	else if (dir == 'S')
 	{
-		dirp = 0.5 * PIE;
-		data->render.dirx = sin(dirp);
-		data->render.diry = cos(dirp);
+		dirp = 0.5 * PI;
+		data->player.dir_x = sin(dirp);
+		data->player.dir_y = cos(dirp);
 	}
 	else if (dir == 'W')
 	{
 		dirp = 0;
-		data->render.dirx = sin(dirp);
-		data->render.diry = cos(dirp);
+		data->player.dir_x = sin(dirp);
+		data->player.dir_y = cos(dirp);
 	}
 	else if (dir == 'E')
 	{
-		dirp = PIE;
-		data->render.dirx = sin(dirp);
-		data->render.diry = cos(dirp);
+		dirp = PI;
+		data->player.dir_x = sin(dirp);
+		data->player.dir_y = cos(dirp);
 	}
-	data->render.dirp = dirp;
+	data->player.dirp = dirp;
 }
