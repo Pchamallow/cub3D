@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 11:20:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:15:08 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,14 @@ void	init_direction(t_data *data)
 	// a recuprer depuis le praring du maze
 	data->player.dirp = 'N';
 	if (data->player.dirp == 'N')
-	{
 		dirp = 1.5 * PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
 	else if (data->player.dirp == 'S')
-	{
 		dirp = 0.5 * PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
 	else if (data->player.dirp == 'W')
-	{
 		dirp = 0;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
 	else if (data->player.dirp == 'E')
-	{
 		dirp = PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
+	data->player.dir_x = cos(dirp);
+	data->player.dir_y = sin(dirp);
 	data->player.dirp = dirp;
 }

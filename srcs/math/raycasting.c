@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 11:26:28 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:59:17 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 {
 	//Calculate height of line to draw on screen
 	(void)distance;
-	int h_wall = (int)(HEIGHT_WINDOW / distance);
+	double h_wall = (HEIGHT_WINDOW / distance);
 
 	//calculate lowest and highest pixel to fill in current stripe
 	int drawStart = -h_wall / 2 + HEIGHT_WINDOW / 2;
@@ -57,9 +57,14 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 		y++;
 	}
 
+	int color;
 	while (y <= drawEnd)
 	{
-		put_pixel(data, y, x, 0xF5F5DC);
+		// if (data->render.wall_x < data->render.wall_y)
+		// 	color = 0xF5F5DC >> 1;
+		// else
+			color = 0xF5F5DC;
+		put_pixel(data, y, x, color);
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
@@ -86,6 +91,22 @@ int	render(t_data *data)
 		// 1. calculer orientation de mon rayon
 		ray_orientation(data);
 		
+		// regarde ecran dans FOV de 90 et non pas 120
+		// comme une focale longue -> ne pas avoir trop d info a l image
+		
+		
+	// PIE /2 = le FOV
+	// x pour incremnter changer de direction
+	// la largeur de la window pour avoir une dir = une colonne
+	// dirp - 1/4 de PI pour positionner l angle de vue la ou le joueur regarde 
+		data->render.ray_dir = ((PI/2 * x) / WIDTH_WINDOW) + data->player.dirp - (0.25 * PI);
+		data->render.ray_dir_y = sin(data->render.ray_dir);
+		data->render.ray_dir_x = cos(data->render.ray_dir);
+		
+		// if (x < WIDTH_WINDOW / 2)
+		// 	data->render.ray_dir = ((PI/2 * x + 1) / WIDTH_WINDOW) + data->player.dirp - (0.25 * PI);
+		
+
 		// 2. faire le calcul de la distance parcouru par le rayon
 		double distance = reach_wall(data);
 		// (void)distance;
@@ -95,6 +116,7 @@ int	render(t_data *data)
 
 		// 3. Mettre la texture dans le buffer image
 		put_texture_pixel(data, x, distance);
+
 		
 		//4. put image
 		// break ;
@@ -112,5 +134,6 @@ int	refresh_map(t_data *data)
 {
 	render(data);
 	print_array(data->map.maze);
+	printf("dirp =  %f,  dir x = %f,  dir y = %f\n", data->player.dirp, data->player.dir_x, data->player.dir_y);
 	return (0);
 }

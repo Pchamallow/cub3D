@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 12:03:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 15:01:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 // distance between player and the wall
-double	distance(t_data *data, int	wallx, int wally)
+double	distance(t_data *data, double wallx, double wally)
 {
 	// printf("(double)data->player.pos_x %f,"
 	// 	" (double)data->player.pos_y = %f\n",
@@ -40,7 +40,7 @@ double	distance(t_data *data, int	wallx, int wally)
 	y = y * y;
 	
 	double distance = sqrt(x + y);
-	// printf("distance player wall = %f\n", distance);
+	printf("distance player wall = %f\n", distance);
 	return (distance);
 }
 
@@ -48,24 +48,41 @@ double	distance(t_data *data, int	wallx, int wally)
 */
 void	rotate_player(t_data *data, int side)
 {
-	double rotSpeed = 45;
+	// double rotSpeed = 45;
+	// if (side == 1)
+	// {
+	// 	double oldDirX = data->player.dir_x;
+	// 	data->player.dir_x = data->player.dir_x * cos(-rotSpeed) - data->player.dir_y * sin(rotSpeed);
+	// 	data->player.dir_y = oldDirX * sin(-rotSpeed) + data->player.dir_y * cos(rotSpeed);
+	// 	// double oldPlaneX = planeX;
+	// 	// planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+	// 	// planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	// }
+	// else
+	// {
+	// 	double oldDirX = data->player.dir_x;
+	// 	data->player.dir_x = data->player.dir_x * cos(rotSpeed) - data->player.dir_y * sin(rotSpeed);
+	// 	data->player.dir_y = oldDirX * sin(rotSpeed) + data->player.dir_y * cos(rotSpeed);
+	// }
 	if (side == 1)
 	{
 		data->player.right = 1;
-		double oldDirX = data->player.dir_x;
-		data->player.dir_x = data->player.dir_x * cos(-rotSpeed) - data->player.dir_y * sin(rotSpeed);
-		data->player.dir_y = oldDirX * sin(-rotSpeed) + data->player.dir_y * cos(rotSpeed);
-		// double oldPlaneX = planeX;
-		// planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-		// planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+		data->player.dirp += 0.1;
 	}
 	else
 	{
 		data->player.left = 1;
-		double oldDirX = data->player.dir_x;
-		data->player.dir_x = data->player.dir_x * cos(rotSpeed) - data->player.dir_y * sin(rotSpeed);
-		data->player.dir_y = oldDirX * sin(rotSpeed) + data->player.dir_y * cos(rotSpeed);
+		data->player.dirp -= 0.1;
 	}
+
+	// eviter les limites en negatif et positif ,rester dans un meme cercle complet
+	if (data->player.dirp > 2 * PI)
+		data->player.dirp = 0;
+	else if (data->player.dirp < 0)
+		data->player.dirp = 2 * PI;
+
+	data->player.dir_x = cos(data->player.dirp);
+	data->player.dir_y = sin(data->player.dirp);
 	printf("dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
 }
 
@@ -77,9 +94,9 @@ double	reach_wall(t_data *data)
 	t_player *player = &data->player;
 
 	// printf("dirx = %f, diry = %f\n", player->dir_x, player->dir_y);
-	double len = sqrt(pow(player->dir_x, 2) + pow(player->dir_y, 2)) ;
-	double dirx_norm = player->dir_x / len;
-	double diry_norm = player->dir_y / len;
+	double len = sqrt(pow(player->dir_x, 2.0) + pow(player->dir_y, 2.0)) ;
+	double dirx_norm = data->render.ray_dir_x / len;
+	double diry_norm = data->render.ray_dir_y / len;
 	
 	// invert
 	double playerx = data->player.pos_y;
@@ -90,9 +107,10 @@ double	reach_wall(t_data *data)
 	// ft_printf_fd(2, "wallx = %d\n wally = %d\n", data->player.pos_y,
 	// 	data->player.pos_x);
 	// printf("data->map.maze[(int)wallx][(int)wally] = %c\n", data->map.maze[ data->player.pos_y][ data->player.pos_x]);
-		 
-	while (data->map.maze[(int)wallx][(int)wally]
-			&& data->map.maze[(int)wallx][(int)wally] != '1')
+	int x = wallx;
+	int y = wally;
+	while (data->map.maze[x][y]
+			&& data->map.maze[x][y] != '1')
 	{
 		wallx = playerx + dirx_norm * t;
 		wally = playery + diry_norm * t;
@@ -100,13 +118,21 @@ double	reach_wall(t_data *data)
 		// 	" , playerx = %f playery = %f, dirx_norm = %f"
 		// 	" diry_norm = %f, t = %f\n",
 		// 	wallx, wally, playerx, playery, dirx_norm, diry_norm, t);
-		// t += 0.1;
-		t++;
+		// t++;
+		x = wallx;
+		y = wally;
+		t += 0.01;
 	}
+	data->render.wall_x = wallx;
+	data->render.wall_y = wally;
 	// printf("its a wall ! : wallx =  %f, wally = %f\n", 
 	// 	wallx, wally);
 	
 	double dis = distance(data, wallx, wally);
+		// correction fish eye -> les rayons envoyer au extremite du FOV sont plus
+	// longs que ceux du milieu
+	// -> on faire en sorte qu ils soient tous a la meme longeur que ceux du milieu
+	// dis = dis * cos(data->render.ray_dir);
 	return (dis);
 }
 

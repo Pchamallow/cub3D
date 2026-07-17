@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 11:30:14 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 14:15:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ typedef struct s_render
 	int		endian;
 	void	*image;
 	char	*buffer;
+	double	wall_x;
+	double	wall_y;
+	double	ray_dir;
+	double	ray_dir_x;
+	double	ray_dir_y;
 }			t_render;
 
 typedef struct s_keys
