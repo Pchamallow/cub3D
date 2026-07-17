@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:20:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 14:34:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 11:30:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	move_player(t_data *data, int dx, int dy)
 		// ft_printf_fd(2, "player moving\n");
 		data->player.pos_x  = new_x;
 		data->player.pos_y = new_y;
-		data->render.debug_color = (int)3333333;
 	}
 }

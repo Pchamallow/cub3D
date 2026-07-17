@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 10:00:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 11:30:14 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_render
 	int		pixel_bits;
 	int		line_bytes;
 	int		endian;
-	int		debug_color;
 	void	*image;
 	char	*buffer;
 }			t_render;
@@ -137,6 +136,8 @@ void	move_player(t_data *data, int dx, int dy);
 int		refresh_map(t_data *data);
 void	ray_orientation(t_data *data);
 double	reach_wall(t_data *data);
+void	rotate_player(t_data *data, int side);
+void	init_direction(t_data *data);
 
 // Events
 

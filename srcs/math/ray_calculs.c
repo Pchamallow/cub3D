@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 10:06:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 12:03:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,6 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdio.h>
-
-// VERSION AVEC PLANE
-// static void rotate_player(t_data *data, double rot_speed)
-// {
-// 	double old_dir_x = data->player.dir_x;
-// 	data->player.dir_x = data->player.dir_x * cos(rot_speed) - data->player.dir_y * sin(rot_speed);
-// 	data->player.dir_y = old_dir_x * sin(rot_speed) + data->player.dir_y * cos(rot_speed);
-
-// 	double old_plane_x = data->player.plane_x;
-// 	data->player.plane_x = data->player.plane_x * cos(rot_speed) - data->player.plane_y * sin(rot_speed);
-// 	data->player.plane_y = old_plane_x * sin(rot_speed) + data->player.plane_y * cos(rot_speed);
-// }
-
-static void rotate_player(t_data *data, double rot_speed)
-{
-	(void) rot_speed;
-	if (data->player.dirp < 0)
-		data->player.dirp += 2 * PI;
-	if (data->player.dirp >= 2 * PI)
-		data->player.dirp -= 2 * PI;
-}
-
-static int	is_rotate(t_data *data)
-{
-	if (data->player.right || data->player.left)
-	{
-		int delta = 5;
-		double rot_speed = 2.0 * delta; 
-		if (data->player.right)
-			rotate_player(data, rot_speed);
-		if (data->player.left)
-			rotate_player(data, -rot_speed);
-		return (1);
-	}
-	return (0);
-}
 
 // distance between player and the wall
 double	distance(t_data *data, int	wallx, int wally)
@@ -80,6 +44,31 @@ double	distance(t_data *data, int	wallx, int wally)
 	return (distance);
 }
 
+/* 1 = right, 2 = left
+*/
+void	rotate_player(t_data *data, int side)
+{
+	double rotSpeed = 45;
+	if (side == 1)
+	{
+		data->player.right = 1;
+		double oldDirX = data->player.dir_x;
+		data->player.dir_x = data->player.dir_x * cos(-rotSpeed) - data->player.dir_y * sin(rotSpeed);
+		data->player.dir_y = oldDirX * sin(-rotSpeed) + data->player.dir_y * cos(rotSpeed);
+		// double oldPlaneX = planeX;
+		// planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+		// planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+	}
+	else
+	{
+		data->player.left = 1;
+		double oldDirX = data->player.dir_x;
+		data->player.dir_x = data->player.dir_x * cos(rotSpeed) - data->player.dir_y * sin(rotSpeed);
+		data->player.dir_y = oldDirX * sin(rotSpeed) + data->player.dir_y * cos(rotSpeed);
+	}
+	printf("dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+}
+
 /*
 * Use sin and cos in to calcul coordinates
 */
@@ -87,6 +76,7 @@ double	reach_wall(t_data *data)
 {
 	t_player *player = &data->player;
 
+	// printf("dirx = %f, diry = %f\n", player->dir_x, player->dir_y);
 	double len = sqrt(pow(player->dir_x, 2) + pow(player->dir_y, 2)) ;
 	double dirx_norm = player->dir_x / len;
 	double diry_norm = player->dir_y / len;
@@ -132,41 +122,16 @@ void	ray_orientation(t_data *data)
 {
 	// start position
 
-	(void)data;
-	char dir = 'N';
-	double dirp = 0;
+
 
 	// orientation rayon 
 
-	data->player.plane_x = 0.66;
-	data->player.plane_x = 0;
+	// if (is_rotate(data))
+	// 	return ;
 
-	if (is_rotate(data))
-		return ;
-	
-	if (dir == 'N')
+	if (data->player.right || data->player.left)
 	{
-		dirp = 1.5 * PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
+		return;
 	}
-	else if (dir == 'S')
-	{
-		dirp = 0.5 * PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
-	else if (dir == 'W')
-	{
-		dirp = 0;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
-	else if (dir == 'E')
-	{
-		dirp = PI;
-		data->player.dir_x = sin(dirp);
-		data->player.dir_y = cos(dirp);
-	}
-	data->player.dirp = dirp;
+	init_direction(data);
 }

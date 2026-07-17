@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/17 09:49:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 11:57:38 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,35 @@ int	handle_keypress(int keycode, void *param)
 	if (keycode == 'd')
 		move_player(data, 1, 0);
 	if (keycode == ARROW_LEFT)
-		data->player.left = 1;
+	{
+		rotate_player(data, 1);
+		printf("trun\n");
+	}
 	if (keycode == ARROW_RIGHT)
-		data->player.left = 1;
+		rotate_player(data, 0);
 	refresh_map(data);
+	return (0);
+}
+
+int	handle_keyrelease(int keycode, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (keycode == ARROW_LEFT)
+		data->player.left = 0;
+	if (keycode == ARROW_RIGHT)
+		data->player.right = 0;
 	return (0);
 }
 
 void	ft_init_hooks(t_data *data)
 {
 	mlx_key_hook(data->win, handle_keypress, data);
-	// mlx_hook(data->win, 2, 1, key_press, data);
+	
+	// mlx_hook(data->win, 3, 1L << 1, handle_keyrelease, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
+	// mlx_loop_hook(data->mlx, refresh_map, data);
 }
 
 // 	// if (keycode == KEY_W || keycode == ARROW_UP)
