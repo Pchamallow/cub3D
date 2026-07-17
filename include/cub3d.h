@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 14:15:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:56:07 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,15 @@ typedef struct s_direction
 typedef struct s_image
 {
 	char			*path;
+	char			*addr;
 	void			*image;
 	int				value;
 	int				width;
 	int				height;
 	int				check;
+	int			pixel_bits;
+	int			line_bytes;
+	int			endian;
 }			t_image;
 
 typedef struct s_player
@@ -112,6 +116,7 @@ typedef struct s_data
 	t_map			map;
 	t_keys			key;
 	t_render		render;
+	t_image			north;
 	t_direction		direction;
 }			t_data;
 
@@ -177,7 +182,7 @@ int		skip_spaces(char *str);
 int		open_fd(char *file, int *fd);
 int		is_arg(char *str);
 int		is_space_or_nl(char c);
-void	*load_image(t_data *data, char *path);
+void	load_image(t_data *data, t_image *dir, char *path);
 int		create_trgb(int t, int r, int g, int b);
 
 // Debug

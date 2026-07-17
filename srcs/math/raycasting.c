@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 16:06:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 17:24:51 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 #include <stdint.h>
 #include <math.h>
 #include "../../lib/libft/libft.h"
-
 #include <stdio.h>
-
 
 static void	put_pixel(t_data *data, int start, int end, int color)
 {
@@ -27,13 +25,38 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	get_color(t_data *data)
+static int get_texture_pixel(t_image *dir, int x, int y)
 {
-	// 1. savoir si on est au nord, sud, est, ouest
-	// 2. comment mettre la texture 
+    char *pixel;
 
-	(void)data;
+    pixel = dir->addr + (y * dir->line_bytes + x * (dir->pixel_bits / 8));
+    return (*(unsigned int *)pixel);
 }
+
+// static void	get_color(t_data *data)
+// {
+	
+// 	(void)data;
+	
+// 	// 1. savoir si on est au nord, sud, est, ouest
+// 	// les directions = par raaport au joueur 
+// 	// pour une case 1 :
+// 	// au dessus de 1 = nord 
+// 	// en dessous de 1 = sud
+// 	// droite 1 = West
+// 	// gauche 1 = est
+// 	// connaitre notre position par rapport au 1
+
+// 	// orientation 
+// 	// if dir = PIE = EST,
+// 	// dir = 0 ou 2 = west,
+// 	// PI * 1.5 = NORD
+// 	// if (data->render.ray_dir == 1.5 * PI)
+// 		// color = data->direction.no;
+// 	data->north.image = load_image(data, &data->north, data->north.image);
+
+// 	// 2. comment mettre la texture 
+// }
 
 static void	put_texture_pixel(t_data *data, int x, double distance)
 {
@@ -71,15 +94,15 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 		// if (data->render.wall_x < data->render.wall_y)
 		// 	color = 0xF5F5DC >> 1;
 		// else
-			color = 0xF5F5DC;
+		color = 0xF5F5DC;
 
-		get_color(data);
+		// get_color(data);
 		// texture murs
 		// 1. savoir si on est au nord, sud, est, ouest
 		// 2. comment mettre la texture 
 		// data->direction.no;
-		// put_pixel(data, y, x, data->direction.no);
-		put_pixel(data, y, x, color);
+		// put_pixel(data, y, x, color);
+		put_pixel(data, y, x, get_texture_pixel(&data->north, 5, 5));
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
