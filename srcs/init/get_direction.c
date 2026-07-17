@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/15 12:06:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:08:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ static void	dir_handle_error(t_data *data, int i, int *j)
 	}
 	while (data->map.full_file[i][*j] && (data->map.full_file[i][*j] == ' '))
 		*j += 1;
-	if ((data->map.full_file[i][*j]
-		&& !ft_strnstr(&data->map.full_file[i][*j], "./", 2))
-		|| !data->map.full_file[i][*j] || !data->map.full_file[i][*j + 1])
+	if (!data->map.full_file[i][*j] || !data->map.full_file[i][*j + 1])
 	{
 		print_invalid_args();
 		*j = -1;

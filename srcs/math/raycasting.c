@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 14:59:17 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:06:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 	dst = data->render.buffer + (start * data->render.line_bytes
 		+ end  * (data->render.pixel_bits/ 8));
 	*(unsigned int*)dst = color;
+}
+
+static void	get_color(t_data *data)
+{
+	// 1. savoir si on est au nord, sud, est, ouest
+	// 2. comment mettre la texture 
+
+	(void)data;
 }
 
 static void	put_texture_pixel(t_data *data, int x, double distance)
@@ -64,6 +72,13 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 		// 	color = 0xF5F5DC >> 1;
 		// else
 			color = 0xF5F5DC;
+
+		get_color(data);
+		// texture murs
+		// 1. savoir si on est au nord, sud, est, ouest
+		// 2. comment mettre la texture 
+		// data->direction.no;
+		// put_pixel(data, y, x, data->direction.no);
 		put_pixel(data, y, x, color);
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;

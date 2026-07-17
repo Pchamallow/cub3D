@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 15:01:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/17 16:00:46 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,6 @@
 // distance between player and the wall
 double	distance(t_data *data, double wallx, double wally)
 {
-	// printf("(double)data->player.pos_x %f,"
-	// 	" (double)data->player.pos_y = %f\n",
-	// 	(double)data->player.pos_x, (double)data->player.pos_y);
-	
-	// if (data->player.pos_y > wallx)
-	// 	printf("sqrt x %f", sqrt(((double)data->player.pos_y - wallx)));
-	// if (data->player.pos_x > wally)
-	// 	printf("sqrt y %f", sqrt(((double)data->player.pos_x - wally)));
-
 	double x = 0;
 	double y = 0;
 
@@ -40,7 +31,7 @@ double	distance(t_data *data, double wallx, double wally)
 	y = y * y;
 	
 	double distance = sqrt(x + y);
-	printf("distance player wall = %f\n", distance);
+	// printf("distance player wall = %f\n", distance);
 	return (distance);
 }
 
@@ -48,22 +39,6 @@ double	distance(t_data *data, double wallx, double wally)
 */
 void	rotate_player(t_data *data, int side)
 {
-	// double rotSpeed = 45;
-	// if (side == 1)
-	// {
-	// 	double oldDirX = data->player.dir_x;
-	// 	data->player.dir_x = data->player.dir_x * cos(-rotSpeed) - data->player.dir_y * sin(rotSpeed);
-	// 	data->player.dir_y = oldDirX * sin(-rotSpeed) + data->player.dir_y * cos(rotSpeed);
-	// 	// double oldPlaneX = planeX;
-	// 	// planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-	// 	// planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
-	// }
-	// else
-	// {
-	// 	double oldDirX = data->player.dir_x;
-	// 	data->player.dir_x = data->player.dir_x * cos(rotSpeed) - data->player.dir_y * sin(rotSpeed);
-	// 	data->player.dir_y = oldDirX * sin(rotSpeed) + data->player.dir_y * cos(rotSpeed);
-	// }
 	if (side == 1)
 	{
 		data->player.right = 1;
@@ -132,7 +107,7 @@ double	reach_wall(t_data *data)
 		// correction fish eye -> les rayons envoyer au extremite du FOV sont plus
 	// longs que ceux du milieu
 	// -> on faire en sorte qu ils soient tous a la meme longeur que ceux du milieu
-	// dis = dis * cos(data->render.ray_dir);
+	dis = dis * cos(data->render.ray_dir - data->player.dirp);
 	return (dis);
 }
 
@@ -146,18 +121,7 @@ double	reach_wall(t_data *data)
 */
 void	ray_orientation(t_data *data)
 {
-	// start position
-
-
-
-	// orientation rayon 
-
-	// if (is_rotate(data))
-	// 	return ;
-
 	if (data->player.right || data->player.left)
-	{
 		return;
-	}
 	init_direction(data);
 }
