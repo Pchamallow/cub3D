@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 14:32:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 15:33:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	rotate_player(t_data *data, int side)
 	}
 	else if (data->player.dirp < 0.0)
 	{
-		delta = data->player.dirp * -1;
+		delta = data->player.dirp * -1.0;
 		data->player.dirp = (2.0 * PI) - delta;
 	}
 	printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
@@ -75,12 +75,13 @@ void	rotate_player(t_data *data, int side)
 */
 double	reach_wall(t_data *data)
 {
-	t_player *player = &data->player;
+	// t_player *player = &data->player;
 
-	double len = player->dir_x + player->dir_y;
-	double dirx_norm = data->render.ray_dir_x / len;
-	double diry_norm = data->render.ray_dir_y / len;
-	
+	// double len = player->dir_x + player->dir_y;
+	// double dirx_norm = data->render.ray_dir_x / len;
+	// double diry_norm = data->render.ray_dir_y / len;
+	// if (diry_norm)
+	// printf("len = %f | dirX_norm = %f | dirY_norm = %f\n", len, dirx_norm, diry_norm);
 	double playerx = data->player.pos_y;
 	double playery = data->player.pos_x;
 	double	t = 0;
@@ -94,8 +95,8 @@ double	reach_wall(t_data *data)
 	while (data->map.maze[x][y]
 			&& data->map.maze[x][y] != '1')
 	{
-		wallx = playerx + dirx_norm * t;
-		wally = playery + diry_norm * t;
+		wallx = playerx + data->render.ray_dir_x * t;
+		wally = playery + data->render.ray_dir_y * t;
 		// printf("wallx = %f, wally = %f"
 		// 	" , playerx = %f playery = %f, dirx_norm = %f"
 		// 	" diry_norm = %f, t = %f\n",
