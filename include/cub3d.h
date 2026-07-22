@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 11:49:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:01:59 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ int		get_all_directions(t_data *data);
 // Math
 
 int		render(t_data *data);
-void	move_player(t_data *data, int dx, int dy);
+void	move_player(t_data *data, double x, double y);
+// void	move_player(t_data *data, int dx, int dy);
 int		refresh_map(t_data *data);
 void	ray_orientation(t_data *data);
 double	reach_wall(t_data *data);
