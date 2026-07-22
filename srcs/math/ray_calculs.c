@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 16:00:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:07:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,10 @@ double	reach_wall(t_data *data)
 {
 	t_player *player = &data->player;
 
-	// printf("dirx = %f, diry = %f\n", player->dir_x, player->dir_y);
-	double len = sqrt(pow(player->dir_x, 2.0) + pow(player->dir_y, 2.0)) ;
+	double len = player->dir_x + player->dir_y;
 	double dirx_norm = data->render.ray_dir_x / len;
 	double diry_norm = data->render.ray_dir_y / len;
 	
-	// invert
 	double playerx = data->player.pos_y;
 	double playery = data->player.pos_x;
 	double	t = 0;

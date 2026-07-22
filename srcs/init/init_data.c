@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/17 11:30:17 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:22:03 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,11 @@ static int	init_render(t_data *data)
 {
 	data->render.image = mlx_new_image(data->mlx, data->width, data->height);
 	if (!data->render.image)
-		return (1);
-	// add message error
-	
+		return (1); // add message error
 	data->render.buffer = mlx_get_data_addr(data->render.image, &data->render.pixel_bits,
 		&data->render.line_bytes, &data->render.endian);
 	if (!data->render.buffer)
-		return (1);
-	// protection
+		return (1); // message protection ?
 	if (render(data))
 		return (1);
 	return (0);
@@ -111,6 +108,8 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (is_tabs(data->map.full_file))
 		return (1);
+	// function count args lines (full_file), jusqu au debut du maze, 
+	//-> parcourt le nb de directions == 4 et de rgb == 2
 	if (get_all_directions(data))
 		return (1);
 	if (init_rgb(data))

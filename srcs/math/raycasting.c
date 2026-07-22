@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 17:24:51 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:13:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static void	put_pixel(t_data *data, int start, int end, int color)
 	*(unsigned int*)dst = color;
 }
 
-static int get_texture_pixel(t_image *dir, int x, int y)
-{
-    char *pixel;
+// static int get_texture_pixel(t_image *dir, int x, int y)
+// {
+//     char *pixel;
 
-    pixel = dir->addr + (y * dir->line_bytes + x * (dir->pixel_bits / 8));
-    return (*(unsigned int *)pixel);
-}
+//     pixel = dir->addr + (y * dir->line_bytes + x * (dir->pixel_bits / 8));
+//     return (*(unsigned int *)pixel);
+// }
 
 // static void	get_color(t_data *data)
 // {
@@ -76,9 +76,6 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 	// printf("[DEBUG] drawStart = %d   drawEnd = %d\n",
 	// 	drawStart, drawEnd);
 
-	// drawStart = 50;
-	// drawEnd = 500;
-	
 	int y = 0;
 
 	while (y < drawStart)
@@ -91,9 +88,6 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 	int color;
 	while (y <= drawEnd)
 	{
-		// if (data->render.wall_x < data->render.wall_y)
-		// 	color = 0xF5F5DC >> 1;
-		// else
 		color = 0xF5F5DC;
 
 		// get_color(data);
@@ -102,7 +96,8 @@ static void	put_texture_pixel(t_data *data, int x, double distance)
 		// 2. comment mettre la texture 
 		// data->direction.no;
 		// put_pixel(data, y, x, color);
-		put_pixel(data, y, x, get_texture_pixel(&data->north, 5, 5));
+		// put_pixel(data, y, x, get_texture_pixel(&data->north, 5, 5));
+		put_pixel(data, y, x, color);
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
@@ -124,43 +119,30 @@ int	render(t_data *data)
 
 	while (x <= WIDTH_WINDOW)
 	{
-		// while (x < HEIGHT_WINDOW)
-		// {
 		// 1. calculer orientation de mon rayon
 		ray_orientation(data);
+
+		// pouvoir avancer reculer par rapport a la camera
+		// = mettre a jour l orientation player avec les mouvemenst de camera 
+		// (rajouter ex : +1 camera -> +1 player)
 		
 		// regarde ecran dans FOV de 90 et non pas 120
 		// comme une focale longue -> ne pas avoir trop d info a l image
 		
-		
-	// PIE /2 = le FOV
-	// x pour incremnter changer de direction
-	// la largeur de la window pour avoir une dir = une colonne
-	// dirp - 1/4 de PI pour positionner l angle de vue la ou le joueur regarde 
+		// PIE /2 = le FOV
+		// x pour incremnter changer de direction
+		// la largeur de la window pour avoir une dir = une colonne
+		// dirp - 1/4 de PI pour positionner l angle de vue la ou le joueur regarde 
 		data->render.ray_dir = ((PI/2 * x) / WIDTH_WINDOW) + data->player.dirp - (0.25 * PI);
 		data->render.ray_dir_y = sin(data->render.ray_dir);
 		data->render.ray_dir_x = cos(data->render.ray_dir);
 		
-		// if (x < WIDTH_WINDOW / 2)
-		// 	data->render.ray_dir = ((PI/2 * x + 1) / WIDTH_WINDOW) + data->player.dirp - (0.25 * PI);
-		
-
 		// 2. faire le calcul de la distance parcouru par le rayon
 		double distance = reach_wall(data);
-		// (void)distance;
-	
-		// utilisation distance pour generer la perspective avec le mur
-		
 
 		// 3. Mettre la texture dans le buffer image
 		put_texture_pixel(data, x, distance);
 
-		
-		//4. put image
-		// break ;
-		// x++;
-		// }
-		// break ;
 		x++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
