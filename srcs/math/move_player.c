@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:20:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 16:49:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:18:48 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ void	move_player(t_data *data, double x, double y)
 
 	new_x = (int)x;
 	new_y = (int)y;
-	// new_x = data->player.pos_x + dx;
-	// new_y = data->player.pos_y + dy;
-	// ft_printf_fd(2, "new pos player =  y : %d"
-	// 	"  x : %d\n", new_y, new_x);
+	// maze_x = new_y;
+	// maze_x = new_y;
+	printf(" move new pos -> x = %d, y = %d\n", new_x, new_y);
 	if (data->map.maze[new_y]
 		&& data->map.maze[new_y][new_x]
 		&& data->map.maze[new_y][new_x] != '1')
 	{
 		// ft_printf_fd(2, "player moving\n");
-		data->player.pos_x  = new_x;
-		data->player.pos_y = new_y;
+		data->player.pos_x = x;
+		data->player.pos_y = y;
 	}
 }

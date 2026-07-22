@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 14:47:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 17:34:03 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	render(t_data *data)
 
 		x++;
 	}
-	print_player_info(data);
+	// print_player_info(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 
 	return (0);
