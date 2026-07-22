@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 11:07:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:32:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,35 @@ double	distance(t_data *data, double wallx, double wally)
 */
 void	rotate_player(t_data *data, int side)
 {
+	double	delta;
+
 	if (side == 1)
 	{
-		data->player.right = 1;
+		data->player.left = 1;
 		data->player.dirp += 0.1;
 	}
 	else
 	{
-		data->player.left = 1;
+		data->player.right = 1;
 		data->player.dirp -= 0.1;
 	}
-
 	// eviter les limites en negatif et positif ,rester dans un meme cercle complet
-	if (data->player.dirp > 2 * PI)
-		data->player.dirp = 0;
-	else if (data->player.dirp < 0)
-		data->player.dirp = 2 * PI;
-
+	if (data->player.dirp > 2.0 * PI)
+	{
+		// delta = recuperer l eacart qu on va ajouter pour rotate
+		delta = data->player.dirp - (2.0 * PI);
+		data->player.dirp = 0.0 + delta;
+	}
+	else if (data->player.dirp < 0.0)
+	{
+		delta = data->player.dirp * -1;
+		data->player.dirp = (2.0 * PI) - delta;
+	}
+	printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
+	
 	data->player.dir_x = cos(data->player.dirp);
 	data->player.dir_y = sin(data->player.dirp);
-	printf("dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+	printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
 }
 
 /*
@@ -94,7 +103,7 @@ double	reach_wall(t_data *data)
 		// t++;
 		x = wallx;
 		y = wally;
-		t += 0.01;
+		t += 0.003;
 	}
 	data->render.wall_x = wallx;
 	data->render.wall_y = wally;
@@ -120,6 +129,10 @@ double	reach_wall(t_data *data)
 void	ray_orientation(t_data *data)
 {
 	if (data->player.right || data->player.left)
+	{
+		// data->player.right = 0;
+		// data->player.left = 0;
 		return;
+	}
 	init_direction(data);
 }

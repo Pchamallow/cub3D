@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 11:40:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 14:31:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	render(t_data *data)
 		// x pour incremnter changer de direction
 		// la largeur de la window pour avoir une dir = une colonne
 		// dirp - 1/4 de PI pour positionner l angle de vue la ou le joueur regarde 
-		data->render.ray_dir = ((PI/2 * x) / WIDTH_WINDOW) + data->player.dirp - (0.25 * PI);
+		data->render.ray_dir = (PI/2 - ((PI/2 * x) / WIDTH_WINDOW)) + data->player.dirp - (0.25 * PI);
 		data->render.ray_dir_y = sin(data->render.ray_dir);
 		data->render.ray_dir_x = cos(data->render.ray_dir);
 		
