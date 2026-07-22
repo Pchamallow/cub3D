@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 16:56:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:49:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,40 @@
 
 typedef struct s_render
 {
-	int		pixel_bits;
-	int		line_bytes;
-	int		endian;
-	void	*image;
-	char	*buffer;
-	double	wall_x;
-	double	wall_y;
-	double	ray_dir;
-	double	ray_dir_x;
-	double	ray_dir_y;
+	int				pixel_bits;
+	int				line_bytes;
+	int				endian;
+	void			*image;
+	char			*buffer;
+	double			wall_x;
+	double			wall_y;
+	double			ray_dir;
+	double			ray_dir_x;
+	double			ray_dir_y;
 }			t_render;
 
 typedef struct s_keys
 {
-	int	w;
-	int	s;
-	int	a;
-	int	d;
-	int	left;
-	int	right;
+	int				w;
+	int				s;
+	int				a;
+	int				d;
+	int				left;
+	int				right;
 }	t_keys;
 
 typedef struct s_map
 {
-	char		**full_file;
-	char		**maze;
-	char		*file_name;
-	int			width;
-	int			height;
-	int			lines;
-	int			columns;
-	int			wall_missing;
-	int			start_count;
-	int			begin_maze;
+	char			**full_file;
+	char			**maze;
+	char			*file_name;
+	int				width;
+	int				height;
+	int				lines;
+	int				columns;
+	int				wall_missing;
+	int				start_count;
+	int				begin_maze;
 }				t_map;
 
 typedef struct s_direction
@@ -73,9 +73,9 @@ typedef struct s_image
 	int				width;
 	int				height;
 	int				check;
-	int			pixel_bits;
-	int			line_bytes;
-	int			endian;
+	int				pixel_bits;
+	int				line_bytes;
+	int				endian;
 }			t_image;
 
 typedef struct s_player
@@ -191,5 +191,6 @@ void	print_array(char **array);
 void	print_directions(t_data *data);
 void	print_rgb(t_data *data);
 void	print_invalid_args(void);
+void	print_player_info(t_data *data);
 
 #endif

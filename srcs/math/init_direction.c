@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 14:15:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:44:02 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	init_direction(t_data *data)
 {
 	double dirp = 0;
-	// a recuprer depuis le praring du maze
+	// a recuprer depuis le parsing du maze
 	data->player.dirp = 'N';
 	if (data->player.dirp == 'N')
 		dirp = 1.5 * PI;

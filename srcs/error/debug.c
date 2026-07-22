@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:04:40 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/14 11:48:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 11:41:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ void	print_rgb(t_data *data)
 	ft_printf_fd(2, "R %d\n", data->ground.r);
 	ft_printf_fd(2, "G %d\n", data->ground.g);
 	ft_printf_fd(2, "B %d\n", data->ground.b);
+}
+
+void	print_player_info(t_data *data)
+{
+	print_directions(data);
+	printf("\nplayer x = %d | player y = %d\n\n", data->player.pos_x, data->player.pos_y);
+	printf("dirp = %f | dir x = %f | dir y = %f\n\n", data->player.dirp, data->player.dir_x, data->player.dir_y);
+	printf("player right ? = %f | left = %f\n\n", data->player.right, data->player.left);
 }
