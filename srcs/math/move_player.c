@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:20:06 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/17 12:14:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 16:49:08 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,34 @@
 // }
 
 // voir lorsque le player bouge un changement de couleur 
-void	move_player(t_data *data, int dx, int dy)
-{
-	int		new_x;
-	int		new_y;
+// void	move_player(t_data *data, int dx, int dy)
+// {
+// 	int		new_x;
+// 	int		new_y;
 
-	new_x = data->player.pos_x + dx;
-	new_y = data->player.pos_y + dy;
+// 	new_x = data->player.pos_x + dx;
+// 	new_y = data->player.pos_y + dy;
+// 	// ft_printf_fd(2, "new pos player =  y : %d"
+// 	// 	"  x : %d\n", new_y, new_x);
+// 	if (data->map.maze[new_y]
+// 		&& data->map.maze[new_y][new_x]
+// 		&& data->map.maze[new_y][new_x] != '1')
+// 	{
+// 		// ft_printf_fd(2, "player moving\n");
+// 		data->player.pos_x  = new_x;
+// 		data->player.pos_y = new_y;
+// 	}
+// }
+
+void	move_player(t_data *data, double x, double y)
+{
+	int	new_x;
+	int	new_y;
+
+	new_x = (int)x;
+	new_y = (int)y;
+	// new_x = data->player.pos_x + dx;
+	// new_y = data->player.pos_y + dy;
 	// ft_printf_fd(2, "new pos player =  y : %d"
 	// 	"  x : %d\n", new_y, new_x);
 	if (data->map.maze[new_y]

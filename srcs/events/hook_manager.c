@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/22 14:32:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/22 16:49:26 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 int	handle_keypress(int keycode, void *param)
 {
 	t_data	*data;
-
+	double	x;
+	double	y;
+	
 	data = (t_data *)param;
 	if (keycode == ESC)
 		close_esc(keycode, data);
