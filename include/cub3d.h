@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 14:56:38 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 15:04:59 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_player
 {
 	int				x_start_p;
 	int				y_start_p;
-	double				pos_x;
-	double				pos_y;
+	double			pos_x;
+	double			pos_y;
 	double			dirp;
 	double			dir_x;
 	double			dir_y;
@@ -146,7 +146,7 @@ void	move_player(t_data *data, double x, double y);
 int		refresh_map(t_data *data);
 void	ray_orientation(t_data *data);
 double	reach_wall(t_data *data);
-void	rotate_player(t_data *data, int side);
+void	rotate_player(t_data *data);
 void	init_direction(t_data *data);
 
 // Events

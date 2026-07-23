@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 14:56:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 15:05:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	handle_keypress(int keycode, void *param)
 	else if (keycode == 'd')
 		data->key.d = 1;
 	if (keycode == ARROW_LEFT)
-		rotate_player(data, 1);
+		data->key.left = 1;
 	if (keycode == ARROW_RIGHT)
-		rotate_player(data, 0);
+		data->key.right = 1;
 	return (0);
 }
 
@@ -46,6 +46,8 @@ int	handle_keyrelease(int keycode, void *param)
 	data->key.s = 0;
 	data->key.a = 0;
 	data->key.d = 0;
+	data->key.left = 0;
+	data->key.right = 0;
 	// if (keycode == ARROW_LEFT)
 	// 	data->player.left = 0;
 	// if (keycode == ARROW_RIGHT)
