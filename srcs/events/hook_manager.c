@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 13:40:15 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:12:17 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,21 @@ int	handle_keypress(int keycode, void *param)
 	}
 	if (keycode == 'a')
 	{
-		printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
 		x = data->player.pos_x + sin(data->player.dirp + PI/2);
 		y = data->player.pos_y + cos(data->player.dirp + PI/2);
+		move_player(data, x, y);
+	}
+	if (keycode == 'd')
+	{
+		printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
+		x = data->player.pos_x - sin(data->player.dirp + PI/2);
+		y = data->player.pos_y - cos(data->player.dirp + PI/2);
 		printf("calculs:   cos = %f, sin = %f\n", cos(data->player.dirp + PI/2),
 		 sin(data->player.dirp + PI/2));
 		printf(" pos after w -> avancer :   x = %f, y = %f\n", x, y);
 		printf("dirx = %f | diry = %f\n", data->player.dir_x, data->player.dir_y);
 		move_player(data, x, y);
 	}
-	if (keycode == 'd')
-		move_player(data, 1, 0);
 	if (keycode == ARROW_LEFT)
 	{
 		rotate_player(data, 1);
