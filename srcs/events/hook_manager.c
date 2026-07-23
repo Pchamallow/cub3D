@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 14:12:17 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:22:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,11 @@
 // 		data->key.w = 1;
 // }
 
-int	handle_keypress(int keycode, void *param)
+void	move_forward_backward(t_data *data, int keycode)
 {
-	t_data	*data;
 	double	x;
 	double	y;
-	
-	data = (t_data *)param;
-	if (keycode == ESC)
-		close_esc(keycode, data);
+
 	if (keycode == 'w')
 	{
 		x = data->player.pos_x + data->player.dir_y;
@@ -45,6 +41,13 @@ int	handle_keypress(int keycode, void *param)
 		y = data->player.pos_y - data->player.dir_x;
 		move_player(data, x, y);
 	}
+}
+
+void	move_left_right(t_data *data, int keycode)
+{
+	double	x;
+	double	y;
+
 	if (keycode == 'a')
 	{
 		x = data->player.pos_x + sin(data->player.dirp + PI/2);
@@ -53,20 +56,30 @@ int	handle_keypress(int keycode, void *param)
 	}
 	if (keycode == 'd')
 	{
-		printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
+		// printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
 		x = data->player.pos_x - sin(data->player.dirp + PI/2);
 		y = data->player.pos_y - cos(data->player.dirp + PI/2);
-		printf("calculs:   cos = %f, sin = %f\n", cos(data->player.dirp + PI/2),
-		 sin(data->player.dirp + PI/2));
-		printf(" pos after w -> avancer :   x = %f, y = %f\n", x, y);
-		printf("dirx = %f | diry = %f\n", data->player.dir_x, data->player.dir_y);
+		// printf("calculs:   cos = %f, sin = %f\n", cos(data->player.dirp + PI/2),
+		//  sin(data->player.dirp + PI/2));
+		// printf(" pos after w -> avancer :   x = %f, y = %f\n", x, y);
+		// printf("dirx = %f | diry = %f\n", data->player.dir_x, data->player.dir_y);
 		move_player(data, x, y);
 	}
+}
+
+int	handle_keypress(int keycode, void *param)
+{
+	t_data	*data;
+	
+	data = (t_data *)param;
+	if (keycode == ESC)
+		close_esc(keycode, data);
+	if (keycode == 'w' || keycode == 's')
+		move_forward_backward(data, keycode);
+	if (keycode == 'a' || keycode == 'd')
+		move_left_right(data, keycode);
 	if (keycode == ARROW_LEFT)
-	{
 		rotate_player(data, 1);
-		printf("trun\n");
-	}
 	if (keycode == ARROW_RIGHT)
 		rotate_player(data, 0);
 	refresh_map(data);
@@ -93,18 +106,3 @@ void	ft_init_hooks(t_data *data)
 	mlx_hook(data->win, 17, 0, close_window, data);
 	// mlx_loop_hook(data->mlx, refresh_map, data);
 }
-
-// 	// if (keycode == KEY_W || keycode == ARROW_UP)
-	// 	move_player(data, -1, 0);
-	// if (keycode == KEY_S || keycode == ARROW_DOWN)
-	// 	move_player(data, 1, 0);
-	// if (keycode == KEY_A || keycode == ARROW_LEFT)
-	// {
-	// 	data->player.direction = LEFT;
-	// 	move_player(data, 0, -1);
-	// }
-	// if (keycode == KEY_D || keycode == ARROW_RIGHT)
-	// {
-	// 	data->player.direction = RIGHT;
-	// 	move_player(data, 0, 1);
-	// }
