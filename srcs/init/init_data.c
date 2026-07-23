@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/22 11:22:03 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:32:02 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	init_render(t_data *data)
 int	ft_init_game(t_data *data)
 {
 	data->mlx = mlx_init();
+	mlx_do_key_autorepeatoff(data->mlx);
 	if (!data->mlx)
 	{
 		ft_mlx_error();
@@ -116,8 +117,8 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (init_maze(data))
 		return (1);
-	ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
-	print_array(data->map.maze);
+	// ft_printf_fd(2, "\n[DEBUG] map after check walls :\n");
+	// print_array(data->map.maze);
 	ft_printf_fd(2, "-------\n");
 	if (is_valid_maze(data))
 		return (1);

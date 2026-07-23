@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 15:33:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:29:13 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	rotate_player(t_data *data, int side)
 		delta = data->player.dirp * -1.0;
 		data->player.dirp = (2.0 * PI) - delta;
 	}
-	printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
+	// printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
 	
 	data->player.dir_x = cos(data->player.dirp);
 	data->player.dir_y = sin(data->player.dirp);
-	printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+	// printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
 }
 
 /*

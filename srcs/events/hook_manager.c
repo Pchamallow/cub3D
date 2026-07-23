@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 14:22:22 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:42:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 #include "../../lib/libft/libft.h"
 #include <math.h>
 
-// en pause, d abord avoir le move player pour voir si ca marche
-// static int	key_press(int keycode, t_data *data)
-// {
-// 	if (keycode == ESC)
-// 		close_esc(keycode, data);
-// 	if (keycode == KEY_W)
-// 		data->key.w = 1;
-// }
-
 void	move_forward_backward(t_data *data, int keycode)
 {
 	double	x;
@@ -31,6 +22,7 @@ void	move_forward_backward(t_data *data, int keycode)
 
 	if (keycode == 'w')
 	{
+		data->key.w = 1;
 		x = data->player.pos_x + data->player.dir_y;
 		y = data->player.pos_y + data->player.dir_x;
 		move_player(data, x, y);
@@ -82,7 +74,7 @@ int	handle_keypress(int keycode, void *param)
 		rotate_player(data, 1);
 	if (keycode == ARROW_RIGHT)
 		rotate_player(data, 0);
-	refresh_map(data);
+	// refresh_map(data);
 	return (0);
 }
 
@@ -91,18 +83,19 @@ int	handle_keyrelease(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	if (keycode == ARROW_LEFT)
-		data->player.left = 0;
-	if (keycode == ARROW_RIGHT)
-		data->player.right = 0;
+	(void)keycode;
+	data->key.w = 0;
+	// if (keycode == ARROW_LEFT)
+	// 	data->player.left = 0;
+	// if (keycode == ARROW_RIGHT)
+	// 	data->player.right = 0;
 	return (0);
 }
 
 void	ft_init_hooks(t_data *data)
 {
-	mlx_key_hook(data->win, handle_keypress, data);
-	
-	// mlx_hook(data->win, 3, 1L << 1, handle_keyrelease, data);
+	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);
+	mlx_hook(data->win, 3, 1L << 1, handle_keyrelease, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
-	// mlx_loop_hook(data->mlx, refresh_map, data);
+	mlx_loop_hook(data->mlx, refresh_map, data);
 }
