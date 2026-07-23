@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 13:12:18 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:56:38 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ int		get_all_directions(t_data *data);
 
 int		render(t_data *data);
 void	move_player(t_data *data, double x, double y);
-// void	move_player(t_data *data, int dx, int dy);
 int		refresh_map(t_data *data);
 void	ray_orientation(t_data *data);
 double	reach_wall(t_data *data);
@@ -160,6 +159,8 @@ int		init_maze(t_data *data);
 int		is_valid_maze(t_data *data);
 int		is_invalid_line(t_data *data, int i);
 int		init_maze_content(t_data *data, int after_args);
+void	move_forward_backward(t_data *data);
+void	move_left_right(t_data *data);
 
 // Error
 

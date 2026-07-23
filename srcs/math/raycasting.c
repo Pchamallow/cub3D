@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 14:29:40 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 14:52:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ int	render(t_data *data)
 
 int	refresh_map(t_data *data)
 {
+	move_forward_backward(data);
+	move_left_right(data);
 	render(data);
 	// print_array(data->map.maze);
 	// printf("dirp =  %f,  dir x = %f,  dir y = %f\n", data->player.dirp, data->player.dir_x, data->player.dir_y);

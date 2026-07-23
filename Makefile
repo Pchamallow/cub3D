@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/17 11:23:32 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/23 15:00:56 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,13 @@ ERROR_SRCS	= $(ERROR_DIR)/error.c		\
 			$(ERROR_DIR)/debug.c
 
 EVENT_DIR	= srcs/events
-EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c ${EVENT_UI_SRCS}
+EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c
+
+MOVE_DIR	= srcs/move_player
+MOVE_SRCS	= ${MOVE_DIR}/move_player.c
 
 MATH_DIR= srcs/math
 MATH_SRCS= ${MATH_DIR}/raycasting.c			\
-			${MATH_DIR}/move_player.c		\
 			${MATH_DIR}/ray_calculs.c		\
 			${MATH_DIR}/init_direction.c
 
@@ -74,8 +76,9 @@ UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\
 			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c	\
 			$(UTILS_DIR)/open_fd.c ${UTILS_DIR}/rgb_checks.c
 
-SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS} \
-				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS} ${MATH_SRCS}
+SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS}	\
+				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS} ${MATH_SRCS}	\
+				${MOVE_SRCS} ${EVENT_UI_SRCS}
 
 OBJS		:= $(SRCS:%.c=$(BUILD_DIR)/%.o)
 
