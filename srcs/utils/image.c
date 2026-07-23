@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:48:17 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/17 17:36:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 16:25:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 void	load_image(t_data *data, t_image *dir, char *path)
 {
 	(void)path;
+	dir->width = 64;
+	dir->height = 64;
 	dir->image = mlx_xpm_file_to_image(data->mlx, "./srcs/texture/NO.xpm", &dir->width, &dir->height);
 	if (!dir->image)
 	{
