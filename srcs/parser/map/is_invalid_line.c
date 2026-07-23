@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/16 12:40:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 13:19:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static int	is_invalid_player(t_data *data, int y)
 			data->map.start_count++;
 			data->player.y_start_p = y - data->map.begin_maze + 1;
 			data->player.x_start_p = j + 1;
-			ft_printf_fd(2, "start pos player =  y : %d"
-				"  x : %d\n", data->player.y_start_p, data->player.x_start_p);
 			data->player.pos_y = data->player.y_start_p;
 			data->player.pos_x = data->player.x_start_p;
+			// printf("[DEBUG] - start pos player =  y : %f"
+			// 	"  x : %f\n", data->player.pos_y, data->player.pos_x);
 			if (data->map.start_count > 1)
 			{
 				ft_display_error("Too many player starting"

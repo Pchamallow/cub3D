@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/22 17:01:59 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 13:12:18 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_player
 {
 	int				x_start_p;
 	int				y_start_p;
-	int				pos_x;
-	int				pos_y;
+	double				pos_x;
+	double				pos_y;
 	double			dirp;
 	double			dir_x;
 	double			dir_y;
