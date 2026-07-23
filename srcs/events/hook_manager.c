@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 16:06:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 16:12:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	handle_keyrelease(int keycode, void *param)
 	if (keycode == ARROW_RIGHT)
 	{
 		data->key.right = 0;
-		printf("right off\n");
+		// printf("right off\n");
 	}
 	return (0);
 }
