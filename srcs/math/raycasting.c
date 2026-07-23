@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 15:05:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 16:00:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,16 @@ int	render(t_data *data)
 	return (0);
 }
 
+
+/*
+* move and rotate here combined with keyrelease allow continuous 
+* movement and rotation while a key is held down
+*/
 int	refresh_map(t_data *data)
 {
+	rotate_player(data);
 	move_forward_backward(data);
 	move_left_right(data);
-	rotate_player(data);
 	render(data);
 	// print_array(data->map.maze);
 	// printf("dirp =  %f,  dir x = %f,  dir y = %f\n", data->player.dirp, data->player.dir_x, data->player.dir_y);

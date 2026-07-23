@@ -6,13 +6,44 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 15:05:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 16:06:09 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
 #include "../../lib/libft/libft.h"
+
+/*
+* move here and in refresh_map
+* -> if a key is pressed and released too quickly
+* when refresh_map runs, the value of data->key is already at 0
+* Therefore, the movement is also handled here
+* the key is press -> we move now
+*/
+void	handle_directions(t_data *data, int keycode)
+{
+	if (keycode == 'w')
+	{
+		data->key.w = 1;
+		move_forward_backward(data);
+	}
+	if (keycode == 's')
+	{
+		data->key.s = 1;
+		move_forward_backward(data);
+	}
+	if (keycode == 'a')
+	{
+		data->key.a = 1;
+		move_left_right(data);
+	}
+	if (keycode == 'd')
+	{
+		data->key.d = 1;
+		move_left_right(data);
+	}
+}
 
 int	handle_keypress(int keycode, void *param)
 {
@@ -21,40 +52,55 @@ int	handle_keypress(int keycode, void *param)
 	data = (t_data *)param;
 	if (keycode == ESC)
 		close_esc(keycode, data);
-	if (keycode == 'w')
-		data->key.w = 1;
-	else if (keycode == 's')
-		data->key.s = 1;
-	else if (keycode == 'a')
-		data->key.a = 1;
-	else if (keycode == 'd')
-		data->key.d = 1;
+	handle_directions(data, keycode);
 	if (keycode == ARROW_LEFT)
+	{
 		data->key.left = 1;
+		rotate_player(data);
+	}
 	if (keycode == ARROW_RIGHT)
+	{
 		data->key.right = 1;
+		rotate_player(data);
+	}
 	return (0);
 }
 
+/*
+* Set the key to 0 when it is released, so the movement stops
+* Each key has its own state, allowing multiple keys to be 
+* pressed at the same time
+* Example: turn left while moving forward
+*/
 int	handle_keyrelease(int keycode, void *param)
 {
 	t_data	*data;
 
 	data = (t_data *)param;
-	(void)keycode;
-	data->key.w = 0;
-	data->key.s = 0;
-	data->key.a = 0;
-	data->key.d = 0;
-	data->key.left = 0;
-	data->key.right = 0;
-	// if (keycode == ARROW_LEFT)
-	// 	data->player.left = 0;
-	// if (keycode == ARROW_RIGHT)
-	// 	data->player.right = 0;
+	if (keycode == 'w')
+		data->key.w = 0;
+	if (keycode == 's')
+		data->key.s = 0;
+	if (keycode == 'a')
+		data->key.a = 0;
+	if (keycode == 'd')
+		data->key.d = 0;
+	if (keycode == ARROW_LEFT)
+		data->key.left = 0;
+	if (keycode == ARROW_RIGHT)
+	{
+		data->key.right = 0;
+		printf("right off\n");
+	}
 	return (0);
 }
 
+/*
+* 1. detect if a key is pressed, which is and move, set key at 1
+* 2. detect if a key is released, which, set key at 0
+* 3. detect if the close window button is pressed
+* 4. if key isn't realease, continue to move
+*/
 void	ft_init_hooks(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, handle_keypress, data);

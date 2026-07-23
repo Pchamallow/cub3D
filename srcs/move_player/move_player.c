@@ -6,12 +6,67 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:50:49 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 14:56:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 15:36:09 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <math.h>
+#include "stdio.h" // a suppr
+
+int	init_rotate_dirp(t_data *data)
+{
+	// printf("rotate choice -> data->key.right = %d\n", data->key.right);
+	if (data->key.left)
+	{
+		data->player.left = 1;
+		data->player.dirp += 0.1;
+	}
+	else if (data->key.right)
+	{
+		printf("rotate right\n");
+		data->player.right = 1;
+		data->player.dirp -= 0.1;
+	}
+	else
+		return (1);
+	return (0);
+}
+
+/*
+* Limit the number by refer to PI
+*	-> avoid max limit and mini limit of number
+*	when the number is > 2 * PI, we have done a complete circle
+*	so we start at 0 + delta
+* Delta
+*	-> if we reset the number (limit by refer to PI),
+*		we need to get the rest between the limit fixed and
+*		the number above this limit
+*		eg: number > 2 * PI
+*			we need to get the range between 2 * PI -> number
+*			else the player doesn t rotate
+*/
+void	rotate_player(t_data *data)
+{
+	double	delta;
+
+	if (init_rotate_dirp(data))
+		return ;
+	if (data->player.dirp > 2.0 * PI)
+	{
+		delta = data->player.dirp - (2.0 * PI);
+		data->player.dirp = 0.0 + delta;
+	}
+	else if (data->player.dirp < 0.0)
+	{
+		delta = data->player.dirp * -1.0;
+		data->player.dirp = (2.0 * PI) - delta;
+	}
+	// printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
+	data->player.dir_x = cos(data->player.dirp);
+	data->player.dir_y = sin(data->player.dirp);
+	// printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+}
 
 void	move_player(t_data *data, double x, double y)
 {

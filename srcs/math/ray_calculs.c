@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 15:06:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/23 15:17:41 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,7 @@ double	distance(t_data *data, double wallx, double wally)
 
 /* 1 = right, 2 = left
 */
-void	rotate_player(t_data *data)
-{
-	double	delta;
 
-	if (data->key.left)
-	{
-		data->player.left = 1;
-		data->player.dirp += 0.1;
-	}
-	else if (data->key.right)
-	{
-		data->player.right = 1;
-		data->player.dirp -= 0.1;
-	}
-	else
-		return ;
-	// eviter les limites en negatif et positif ,rester dans un meme cercle complet
-	if (data->player.dirp > 2.0 * PI)
-	{
-		// delta = recuperer l eacart qu on va ajouter pour rotate
-		delta = data->player.dirp - (2.0 * PI);
-		data->player.dirp = 0.0 + delta;
-	}
-	else if (data->player.dirp < 0.0)
-	{
-		delta = data->player.dirp * -1.0;
-		data->player.dirp = (2.0 * PI) - delta;
-	}
-	// printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
-	
-	data->player.dir_x = cos(data->player.dirp);
-	data->player.dir_y = sin(data->player.dirp);
-	// printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
-}
 
 /*
 * Use sin and cos in to calcul coordinates
