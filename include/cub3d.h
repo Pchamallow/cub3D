@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 12:12:17 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 14:31:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_render
 	double			ray_dir;
 	double			ray_dir_x;
 	double			ray_dir_y;
+	int				tex_x;
+	int				tex_y;
+	double			tex_pos;
+	double			step;
 }			t_render;
 
 typedef struct s_keys
@@ -150,7 +154,7 @@ double	reach_wall(t_data *data);
 void	init_direction(t_data *data);
 void	put_texture_pixel(t_data *data, int x, double distance);
 // void	wall_side(t_data *data);
-double	cast_ray(t_data *data, double ray_dir_x, double ray_dir_y);
+// double	cast_ray(t_data *data, double ray_dir_x, double ray_dir_y);
 
 // Events
 

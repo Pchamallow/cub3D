@@ -6,14 +6,14 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 12:36:00 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 15:12:10 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdlib.h> // for exit
 #include <stdio.h> // for printf
-#include <math.h> // verifier possibite
+#include <math.h> // verify if allowed
 
 static void	put_pixel(t_data *data, int x, int y, int color)
 {
@@ -28,7 +28,7 @@ static int get_pixel(t_image *dir, int x, int y)
 {
 	char *pixel;
 
-	// printf("get pixel _> x = %d y = %d\n", x, y);
+	// printf("get pixel -> x = %d y = %d\n", x, y);
 	pixel = dir->addr + (y * dir->line_bytes + x * (dir->pixel_bits / 8));
 	return (*(unsigned int *)pixel);
 }
@@ -49,6 +49,38 @@ static int get_pixel(t_image *dir, int x, int y)
 //     else
 //         return (1);
 // }
+
+static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
+{
+	data->render.wall_x -= floor(data->render.wall_x);
+	data->render.tex_x = (int)(data->render.wall_x * (double)data->north.width);
+	if (data->render.tex_x < 0)
+		data->render.tex_x = 0;
+	if (data->render.tex_x >= data->north.width)
+		data->render.tex_x = data->north.width - 1;
+
+	data->render.step = (double)data->north.height / (double)h_wall;
+	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
+
+	printf("data->render.wall_x = %f | tex_x = %d | step = %f | tex_pos = %f\n",
+		data->render.wall_x, data->render.tex_x, data->render.step, data->render.tex_pos);
+}
+
+static void	coordinates_textures_north_south(t_data *data, int h_wall, double draw_start)
+{
+	data->render.wall_y -= floor(data->render.wall_y);
+	data->render.tex_x = (int)(data->render.wall_y * (double)data->north.width);
+	if (data->render.tex_x < 0)
+		data->render.tex_x = 0;
+	if (data->render.tex_x >= data->north.width)
+		data->render.tex_x = data->north.width - 1;
+
+	data->render.step = (double)data->north.height / (double)h_wall;
+	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
+
+	printf("data->render.wall_y = %f | tex_x = %d | step = %f | tex_pos = %f\n",
+		data->render.wall_y, data->render.tex_x, data->render.step, data->render.tex_pos);
+}
 
 void	put_texture_pixel(t_data *data, int x, double distance)
 {
@@ -78,6 +110,12 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 
 	int y = 0;
 
+	printf("ray dir x = %f, ray dir y = %f\n", data->render.ray_dir_x, data->render.ray_dir_y);
+	// NO -0.7, 0.7
+	// SOUTH 0.7, -0.7
+	// ES 0.7, 0.7
+	// WEST -0.7, -0.7
+
 	while (y < draw_start)
 	{
 		put_pixel(data, y, x, 0x87CEEB);
@@ -85,17 +123,12 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		y++;
 	}
 
-	int tex_x;
+	if ((data->render.ray_dir_x > 0 && data->render.ray_dir_x > 0)
+		|| (data->render.ray_dir_x < 0 && data->render.ray_dir_x < 0))
+		coordinates_textures_est_west(data, h_wall, draw_start);
+	else
+		coordinates_textures_north_south(data, h_wall, draw_start);
 
-	tex_x = (int)(data->render.wall_x * (double)data->north.width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= data->north.width)
-		tex_x = data->north.width - 1;
-
-	double step = (double)data->north.height / (double)h_wall;
-	double tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * step;
-	
 	int color;
 	while (y <= draw_end)
 	{
@@ -103,15 +136,15 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		// 	color = 0x000000;
 		// else
 
-		int tex_y = (int)tex_pos;
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= data->north.height)
-			tex_y = data->north.height - 1;
-		tex_pos += step;
+		data->render.tex_y = (int)data->render.tex_pos;
+		if (data->render.tex_y < 0)
+			data->render.tex_y = 0;
+		if (data->render.tex_y >= data->north.height)
+			data->render.tex_y = data->north.height - 1;
+		data->render.tex_pos += data->render.step;
 		
-		color = 0xF5F5DC;
-		color = get_pixel(&data->north, tex_x, tex_y);
+		// color = 0xF5F5DC;
+		color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
 
 		// texture murs
 		// 1. savoir si on est au nord, sud, est, ouest
