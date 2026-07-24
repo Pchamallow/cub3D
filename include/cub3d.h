@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 17:17:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:38:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct s_data
 	t_keys			key;
 	t_render		render;
 	t_image			north;
+	t_image			south;
+	t_image			east;
 	t_direction		direction;
 }			t_data;
 

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 12:27:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:39:13 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int	render(t_data *data)
 	int	x;
 
 	x = 0;
-	load_image(data, &data->north, "placeholder");
+	load_image(data, &data->north, "./srcs/texture/NO.xpm");
+	load_image(data, &data->south, "./srcs/texture/SO.xpm");
+	load_image(data, &data->east, "./srcs/texture/EA.xpm");
 	while (x <= WIDTH_WINDOW)
 	{
 		data->render.x = x;

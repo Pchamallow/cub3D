@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 17:28:28 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:45:00 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 	
-	printf("wall_y = %f | wall_x = %f | north.width = %d | tex_x = %d | step = %f | tex_pos = %f\n",
-		data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("wall_y = %f | wall_x = %f | north.width = %d | tex_x = %d | step = %f | tex_pos = %f\n",
+	// 	data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
 {
 	data->render.wall_x -= floor(data->render.wall_x);
-	if (data->render.wall_x > 0.9 || data->render.wall_x < 0.1)
+	// detection face ou coté
+	if (data->render.wall_x > 0.99 || data->render.wall_x < 0.01)
 	{
 		coordinates_textures_north_south(data, h_wall, draw_start);
 		return ;
@@ -80,8 +81,8 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 
-	printf("wall_x = %f | wall_y = %f | north.width = %d |tex_x = %d | step = %f | tex_pos = %f\n",
-		data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("wall_x = %f | wall_y = %f | north.width = %d |tex_x = %d | step = %f | tex_pos = %f\n",
+	// 	data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 void	put_texture_pixel(t_data *data, int x, double distance)
@@ -147,7 +148,15 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		data->render.tex_pos += data->render.step;
 		
 		// color = 0xF5F5DC;
-		color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
+		t_image *actual_texture;
+
+		// regler pour mieux delimiter les textures faces et coté
+		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.005)
+			actual_texture = &data->north;
+		else
+			actual_texture = &data->east;
+		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
+		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
 
 		// texture murs
 		// 1. savoir si on est au nord, sud, est, ouest
