@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 18:23:43 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:26:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ int	render(t_data *data)
 		put_texture_pixel(data, x, distance);
 		x++;
 	}
-	normalize_buffer(data);//
+	
+	// entre deux colonnes de meme couleurs s il y a une colonne de couleur differentes
+	// remplacer par la couleurs des deux autres
+	// voir si je peux faire quelque chose pour les rebords
+	normalize_buffer(data);
+	
 	// print_player_info(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
