@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 12:08:00 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 12:27:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@
 */
 int	render(t_data *data)
 {
-	int x = 0;
+	int	x;
 
-	
+	x = 0;
 	load_image(data, &data->north, "placeholder");
 	while (x <= WIDTH_WINDOW)
 	{
