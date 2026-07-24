@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 17:51:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 18:22:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,7 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	// exit(1);
 
 	int y = 0;
-
 	// printf("ray dir x = %f, ray dir y = %f\n", data->render.ray_dir_x, data->render.ray_dir_y);
-
 	while (y < draw_start)
 	{
 		put_pixel(data, y, x, 0x87CEEB);
@@ -124,12 +122,15 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	coordinates_textures_est_west(data, h_wall, draw_start);
 
 	int color;
+
+	// calculer les entre deux -> entre deux print east
+	// il y a un bout de north
+	// si j ai :   pixel EA -> NO -> EA
+	// -> faire un EA au milieu
+	// sauf que c est toute un colonne qui est dans la mauvaise couleur 
+	// 
 	while (y <= draw_end)
 	{
-		// if (data->render.wall_side)
-		// 	color = 0x000000;
-		// else
-
 		data->render.tex_y = (int)data->render.tex_pos;
 		if (data->render.tex_y < 0)
 			data->render.tex_y = 0;
@@ -141,16 +142,12 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		t_image *actual_texture;
 
 		// regler pour mieux delimiter les textures faces et coté
-		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.005)
+		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
 			actual_texture = &data->north;
 		else
 			actual_texture = &data->east;
 		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
-
-		// texture murs
-		// 1. savoir si on est au nord, sud, est, ouest
-		// 2. comment mettre la texture 
 
 		put_pixel(data, y, x, color);
 
