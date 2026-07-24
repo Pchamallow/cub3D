@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 10:52:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 12:08:00 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int	render(t_data *data)
 {
 	int x = 0;
 
+	
 	load_image(data, &data->north, "placeholder");
 	while (x <= WIDTH_WINDOW)
 	{
+		data->render.x = x;
 		ray_orientation(data);
 		data->render.ray_dir = (PI/2 - ((PI/2 * x) / WIDTH_WINDOW)) + data->player.dirp - (0.25 * PI);
 		data->render.ray_dir_y = sin(data->render.ray_dir);
