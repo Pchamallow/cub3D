@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 17:26:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:28:28 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,10 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 		data->render.tex_x = data->north.width - 1;
 		data->render.wall_side = 0;
 	}
-	// if ((data->render.x == 0) && (data->render.tex_x = data->north.width - 1))
-	// // if ((data->render.x == 0) && (data->render.tex_x = data->north.width - 1))
-	// {
-	// 	coordinates_textures_est_west(data, h_wall, draw_start);
-	// 	data->render.wall_side = 0;
-	// 	return ;
-	// }
-
-	// est and west invisibles
-// ray dir x = 0.492188, ray dir y = 0.870489
-// wall_y = 0.001277 | wall_x = 0.707255 | north.width = 85 | tex_x = 0 (immobile)
-// | step = 0.029795 | tex_pos = 53.273743
-
-	
-	// north and south visible
-// ray dir x = -0.707107, ray dir y = 0.707107
-// wall_y = 0.000405 | wall_x = 0.999595 | north.width = 85 | tex_x = 0 (varie)
-// | step = 0.356546 | tex_pos = -0.356546
-
 
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
-
-	// if (data->render.tex_pos > 0)
-	// {
-	// 	coordinates_textures_est_west(data, h_wall, draw_start);
-	// 	return ;
-	// }
+	
 	printf("wall_y = %f | wall_x = %f | north.width = %d | tex_x = %d | step = %f | tex_pos = %f\n",
 		data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
@@ -99,26 +75,6 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 		data->render.tex_x = 0;
 	if (data->render.tex_x >= data->north.width)
 		data->render.tex_x = data->north.width - 1;
-	// if (data->render.tex_x == )
-	// if (data->render.wall_side ||
-	// 	((data->render.x == 0) && (data->render.tex_x = data->north.width - 1)))
-	// {
-	// 	coordinates_textures_north_south(data, h_wall, draw_start);
-	// 	data->render.wall_side = 1;
-	// 	return ;
-	// }
-
-	// NORTH / SOUTH invisibles
-// ray dir x = -0.707107, ray dir y = 0.707107
-// wall_x = 0.999595 | wall_y = 10.000405 | north.width = 85 |tex_x = 84 
-// | step = 0.356546 | tex_pos = -0.356546
-// (tex, step et tex_pos immobile)
-
-	// EST / WEST invisibles 
-// ray dir x = 0.655317, ray dir y = 0.755354
-// wall_x = 0.629104 | wall_y = 10.000304 | north.width = 85 |tex_x = 53
-// | step = 0.048284 | tex_pos = 46.593738
-// (toutes les valeurs changent)
 
 	
 	data->render.step = (double)data->north.height / (double)h_wall;
@@ -127,11 +83,6 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	printf("wall_x = %f | wall_y = %f | north.width = %d |tex_x = %d | step = %f | tex_pos = %f\n",
 		data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
-
-
-
-
-
 
 void	put_texture_pixel(t_data *data, int x, double distance)
 {
