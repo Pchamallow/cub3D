@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 14:31:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 17:17:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 # define RED "\033[38;5;1m"
 # define RESET "\x1b[0m"
+
+enum TEXTURES
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 
 typedef struct s_render
 {
@@ -36,6 +44,7 @@ typedef struct s_render
 	int				tex_y;
 	double			tex_pos;
 	double			step;
+	int				actual_texture;
 }			t_render;
 
 typedef struct s_keys
@@ -154,7 +163,9 @@ double	reach_wall(t_data *data);
 void	init_direction(t_data *data);
 void	put_texture_pixel(t_data *data, int x, double distance);
 // void	wall_side(t_data *data);
-// double	cast_ray(t_data *data, double ray_dir_x, double ray_dir_y);
+double	cast_ray(t_data *data);
+void	put_pixel(t_data *data, int x, int y, int color);
+int		get_pixel(t_image *dir, int x, int y);
 
 // Events
 
