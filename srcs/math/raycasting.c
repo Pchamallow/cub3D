@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 10:51:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:52:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,6 @@
 #include <math.h>
 #include "../../lib/libft/libft.h"
 #include <stdio.h>
-
-// static void	get_color(t_data *data)
-// {
-	
-// 	(void)data;
-	
-// 	// 1. savoir si on est au nord, sud, est, ouest
-// 	// les directions = par raaport au joueur 
-// 	// pour une case 1 :
-// 	// au dessus de 1 = nord 
-// 	// en dessous de 1 = sud
-// 	// droite 1 = West
-// 	// gauche 1 = est
-// 	// connaitre notre position par rapport au 1
-
-// 	// orientation 
-// 	// if dir = PIE = EST,
-// 	// dir = 0 ou 2 = west,
-// 	// PI * 1.5 = NORD
-// 	// if (data->render.ray_dir == 1.5 * PI)
-// 		// color = data->direction.no;
-// 	data->north.image = load_image(data, &data->north, data->north.image);
-
-// 	// 2. comment mettre la texture 
-// }
-
 
 /*
 * THE LOOP OF EACH COLUMN

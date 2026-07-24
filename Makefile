@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/24 10:32:54 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/24 11:00:19 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ MATH_DIR= srcs/math
 MATH_SRCS= ${MATH_DIR}/raycasting.c			\
 			${MATH_DIR}/ray_calculs.c		\
 			${MATH_DIR}/init_direction.c	\
-			${MATH_DIR}/pixel.c
+			${MATH_DIR}/pixel.c				\
+			${MATH_DIR}/wall_side.c
 
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c					\

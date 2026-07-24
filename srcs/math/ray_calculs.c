@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 10:48:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:53:51 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ double	distance(t_data *data, double wallx, double wally)
 	// printf("distance player wall = %f\n", distance);
 	return (distance);
 }
-
-/* 1 = right, 2 = left
-*/
-
 
 /*
 * Use sin and cos in to calcul coordinates
@@ -87,8 +83,6 @@ double	reach_wall(t_data *data)
 	dis = dis * cos(data->render.ray_dir - data->player.dirp);
 	return (dis);
 }
-
-
 
 /*
 * Direction : h_wall
