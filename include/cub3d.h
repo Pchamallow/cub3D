@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 15:18:28 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:32:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int		refresh_map(t_data *data);
 void	ray_orientation(t_data *data);
 double	reach_wall(t_data *data);
 void	init_direction(t_data *data);
+void	put_texture_pixel(t_data *data, int x, double distance);
 
 // Events
 
