@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/23 15:17:41 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:48:10 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,6 @@ double	reach_wall(t_data *data)
 void	ray_orientation(t_data *data)
 {
 	if (data->player.right || data->player.left)
-	{
-		// data->player.right = 0;
-		// data->player.left = 0;
 		return;
-	}
 	init_direction(data);
 }

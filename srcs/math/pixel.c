@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 10:32:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:34:55 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	{
 		color = 0xF5F5DC;
 
-		// get_color(data);
 		// texture murs
 		// 1. savoir si on est au nord, sud, est, ouest
 		// 2. comment mettre la texture 
 		// data->direction.no;
-		// put_pixel(data, y, x, color);
 		// put_pixel(data, y, x, get_texture_pixel(&data->north, 5, 5));
 		put_pixel(data, y, x, color);
 		// printf(" brefore drawEnd ca print : y = %d, x = %d\n", y, x);

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 10:32:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:51:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,51 @@
 // }
 
 
-// V0002
+/*
+* THE LOOP OF EACH COLUMN
+*
+* 1. Ray Orientation:
+* Calculate the ray orientation based on the player's initial direction
+* if the player rotates (e.g., when arrow keys are pressed) we update from 
+* the move_player() directly.
+*
+* 2. Ray Direction:
+* The window is divided by its width (e.g., 1920), resulting in 1920 columns,
+* and therefore 1920 rays. Each ray has a unique direction corresponding
+* to its position within the field of view (FOV).
+* - PI / 2 represents the FOV (PI = half circle, so PI / 2 = quarter circle = 90 degrees)
+* - A 90-degree FOV is used instead of 120 to avoid excessive distortion and visual noise
+* - 'x' is used to iterate through each column of the screen
+* - The window width ensures one ray per column
+* - The player direction is offset by PI / 4 to center the view correctly
+* - Sine and cosine are used to compute the X and Y components of each ray direction
+*
+* 3. Reach Wall:
+* Calculate the distance between the player's position and the wall hit by the ray.
+* - The ray is incrementally advanced in its direction until it collides with a wall,
+* storing the coordinates of the impact point.
+* - Once the wall is reached, compute the distance between the player and the wall
+* using their respective X and Y coordinates.
+*
+* 4. Put texture in each pixel
+*/
 int	render(t_data *data)
 {
-	// int y = 0;
 	int x = 0;
 
+	load_image(data, &data->north, "placeholder");
 	while (x <= WIDTH_WINDOW)
 	{
-		// 1. calculer orientation de mon rayon
 		ray_orientation(data);
-
-		// pouvoir avancer reculer par rapport a la camera
-		// = mettre a jour l orientation player avec les mouvemenst de camera 
-		// (rajouter ex : +1 camera -> +1 player)
-		
-		// regarde ecran dans FOV de 90 et non pas 120
-		// comme une focale longue -> ne pas avoir trop d info a l image
-		
-		// PIE /2 = le FOV
-		// x pour incremnter changer de direction
-		// la largeur de la window pour avoir une dir = une colonne
-		// dirp - 1/4 de PI pour positionner l angle de vue la ou le joueur regarde 
 		data->render.ray_dir = (PI/2 - ((PI/2 * x) / WIDTH_WINDOW)) + data->player.dirp - (0.25 * PI);
 		data->render.ray_dir_y = sin(data->render.ray_dir);
 		data->render.ray_dir_x = cos(data->render.ray_dir);
-		
-		// 2. faire le calcul de la distance parcouru par le rayon
 		double distance = reach_wall(data);
-
-		// 3. Mettre la texture dans le buffer image
 		put_texture_pixel(data, x, distance);
-
 		x++;
 	}
 	// print_player_info(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
-
 	return (0);
 }
 
