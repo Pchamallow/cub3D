@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:04:07 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:12:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "../../include/macro.h"
 #include <math.h>
 #include <stdio.h>
+
+
+// void	get_dir_wall(t_data *data)
+// {
+// 	// connaitre la direction du wall savoir quel texture choisir 
+	
+// 	data->render.wall_x, 
+// }
 
 void	init_direction(t_data *data)
 {

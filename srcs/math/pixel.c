@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 13:55:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:12:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,9 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	// si j ai :   pixel EA -> NO -> EA
 	// -> faire un EA au milieu
 	// sauf que c est toute un colonne qui est dans la mauvaise couleur 
-	// 
+	//
+	// printf("ray y = %f, ray dir x = %f\n", data->render.ray_dir_y, data->render.ray_dir_x);
+
 	while (y <= draw_end)
 	{
 		data->render.tex_y = (int)data->render.tex_pos;
@@ -142,14 +144,15 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		t_image *actual_texture;
 
 		// regler pour mieux delimiter les textures faces et coté
+		// get_dir_wall(data);
 		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
 			actual_texture = &data->north;
 		else
 			actual_texture = &data->east;
 
-		if (data->render.ray_dir_y < 1 &&  data->render.ray_dir_x > 0)
+		if (data->render.ray_dir_y < 1 && data->render.ray_dir_y > 0 
+			&&  data->render.ray_dir_x > 0)
 			actual_texture = &data->south;
-		// printf("ray y = %f, ray dir x = %f\n", data->render.ray_dir_y, data->render.ray_dir_x);
 			
 		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
