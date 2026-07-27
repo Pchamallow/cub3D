@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 13:59:00 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:27:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ void	put_texture_pixel(t_data *data, int x, double distance);
 double	cast_ray(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		get_pixel(t_image *dir, int x, int y);
+void	get_dir_wall(t_data *data);
 
 // Events
 

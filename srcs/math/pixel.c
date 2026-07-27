@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:12:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:30:18 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,10 @@
 void	put_pixel(t_data *data, int x, int y, int color)
 {
 	char *dst;
-	// (void)y;
 	dst = data->render.buffer + (x * data->render.line_bytes
 		+ y * (data->render.pixel_bits/ 8));
 	*(unsigned int*)dst = color;
 }
-
-
-
-// int is_side(double hit_x, double hit_y)
-// {
-//     double frac_x;
-//     double frac_y;
-
-//     frac_x = hit_x - floor(hit_x);
-//     frac_y = hit_y - floor(hit_y);
-
-//     // si frac_x est très proche de 0 (donc hit_x quasi entier)
-//     // -> on a touché une face verticale (est/ouest) -> side = 0
-//     if (frac_x < 0.0001 || frac_x > 0.9999)
-//         return (0);
-//     // sinon c'est frac_y qui est quasi entier -> face horizontale -> side = 1
-//     else
-//         return (1);
-// }
 
 static void	coordinates_textures_north_south(t_data *data, int h_wall, double draw_start)
 {
@@ -58,8 +38,8 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 	
-	printf("wall_y = %f | wall_x = %f | north.width = %d | tex_x = %d | step = %f | tex_pos = %f\n",
-		data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("wall_y = %f | wall_x = %f | north.width = %d | tex_x = %d | step = %f | tex_pos = %f\n",
+	// 	data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
@@ -81,8 +61,8 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 
-	printf("wall_x = %f | wall_y = %f | north.width = %d |tex_x = %d | step = %f | tex_pos = %f\n",
-		data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("wall_x = %f | wall_y = %f | north.width = %d |tex_x = %d | step = %f | tex_pos = %f\n",
+	// 	data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 void	put_texture_pixel(t_data *data, int x, double distance)
@@ -102,13 +82,6 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	// printf("[DEBUG] draw_start = %d   draw_end = %d\n",
 	// 	draw_start, draw_end);
 
-	// TEST DETECT SIDE WALL
-	// double hit_x = data->player.pos_x + distance * data->render.ray_dir_x;
-    // double hit_y = data->player.pos_y + distance * data->render.ray_dir_y;
-	// cast_ray(data, data->render.ray_dir_x, data->render.ray_dir_y);
-    // data->render.wall_side = is_side(hit_x, hit_y);
-	// wall_side(data);
-	// exit(1);
 
 	int y = 0;
 	// printf("ray dir x = %f, ray dir y = %f\n", data->render.ray_dir_x, data->render.ray_dir_y);
@@ -144,7 +117,7 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		t_image *actual_texture;
 
 		// regler pour mieux delimiter les textures faces et coté
-		// get_dir_wall(data);
+		get_dir_wall(data);
 		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
 			actual_texture = &data->north;
 		else
@@ -153,6 +126,8 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		if (data->render.ray_dir_y < 1 && data->render.ray_dir_y > 0 
 			&&  data->render.ray_dir_x > 0)
 			actual_texture = &data->south;
+
+
 			
 		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);

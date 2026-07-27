@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:12:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:28:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,24 @@
 #include <math.h>
 #include <stdio.h>
 
-
-// void	get_dir_wall(t_data *data)
-// {
-// 	// connaitre la direction du wall savoir quel texture choisir 
+/*
+* Choose texture from wall direction
+*/
+void	get_dir_wall(t_data *data)
+{
+	// connaitre la direction du wall savoir quel texture choisir 
 	
-// 	data->render.wall_x, 
-// }
+	// if coodonnes -> en dessous ==  0 -> sud
+	// coordonnes -> au dessous == 0 -> nord
+	// coord -> droite 0 == west
+	// coord -> fauche 0 = est
+
+	(void)data;
+	// int side_x = (int)floor(data->render.wall_x) + 1;
+	// int side_y = (int)floor(data->render.wall_x) + 1;
+	// printf("side_x = %d, side_y = %d\n", side_x, side_y);
+	// data->render.wall_x
+}
 
 void	init_direction(t_data *data)
 {

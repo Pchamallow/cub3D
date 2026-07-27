@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 12:53:18 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 14:29:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ double	reach_wall(t_data *data)
 	dis = dis * cos(data->render.ray_dir - data->player.dirp);
 	return (dis);
 }
+
+
 
 /*
 * Direction : h_wall
