@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:30:18 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 15:51:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,23 +114,17 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		data->render.tex_pos += data->render.step;
 		
 		// color = 0xF5F5DC;
-		t_image *actual_texture;
+		// t_image *actual_texture;
 
 		// regler pour mieux delimiter les textures faces et coté
+		// if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
+		// 	actual_texture = &data->north;
+		// else
+		// 	actual_texture = &data->east;
+
 		get_dir_wall(data);
-		if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
-			actual_texture = &data->north;
-		else
-			actual_texture = &data->east;
-
-		if (data->render.ray_dir_y < 1 && data->render.ray_dir_y > 0 
-			&&  data->render.ray_dir_x > 0)
-			actual_texture = &data->south;
-
-
-			
-		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
-		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
+		// color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
+		color = get_pixel(data->render.actual_texture, data->render.tex_x, data->render.tex_y);
 
 		put_pixel(data, y, x, color);
 

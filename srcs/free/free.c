@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/12 18:55:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 16:05:19 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,21 @@ void	free_map(char **map)
 	free(map);
 }
 
-static void	free_textures(t_direction *dir)
+static void	free_textures(t_data *data, t_direction *dir)
 {
-	free(dir->no);
-	free(dir->so);
-	free(dir->we);
-	free(dir->ea);
-	dir->no = NULL;
-	dir->so = NULL;
-	dir->we = NULL;
-	dir->ea = NULL;
+	// free(dir->no);
+	// free(dir->so);
+	// free(dir->we);
+	// free(dir->ea);
+	// dir->no = NULL;
+	// dir->so = NULL;
+	// dir->we = NULL;
+	// dir->ea = NULL;
+	(void)dir;
+	mlx_destroy_image(data->mlx, data->north.image);
+	mlx_destroy_image(data->mlx, data->south.image);
+	mlx_destroy_image(data->mlx, data->east.image);
+	mlx_destroy_image(data->mlx, data->weast.image);
 }
 
 static void	free_images(t_data *data)
@@ -64,7 +69,7 @@ void	free_all(t_data *data)
 		return ;
 	free_map(data->map.full_file);
 	free_map(data->map.maze);
-	free_textures(&data->direction);
+	free_textures(data, &data->direction);
 	free_images(data);
 	if (data->mlx && data->win)
 		mlx_destroy_window(data->mlx, data->win);

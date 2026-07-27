@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:29:22 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 15:33:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,11 @@ double	reach_wall(t_data *data)
 		y = wally;
 		t += 0.003;
 	}
+	// printf("maze x = %d, maze y = %d\n", x, y);
 	data->render.wall_x = wallx;
 	data->render.wall_y = wally;
+	data->render.wall_coord_x = x;
+	data->render.wall_coord_y = y;
 	// printf("its a wall ! : wallx =  %f, wally = %f\n", 
 	// 	wallx, wally);
 	

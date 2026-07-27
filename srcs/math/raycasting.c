@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 12:51:43 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 15:53:09 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	render(t_data *data)
 	load_image(data, &data->north, "./srcs/texture/NO.xpm");
 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
 	load_image(data, &data->east, "./srcs/texture/EA.xpm");
+	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
 	while (x <= WIDTH_WINDOW)
 	{
 		data->render.x = x;
@@ -64,7 +65,7 @@ int	render(t_data *data)
 		put_texture_pixel(data, x, distance);
 		x++;
 	}
-	
+	get_dir_wall(data);
 	// print_player_info(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);

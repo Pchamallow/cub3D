@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:27:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 15:50:21 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ enum TEXTURES
 	WEST
 };
 
+typedef struct s_image
+{
+	char			*path;
+	char			*addr;
+	void			*image;
+	int				value;
+	int				width;
+	int				height;
+	int				check;
+	int				pixel_bits;
+	int				line_bytes;
+	int				endian;
+}			t_image;
+
 typedef struct s_render
 {
 	int				pixel_bits;
@@ -36,7 +50,9 @@ typedef struct s_render
 	void			*image;
 	char			*buffer;
 	double			wall_x;
+	int				wall_coord_x;
 	double			wall_y;
+	int				wall_coord_y;
 	double			ray_dir;
 	double			ray_dir_x;
 	double			ray_dir_y;
@@ -44,7 +60,7 @@ typedef struct s_render
 	int				tex_y;
 	double			tex_pos;
 	double			step;
-	int				actual_texture;
+	t_image			*actual_texture;
 }			t_render;
 
 typedef struct s_keys
@@ -79,19 +95,6 @@ typedef struct s_direction
 	char			*ea;
 }				t_direction;
 
-typedef struct s_image
-{
-	char			*path;
-	char			*addr;
-	void			*image;
-	int				value;
-	int				width;
-	int				height;
-	int				check;
-	int				pixel_bits;
-	int				line_bytes;
-	int				endian;
-}			t_image;
 
 typedef struct s_player
 {
@@ -135,6 +138,7 @@ typedef struct s_data
 	t_image			north;
 	t_image			south;
 	t_image			east;
+	t_image			weast;
 	t_direction		direction;
 }			t_data;
 
