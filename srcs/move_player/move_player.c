@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:50:49 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 15:46:47 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 16:29:51 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	init_rotate_dirp(t_data *data)
 	if (data->key.left)
 	{
 		data->player.left = 1;
-		data->player.dirp += 0.01;
+		data->player.dirp += 0.02;
 	}
 	else if (data->key.right)
 	{
 		// printf("rotate right\n");
 		data->player.right = 1;
-		data->player.dirp -= 0.01;
+		data->player.dirp -= 0.02;
 	}
 	else
 		return (1);
