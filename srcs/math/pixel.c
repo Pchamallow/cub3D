@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 15:51:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 16:20:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	if (data->render.tex_x >= data->north.width)
 	{
 		data->render.tex_x = data->north.width - 1;
-		data->render.wall_side = 0;
+		data->render.wall_side = 0; // a enlever de la strcuture ???
 	}
+
+	if (data->render.actual_texture == &data->south)
+		data->render.tex_x = data->south.width - 1 - data->render.tex_x;
 
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
@@ -42,16 +45,29 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	// 	data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
+/*
+* 1. search dir wall and choose texture
+* 2. if wall_x > 0.99 && wall.x < 0.01 -> its north or south
+* 3. if direction is weast -> miror the texture, else if it will be reversed
+* 4. set limits coordonates
+*/
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
 {
 	data->render.wall_x -= floor(data->render.wall_x);
 	// detection face ou coté
+	get_dir_wall(data);
 	if (data->render.wall_x > 0.99 || data->render.wall_x < 0.01)
 	{
 		coordinates_textures_north_south(data, h_wall, draw_start);
 		return ;
 	}
+	
 	data->render.tex_x = (int)(data->render.wall_x * (double)data->north.width);
+
+	// mirored
+	if (data->render.actual_texture == &data->weast)
+		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
+	
 	if (data->render.tex_x < 0)
 		data->render.tex_x = 0;
 	if (data->render.tex_x >= data->north.width)
@@ -122,7 +138,6 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		// else
 		// 	actual_texture = &data->east;
 
-		get_dir_wall(data);
 		// color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(data->render.actual_texture, data->render.tex_x, data->render.tex_y);
 
