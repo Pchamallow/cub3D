@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/24 18:22:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/27 13:55:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 			actual_texture = &data->north;
 		else
 			actual_texture = &data->east;
+
+		if (data->render.ray_dir_y < 1 &&  data->render.ray_dir_x > 0)
+			actual_texture = &data->south;
+		// printf("ray y = %f, ray dir x = %f\n", data->render.ray_dir_y, data->render.ray_dir_x);
+			
 		// color = get_pixel(&data->north, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
 
