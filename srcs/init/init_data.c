@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/27 15:23:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 15:09:02 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,15 @@ static int	init_rgb(t_data *data)
 	return (error);
 }
 
+// static void	init_image(t_data *data)
+// {
+// 	// print les valeurs pour voir les endians, lines bytes, pixel 
+// 	load_image(data, &data->north, "./srcs/texture/NO.xpm");
+// 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
+// 	load_image(data, &data->east, "./srcs/texture/EA.xpm");
+// 	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
+// }
+
 int	ft_init_data(t_data *data)
 {
 	if (init_full_file(data))
@@ -122,5 +131,6 @@ int	ft_init_data(t_data *data)
 	ft_printf_fd(2, "-------\n");
 	if (is_valid_maze(data))
 		return (1);
+	// init_image(data);
 	return (0);
 }

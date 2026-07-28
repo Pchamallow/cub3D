@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 11:33:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:35:21 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ double	reach_wall(t_data *data)
 	// 	wallx, wally);
 	
 	double dis = distance(data, wallx, wally);
-		// correction fish eye -> les rayons envoyer au extremite du FOV sont plus
+	
+	// correction fish eye -> les rayons envoyer au extremite du FOV sont plus
 	// longs que ceux du milieu
 	// -> on faire en sorte qu ils soient tous a la meme longeur que ceux du milieu
 	dis = dis * cos(data->render.ray_dir - data->player.dirp);
@@ -98,7 +99,7 @@ double	reach_wall(t_data *data)
 */
 void	ray_orientation(t_data *data)
 {
-	if (data->player.right || data->player.left)
+	if (data->player.has_turn)
 		return;
 	init_direction(data);
 }

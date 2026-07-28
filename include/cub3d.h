@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 10:51:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:35:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_player
 {
 	int				x_start_p;
 	int				y_start_p;
+	int				has_turn;
 	double			pos_x;
 	double			pos_y;
 	char			direction;
@@ -112,8 +113,6 @@ typedef struct s_player
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
-	double			right;
-	double			left;
 }			t_player;
 
 typedef struct s_color

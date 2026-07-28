@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 11:11:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 15:09:28 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	render(t_data *data)
 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
 	load_image(data, &data->east, "./srcs/texture/EA.xpm");
 	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
-	while (x <= WIDTH_WINDOW)
+	while (x < WIDTH_WINDOW)
 	{
 		data->render.x = x;
 		ray_orientation(data);

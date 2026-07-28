@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/27 16:05:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 15:06:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	free_textures(t_data *data, t_direction *dir)
 	// dir->we = NULL;
 	// dir->ea = NULL;
 	(void)dir;
+	// rajouter if image existe pour chacun
 	mlx_destroy_image(data->mlx, data->north.image);
 	mlx_destroy_image(data->mlx, data->south.image);
 	mlx_destroy_image(data->mlx, data->east.image);
