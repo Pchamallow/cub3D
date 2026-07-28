@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 10:51:26 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:55:47 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 	
-	printf("north ou south	wall_y = %f | wall_x = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
-		data->wall.distance_y, data->wall.distance_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("north ou south	wall_y = %f | wall_x = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
+	// 	data->wall.distance_y, data->wall.distance_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 /*
@@ -76,8 +76,8 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 
-	printf("est ou west	wall_x = %f | wall_y = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
-		data->wall.distance_x, data->wall.distance_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+	// printf("est ou west	wall_x = %f | wall_y = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
+	// 	data->wall.distance_x, data->wall.distance_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 void	put_texture_pixel(t_data *data, int x, double distance)

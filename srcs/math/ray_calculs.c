@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 10:10:59 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 10:50:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:59:28 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ double	reach_wall(t_data *data)
 	double	t = 0;
 	double wallx = playerx;
 	double wally = playery;
-	// ft_printf_fd(2, "wallx = %d\n wally = %d\n", data->player.pos_y,
-	// 	data->player.pos_x);
-	// printf("data->map.maze[(int)wallx][(int)wally] = %c\n", data->map.maze[ data->player.pos_y][ data->player.pos_x]);
+
+	printf("player x = %f - player y = %f\n", wallx, wally);
 	int x = wallx;
 	int y = wally;
 	while (data->map.maze[x][y]
@@ -74,6 +73,8 @@ double	reach_wall(t_data *data)
 	// printf("maze x = %d, maze y = %d\n", x, y);
 	data->wall.distance_x = wallx;
 	data->wall.distance_y = wally;
+	// printf("distance_x = %f - distance_y = %f\n",
+	// 	data->wall.distance_x, data->wall.distance_y);
 	data->wall.map_x = x;
 	data->wall.map_y = y;
 	// printf("its a wall ! : wallx =  %f, wally = %f\n", 
