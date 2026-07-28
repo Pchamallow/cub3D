@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 13:48:13 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 13:59:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,50 @@
 #include <math.h>
 #include <stdio.h>
 
-// fix pour retrirer les colonnes de nords en plein
-// milieu des murs en direction des cotes
+/*
+* Function to fix the columns with the wrong texture,
+* which appear in the middle of west-facing walls.
+* We always start from the position of the wall hit by the ray.
+*
+* Case 1:
+*	- if there is a wall above AND below our current cell
+*		= we are on a side face
+*
+* Case 2: bottom corner of a wall section
+*	- if there is a wall above us
+*	- and we are within the interval between the current wall
+*	  and the wall above (e.g. we are at x = 10.5, min = 9.1,
+*	  max = 10.9)
+*		= we are on a side face
+*
+* Case 3: top corner of a wall section
+*	- if there is a wall below us
+*	- and we are within the interval between the current wall
+*	  and the wall below (e.g. we are at x = 10.5, min = 10.1,
+*	  max = 11.9)
+*		= we are on a side face
+*/
 static int	on_side(t_data *data)
 {
 	int map_x = data->wall.map_x;
 	int map_y = data->wall.map_y;
 	double floor_x = floor(data->wall.distance_x);
-	// double floor_y = floor(data->wall.distance_y);
 
-	// printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
-	// 	data->wall.distance_x, floor_x + 0.5, floor_x + 1);
-	// printf("wall map x = %d - wall map y = %d\n",
-	// 	data->wall.map_x, data->wall.map_y);
-
-	// si il y a des murs au dessus et en dessous 
-	// on est sur un coté
 	if (data->map.maze[map_x + 1][map_y]
 		&& data->map.maze[map_x + 1][map_y] == '1'
 		&& data->map.maze[map_x - 1][map_y]
 		&& data->map.maze[map_x - 1][map_y] == '1')
 		return (1);
-	// par rapport a la position actuelle disons x = entre 10.0 et 10.9
-	// s il y a un mur au dessus, entre 9.1 et 10 .9
-	// c est un side c est sur
 	if (data->map.maze[map_x - 1][map_y]
 		&& data->map.maze[map_x - 1][map_y] == '1'
 		&& data->wall.distance_x > floor_x - 0.9
 		&& data->wall.distance_x < floor_x + 0.9)
 		return (1);
-	// similaire a celui du dose mais pour le coin oppose
-	// si j ai un mur en dessous de moi
-	// et que je suis entre x.1 (minimum du mur actuel)
-	// et x + 1.9 (presque le max du mur du dessous)
-	// c est que je suis sur le coté
 	if (data->map.maze[map_x + 1][map_y]
 		&& data->map.maze[map_x + 1][map_y] == '1'
 		&& data->wall.distance_x > floor_x + 0.1
 		&& data->wall.distance_x < floor_x + 1.9)
 		return (1);
-	// else if 
 	return (0);
 }
 
