@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 16:46:20 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/28 14:02:52 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 17:02:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@
 // Math
 # define PI 3.141592654
 # define FOV 90
+# define FOV_RAD (FOV * PI / 180.0)
 # define SPEED_MOVE 20
 # define SPEED_ROT 0.03
 

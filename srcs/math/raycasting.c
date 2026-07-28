@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 16:04:55 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 17:04:22 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@
 * The window is divided by its width (e.g., 1920), resulting in 1920 columns,
 * and therefore 1920 rays. Each ray has a unique direction corresponding
 * to its position within the field of view (FOV).
-* - PI / 2 represents the FOV (PI = half circle, so PI / 2 = quarter circle = 90 degrees)
+* - FOV_RAD = FOV * PI / 180 (PI = half circle, so PI / 2 = quarter circle = 90 degrees)
 * - A 90-degree FOV is used instead of 120 to avoid excessive distortion and visual noise
 * - 'x' is used to iterate through each column of the screen
 * - The window width ensures one ray per column
 * - The player direction is offset by PI / 4 to center the view correctly
 * - Sine and cosine are used to compute the X and Y components of each ray direction
+* - Now, ray are spaced ny angle, now we will spaced by distance with atan and tan
+*	the space between each ray is the same
 *
 * 3. Reach Wall:
 * Calculate the distance between the player's position and the wall hit by the ray.
@@ -59,9 +61,13 @@ int	render(t_data *data)
 	{
 		data->render.x = x;
 		ray_orientation(data);
-		data->render.ray_dir = (PI/2 - ((PI/2 * x) / WIDTH_WINDOW)) + data->player.dirp - (0.25 * PI);
+
+		double cam_x = ((WIDTH_WINDOW / 2.0) - x) / (WIDTH_WINDOW / 2.0);
+		data->render.ray_dir = data->player.dirp
+			+ atan(cam_x * tan(FOV_RAD / 2.0));
 		data->render.ray_dir_y = sin(data->render.ray_dir);
 		data->render.ray_dir_x = cos(data->render.ray_dir);
+
 		double distance = reach_wall(data);
 		put_texture_pixel(data, x, distance);
 		x++;
