@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 16:51:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:51:26 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	put_pixel(t_data *data, int x, int y, int color)
 
 static void	coordinates_textures_north_south(t_data *data, int h_wall, double draw_start)
 {
-	data->render.wall_y -= floor(data->render.wall_y);
-	data->render.tex_x = (int)(data->render.wall_y * (double)data->north.width);
+	data->wall.distance_y -= floor(data->wall.distance_y);
+	data->render.tex_x = (int)(data->wall.distance_y * (double)data->north.width);
 	if (data->render.tex_x < 0)
 		data->render.tex_x = 0;
 	if (data->render.tex_x >= data->north.width)
 	{
 		data->render.tex_x = data->north.width - 1;
-		data->render.wall_side = 0; // a enlever de la strcuture ???
+		// data->render.wall_side = 0; // a enlever de la strcuture ???
 	}
 
 	if (data->render.actual_texture == &data->south)
@@ -42,7 +42,7 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 	
 	printf("north ou south	wall_y = %f | wall_x = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
-		data->render.wall_y, data->render.wall_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+		data->wall.distance_y, data->wall.distance_x, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 /*
@@ -53,16 +53,16 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 */
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
 {
-	data->render.wall_x -= floor(data->render.wall_x);
+	data->wall.distance_x -= floor(data->wall.distance_x);
 	// detection face ou coté
 	get_dir_wall(data);
-	if (data->render.wall_x > 0.99 || data->render.wall_x < 0.01)
+	if (data->wall.distance_x > 0.99 || data->wall.distance_x < 0.01)
 	{
 		coordinates_textures_north_south(data, h_wall, draw_start);
 		return ;
 	}
 	
-	data->render.tex_x = (int)(data->render.wall_x * (double)data->north.width);
+	data->render.tex_x = (int)(data->wall.distance_x * (double)data->north.width);
 
 	if (data->render.actual_texture == &data->weast)
 		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
@@ -77,7 +77,7 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 
 	printf("est ou west	wall_x = %f | wall_y = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
-		data->render.wall_x, data->render.wall_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
+		data->wall.distance_x, data->wall.distance_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 void	put_texture_pixel(t_data *data, int x, double distance)
@@ -132,7 +132,7 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		// t_image *actual_texture;
 
 		// regler pour mieux delimiter les textures faces et coté
-		// if (data->render.wall_x > 0.995 || data->render.wall_x < 0.0057)
+		// if (data->wall.distance_x > 0.995 || data->wall.distance_x < 0.0057)
 		// 	actual_texture = &data->north;
 		// else
 		// 	actual_texture = &data->east;

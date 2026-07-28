@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 15:50:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:51:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,23 @@ typedef struct s_image
 	int				endian;
 }			t_image;
 
+typedef struct s_wall
+{
+	double			distance_x;
+	double			distance_y;
+	int				map_x;
+	int				map_y;
+	int				wall_side;
+}				t_wall;
+
 typedef struct s_render
 {
 	int				pixel_bits;
 	int				line_bytes;
 	int				endian;
-	int				wall_side;
 	int				x;
 	void			*image;
 	char			*buffer;
-	double			wall_x;
-	int				wall_coord_x;
-	double			wall_y;
-	int				wall_coord_y;
 	double			ray_dir;
 	double			ray_dir_x;
 	double			ray_dir_y;
@@ -140,6 +144,7 @@ typedef struct s_data
 	t_image			east;
 	t_image			weast;
 	t_direction		direction;
+	t_wall			wall;
 }			t_data;
 
 // =============================

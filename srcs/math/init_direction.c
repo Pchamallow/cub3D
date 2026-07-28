@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 16:33:21 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 10:50:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	get_dir_wall(t_data *data)
 	// coord -> droite 0 == west
 	// coord -> fauche 0 = est
 
-	int x = data->render.wall_coord_x;
-	int y = data->render.wall_coord_y;
+	int x = data->wall.map_x;
+	int y = data->wall.map_y;
 	
-	// data->render.wall_x -= floor(data->render.wall_x);
+	// data->wall.distance_x -= floor(data->wall.distance_x);
 	
-	if (data->render.wall_x > 0.999 || data->render.wall_x < 0.003)
+	if (data->wall.distance_x > 0.999 || data->wall.distance_x < 0.003)
 	{
 		// printf("its north or south\n");
 		if (data->map.maze[x + 1][y]
