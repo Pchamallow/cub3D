@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 15:02:43 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 16:01:54 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,19 @@ void	get_dir_wall(t_data *data)
 
 	data->render.actual_texture = &data->east;
 
-	printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
-		data->wall.distance_x, floor_x + 0.5, floor_x + 1);
-	printf(" distance y = %f, floor + 0.5 = %f, floor + 1 = %f\n",
-		data->wall.distance_y, floor_y + 0.5, floor_y + 1);
-	printf("wall map x = %d - wall map y = %d\n",
-		data->wall.map_x, data->wall.map_y);
+	// printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
+	// 	data->wall.distance_x, floor_x + 0.5, floor_x + 1);
+	// printf(" distance y = %f, floor + 0.5 = %f, floor + 1 = %f\n",
+	// 	data->wall.distance_y, floor_y + 0.5, floor_y + 1);
+	// printf("wall map x = %d - wall map y = %d\n",
+		// data->wall.map_x, data->wall.map_y);
 
 	if ((data->wall.distance_x > floor_x + 0.997
 		|| data->wall.distance_x < 0.003)
 		&& !on_side(data))
 	{
 	
-		printf("its north or south\n");
+		// printf("its north or south\n");
 		// printf("wall map x = %d - wall map y = %d\n",
 		// 	data->wall.map_x, data->wall.map_y);
 		if (data->map.maze[x + 1][y]
