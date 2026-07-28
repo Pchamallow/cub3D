@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 13:38:38 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 13:48:13 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ static int	on_side(t_data *data)
 		&& data->wall.distance_x > floor_x - 0.9
 		&& data->wall.distance_x < floor_x + 0.9)
 		return (1);
+	// similaire a celui du dose mais pour le coin oppose
+	// si j ai un mur en dessous de moi
+	// et que je suis entre x.1 (minimum du mur actuel)
+	// et x + 1.9 (presque le max du mur du dessous)
+	// c est que je suis sur le coté
+	if (data->map.maze[map_x + 1][map_y]
+		&& data->map.maze[map_x + 1][map_y] == '1'
+		&& data->wall.distance_x > floor_x + 0.1
+		&& data->wall.distance_x < floor_x + 1.9)
+		return (1);
 	// else if 
 	return (0);
 }
@@ -56,20 +66,8 @@ static int	on_side(t_data *data)
 */
 void	get_dir_wall(t_data *data)
 {
-	// connaitre la direction du wall savoir quel texture choisir 
-	
-	// prendre en compte la position actuel du player 
-
-
-	// if coodonnes -> en dessous ==  0 -> sud
-	// coordonnes -> au dessous == 0 -> nord
-	// coord -> droite 0 == west
-	// coord -> fauche 0 = est
-
 	int x = data->wall.map_x;
 	int y = data->wall.map_y;
-	
-	// data->wall.distance_x -= floor(data->wall.distance_x);
 	
 	// || data->wall.distance_x < floor(data->wall.distance_x) - 0.9)
 	// if (data->wall.distance_x < floor(data->wall.distance_x) + 0.9)
@@ -83,16 +81,6 @@ void	get_dir_wall(t_data *data)
 
 	data->render.actual_texture = &data->east;
 
-	
-// fonctionne mais probeleme au niveau d un coin avec du vide derrierw
-// if (data->wall.distance_x > 0.999 || data->wall.distance_x < 0.003)
-
-// idealement ne pas print des le depart sur le cote west
-// + print le west sur cette partie 
-// dans quel contexte on print l est 
-
-// position actuel =    x = 5.9   y = 4
-// si floor x + 1 -> la case a cote est un G -> alors c est bien west
 	printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
 		data->wall.distance_x, floor_x + 0.5, floor_x + 1);
 	printf(" distance y = %f, floor + 0.5 = %f, floor + 1 = %f\n",
