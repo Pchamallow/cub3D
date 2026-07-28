@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 15:53:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:11:16 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	render(t_data *data)
 	int	x;
 
 	x = 0;
+	// remplacer les path par les macros qui correspondent
 	load_image(data, &data->north, "./srcs/texture/NO.xpm");
 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
 	load_image(data, &data->east, "./srcs/texture/EA.xpm");

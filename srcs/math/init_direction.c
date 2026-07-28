@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 11:05:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 11:23:41 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	get_dir_wall(t_data *data)
 	printf(" distance y = %f, floor + 0.5 = %f\n",
 		data->wall.distance_y, floor(data->wall.distance_y) + 0.5);
 	
+	data->render.actual_texture = &data->east;
+
 // fonctionne mais probeleme au niveau d un coin avec du vide derrierw
 // if (data->wall.distance_x > 0.999 || data->wall.distance_x < 0.003)
 
@@ -67,14 +69,15 @@ void	get_dir_wall(t_data *data)
 	else
 	{
 		// printf("its east or weast\n");
-		if (data->map.maze[x][y - 1]
-			&& data->map.maze[x][y - 1] == 'G')
-		{
-			// printf("its the east !\n");
-			data->render.actual_texture = &data->east;
-		}
+		// if (data->map.maze[x][y - 1]
+		// 	&& data->map.maze[x][y - 1] == 'G')
+		// {
+		// 	// printf("its the east !\n");
+		// 	data->render.actual_texture = &data->east;
+		// }
 		if (data->map.maze[x][y + 1]
-			&& data->map.maze[x][y + 1] == 'G')
+			&& data->map.maze[x][y + 1] == 'G'
+			&& data->wall.distance_y > floor(data->wall.distance_y) + 0.9)
 		{
 			// printf("its the weast !\n");
 			data->render.actual_texture = &data->weast;
