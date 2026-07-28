@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/23 16:12:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/24 10:01:05 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@
 */
 void	handle_directions(t_data *data, int keycode)
 {
-	if (keycode == 'w')
+	if (keycode == KEY_W)
 	{
 		data->key.w = 1;
 		move_forward_backward(data);
 	}
-	if (keycode == 's')
+	if (keycode == KEY_S)
 	{
 		data->key.s = 1;
 		move_forward_backward(data);
 	}
-	if (keycode == 'a')
+	if (keycode == KEY_A)
 	{
 		data->key.a = 1;
 		move_left_right(data);
 	}
-	if (keycode == 'd')
+	if (keycode == KEY_D)
 	{
 		data->key.d = 1;
 		move_left_right(data);
