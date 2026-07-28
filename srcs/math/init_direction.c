@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 13:13:14 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 13:38:38 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include <math.h>
 #include <stdio.h>
 
-
+// fix pour retrirer les colonnes de nords en plein
+// milieu des murs en direction des cotes
 static int	on_side(t_data *data)
 {
 	int map_x = data->wall.map_x;
@@ -23,15 +24,23 @@ static int	on_side(t_data *data)
 	double floor_x = floor(data->wall.distance_x);
 	// double floor_y = floor(data->wall.distance_y);
 
-	printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
-		data->wall.distance_x, floor_x + 0.5, floor_x + 1);
-	printf("wall map x = %d - wall map y = %d\n",
-		data->wall.map_x, data->wall.map_y);
+	// printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
+	// 	data->wall.distance_x, floor_x + 0.5, floor_x + 1);
+	// printf("wall map x = %d - wall map y = %d\n",
+	// 	data->wall.map_x, data->wall.map_y);
 
-	if (data->map.maze[map_x + 1][map_y] == '1'
+	// si il y a des murs au dessus et en dessous 
+	// on est sur un coté
+	if (data->map.maze[map_x + 1][map_y]
+		&& data->map.maze[map_x + 1][map_y] == '1'
+		&& data->map.maze[map_x - 1][map_y]
 		&& data->map.maze[map_x - 1][map_y] == '1')
 		return (1);
-	if (data->map.maze[map_x - 1][map_y] == '1'
+	// par rapport a la position actuelle disons x = entre 10.0 et 10.9
+	// s il y a un mur au dessus, entre 9.1 et 10 .9
+	// c est un side c est sur
+	if (data->map.maze[map_x - 1][map_y]
+		&& data->map.maze[map_x - 1][map_y] == '1'
 		&& data->wall.distance_x > floor_x - 0.9
 		&& data->wall.distance_x < floor_x + 0.9)
 		return (1);
@@ -39,12 +48,8 @@ static int	on_side(t_data *data)
 	return (0);
 }
 
-// x.01 et que x - 1 == 1
-// side = x.0 = 1er mur jusqu x.9 dernier mur
+// si y = y.9 -> floor y + 1 == '1' -> west
 
-// case actuelle = mur 
-// apres pas de mur = x_max = mur actuell + 0.9
-// avant mur = x.1 min du mur 
 
 /*
 * Choose texture from wall direction
@@ -75,36 +80,31 @@ void	get_dir_wall(t_data *data)
 	// int map_x = data->wall.map_x;
 	// int map_y = data->wall.map_y;
 
-	// printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
-	// 	data->wall.distance_x, floor_x + 0.5, floor_x + 1);
-	// printf(" distance y = %f, floor + 0.5 = %f, floor + 1 = %f\n",
-	// 	data->wall.distance_y, floor_y + 0.5, floor_y + 1);
-	// printf("wall map x = %d - wall map y = %d\n",
-	// 	data->wall.map_x, data->wall.map_y);
-	
-	data->render.actual_texture = &data->east;
 
-// x > x.9 + x + 1 == 1 -> ni sud si north
-// dire si la case en dessous en 1 -> alors c est que tu n est ni 
-// le nord ni le sud 
-// connaitre la position de la case actuel
+	data->render.actual_texture = &data->east;
 
 	
 // fonctionne mais probeleme au niveau d un coin avec du vide derrierw
 // if (data->wall.distance_x > 0.999 || data->wall.distance_x < 0.003)
 
+// idealement ne pas print des le depart sur le cote west
+// + print le west sur cette partie 
+// dans quel contexte on print l est 
 
-	
-
-	// if ((data->wall.distance_x > floor_x + 0.997
-	// 	|| data->wall.distance_x < 0.003)
-	// 	&& data->map.maze[map_x + 1][map_y] != '1'
-	// 	&& data->map.maze[map_x - 1][map_y] != '1')
+// position actuel =    x = 5.9   y = 4
+// si floor x + 1 -> la case a cote est un G -> alors c est bien west
+	printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
+		data->wall.distance_x, floor_x + 0.5, floor_x + 1);
+	printf(" distance y = %f, floor + 0.5 = %f, floor + 1 = %f\n",
+		data->wall.distance_y, floor_y + 0.5, floor_y + 1);
+	printf("wall map x = %d - wall map y = %d\n",
+		data->wall.map_x, data->wall.map_y);
 
 	if ((data->wall.distance_x > floor_x + 0.997
 		|| data->wall.distance_x < 0.003)
 		&& !on_side(data))
 	{
+	
 		printf("its north or south\n");
 		// printf("wall map x = %d - wall map y = %d\n",
 		// 	data->wall.map_x, data->wall.map_y);
@@ -121,9 +121,12 @@ void	get_dir_wall(t_data *data)
 			// printf("its the south !\n");
 			data->render.actual_texture = &data->south;
 		}
+		return ;
 	}
 	else
 	{
+		// if (data->map.maze[x + 1][map_y] == 'G'
+		// 	&& data->wall.distance_y > floor_y + 0.9)
 		// printf("its east or weast\n");
 		// if (data->map.maze[x][y - 1]
 		// 	&& data->map.maze[x][y - 1] == 'G')
