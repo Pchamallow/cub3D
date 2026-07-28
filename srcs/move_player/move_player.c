@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:50:49 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 11:07:16 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 14:03:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	init_rotate_dirp(t_data *data)
 	if (data->key.left)
 	{
 		data->player.left = 1;
-		data->player.dirp += 0.02;
+		data->player.dirp += SPEED_ROT;
 	}
 	else if (data->key.right)
 	{
 		// printf("rotate right\n");
 		data->player.right = 1;
-		data->player.dirp -= 0.02;
+		data->player.dirp -= SPEED_ROT;
 	}
 	else
 		return (1);
@@ -94,14 +94,14 @@ void	move_forward_backward(t_data *data)
 
 	if (data->key.w)
 	{
-		x = data->player.pos_x + data->player.dir_y / SPEED;
-		y = data->player.pos_y + data->player.dir_x / SPEED;
+		x = data->player.pos_x + data->player.dir_y / SPEED_MOVE;
+		y = data->player.pos_y + data->player.dir_x / SPEED_MOVE;
 		move_player(data, x, y);
 	}
 	if (data->key.s)
 	{
-		x = data->player.pos_x - data->player.dir_y / SPEED;
-		y = data->player.pos_y - data->player.dir_x / SPEED;
+		x = data->player.pos_x - data->player.dir_y / SPEED_MOVE;
+		y = data->player.pos_y - data->player.dir_x / SPEED_MOVE;
 		move_player(data, x, y);
 	}
 }
@@ -113,15 +113,15 @@ void	move_left_right(t_data *data)
 
 	if (data->key.a)
 	{
-		x = data->player.pos_x + sin(data->player.dirp + PI / 2) / SPEED;
-		y = data->player.pos_y + cos(data->player.dirp + PI / 2) / SPEED;
+		x = data->player.pos_x + sin(data->player.dirp + PI / 2) / SPEED_MOVE;
+		y = data->player.pos_y + cos(data->player.dirp + PI / 2) / SPEED_MOVE;
 		move_player(data, x, y);
 	}
 	if (data->key.d)
 	{
 		// printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
-		x = data->player.pos_x - sin(data->player.dirp + PI / 2) / SPEED;
-		y = data->player.pos_y - cos(data->player.dirp + PI / 2) / SPEED;
+		x = data->player.pos_x - sin(data->player.dirp + PI / 2) / SPEED_MOVE;
+		y = data->player.pos_y - cos(data->player.dirp + PI / 2) / SPEED_MOVE;
 		// printf("calculs:   cos = %f, sin = %f\n", cos(data->player.dirp + PI/2),
 		//  sin(data->player.dirp + PI/2));
 		// printf(" pos after w -> avancer :   x = %f, y = %f\n", x, y);

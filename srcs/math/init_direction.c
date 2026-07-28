@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 13:59:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/28 13:59:50 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ static int	on_side(t_data *data)
 	return (0);
 }
 
-// si y = y.9 -> floor y + 1 == '1' -> west
-
-
 /*
 * Choose texture from wall direction
 */
@@ -72,16 +69,8 @@ void	get_dir_wall(t_data *data)
 {
 	int x = data->wall.map_x;
 	int y = data->wall.map_y;
-	
-	// || data->wall.distance_x < floor(data->wall.distance_x) - 0.9)
-	// if (data->wall.distance_x < floor(data->wall.distance_x) + 0.9)
-	
 	double floor_x = floor(data->wall.distance_x);
 	double floor_y = floor(data->wall.distance_y);
-
-	// int map_x = data->wall.map_x;
-	// int map_y = data->wall.map_y;
-
 
 	data->render.actual_texture = &data->east;
 
