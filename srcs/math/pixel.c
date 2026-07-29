@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 08:25:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 08:35:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 		// data->render.wall_side = 0; // a enlever de la strcuture ???
 	}
 
-	if (data->render.actual_texture == &data->south)
-		data->render.tex_x = data->south.width - 1 - data->render.tex_x;
+	if (data->render.actual_texture == &data->north)
+		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
 
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;

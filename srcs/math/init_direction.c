@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 17:15:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 08:35:25 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ void	get_dir_wall(t_data *data)
 			&& data->map.maze[x + 1][y] == 'G')
 		{
 			// printf("its the north !\n");
-			data->render.actual_texture = &data->north;
+			data->render.actual_texture = &data->south;
 		}
 		if (data->map.maze[x - 1][y]
 			&& data->map.maze[x - 1][y] == 'G'
 			&& data->wall.distance_x < floor_x + 0.5)
 		{
 			// printf("its the south !\n");
-			data->render.actual_texture = &data->south;
+			data->render.actual_texture = &data->north;
 		}
 		return ;
 	}
