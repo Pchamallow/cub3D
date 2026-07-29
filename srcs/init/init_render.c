@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 13:01:54 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 14:26:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:34:08 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	start_north_south(t_data *data)
 
 static int	load_textures(t_data *data)
 {
-	// remplacer les path par les macros qui correspondent
-	load_image(data, &data->north, "./srcs/texture/NO.xpm");
+	// remplacer par les paths recuperer depuis le file
+	load_image(data, &data->north, data->north.path);
 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
 	load_image(data, &data->east, "./srcs/texture/EA.xpm");
 	load_image(data, &data->weast, "./srcs/texture/WE.xpm");

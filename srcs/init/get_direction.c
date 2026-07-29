@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 13:56:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:38:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,19 +122,18 @@ static char	*get_direction(t_data *data, char *dir)
 
 int	get_all_directions(t_data *data)
 {
-	data->direction.no = get_direction(data, "NO");
-	if (!data->direction.no)
+	data->north.path = get_direction(data, "NO");
+	if (!data->north.path)
 		return (1);
-	data->direction.so = get_direction(data, "SO");
-	if (!data->direction.so)
+	data->south.path = get_direction(data, "SO");
+	if (!data->south.path)
 		return (1);
-	data->direction.we = get_direction(data, "WE");
-	if (!data->direction.we)
+	data->weast.path = get_direction(data, "WE");
+	if (!data->weast.path)
 		return (1);
-	data->direction.ea = get_direction(data, "EA");
-	if (!data->direction.ea)
+	data->east.path = get_direction(data, "EA");
+	if (!data->east.path)
 		return (1);
 	// print_directions(data);
-	// load_image(data, &data->north, data->direction.no);
 	return (0);
 }

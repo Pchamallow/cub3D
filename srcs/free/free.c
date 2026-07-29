@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 14:28:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:38:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	free_map(char **map)
 	free(map);
 }
 
-static void	free_textures(t_data *data, t_direction *dir)
+static void	free_textures(t_data *data)
 {
-	free(dir->no);
-	free(dir->so);
-	free(dir->we);
-	free(dir->ea);
-	dir->no = NULL;
-	dir->so = NULL;
-	dir->we = NULL;
-	dir->ea = NULL;
+	if (data->north.path)
+		free(data->north.path);
+	if (data->south.path)
+		free(data->south.path);
+	if (data->weast.path)
+		free(data->weast.path);
+	if (data->east.path)
+		free(data->east.path);
 	if (data->north.image)
 		mlx_destroy_image(data->mlx, data->north.image);
 	if (data->south.image)
@@ -72,7 +72,7 @@ void	free_all(t_data *data)
 		return ;
 	free_map(data->map.full_file);
 	free_map(data->map.maze);
-	free_textures(data, &data->direction);
+	free_textures(data);
 	free_render(data);
 	if (data->mlx && data->win)
 		mlx_destroy_window(data->mlx, data->win);
