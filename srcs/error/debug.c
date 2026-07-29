@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:04:40 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 12:44:33 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:41:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	print_array(char **array)
 
 void	print_directions(t_data *data)
 {
-	ft_printf_fd(2, "no = %s\n", data->direction.no);
-	ft_printf_fd(2, "so = %s\n", data->direction.so);
-	ft_printf_fd(2, "we = %s\n", data->direction.we);
-	ft_printf_fd(2, "ea = %s\n", data->direction.ea);
+	ft_printf_fd(2, "no = %s\n", data->north.path);
+	ft_printf_fd(2, "so = %s\n", data->south.path);
+	ft_printf_fd(2, "we = %s\n", data->weast.path);
+	ft_printf_fd(2, "ea = %s\n", data->east.path);
 }
 
 void	print_rgb(t_data *data)
