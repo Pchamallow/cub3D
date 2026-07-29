@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 16:04:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 08:25:12 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 }
 
 /*
-* 1. search dir wall and choose texture
+* 1. get_dir_wall(): search dir wall (face or side) and choose texture
 * 2. if wall_x > 0.99 && wall.x < 0.01 -> its north or south
 * 3. if direction is weast -> miror the texture, else if it will be reversed
 * 4. set limits coordonates
@@ -54,7 +54,6 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
 {
 	data->wall.distance_x -= floor(data->wall.distance_x);
-	// detection face ou coté
 	get_dir_wall(data);
 	if (data->wall.distance_x > 0.99 || data->wall.distance_x < 0.01)
 	{
@@ -75,9 +74,6 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	
 	data->render.step = (double)data->north.height / (double)h_wall;
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
-
-	// printf("est ou west	wall_x = %f | wall_y = %f | north.width = %d | tex_x = %02d | step = %f | tex_pos = %f\n",
-	// 	data->wall.distance_x, data->wall.distance_y, data->north.width, data->render.tex_x, data->render.step, data->render.tex_pos);
 }
 
 void	put_texture_pixel(t_data *data, int x, double distance)
@@ -94,30 +90,18 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 	if(draw_end >= HEIGHT_WINDOW)
 		draw_end = HEIGHT_WINDOW - 1;
 
-	// printf("[DEBUG] draw_start = %d   draw_end = %d\n",
-	// 	draw_start, draw_end);
-
 
 	int y = 0;
 	// printf("ray dir x = %f, ray dir y = %f\n", data->render.ray_dir_x, data->render.ray_dir_y);
 	while (y < draw_start)
 	{
-		put_pixel(data, y, x, 0x87CEEB);
-		// printf(" ca print : y = %d, x = %d\n", y, x);
+		put_pixel(data, y, x, data->ceiling.color);
 		y++;
 	}
 
 	coordinates_textures_est_west(data, h_wall, draw_start);
 
 	int color;
-
-	// calculer les entre deux -> entre deux print east
-	// il y a un bout de north
-	// si j ai :   pixel EA -> NO -> EA
-	// -> faire un EA au milieu
-	// sauf que c est toute un colonne qui est dans la mauvaise couleur 
-	//
-	// printf("ray y = %f, ray dir x = %f\n", data->render.ray_dir_y, data->render.ray_dir_x);
 
 	while (y <= draw_end)
 	{
@@ -128,28 +112,14 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 			data->render.tex_y = data->north.height - 1;
 		data->render.tex_pos += data->render.step;
 		
-		// color = 0xF5F5DC;
-		// t_image *actual_texture;
-
-		// regler pour mieux delimiter les textures faces et coté
-		// if (data->wall.distance_x > 0.995 || data->wall.distance_x < 0.0057)
-		// 	actual_texture = &data->north;
-		// else
-		// 	actual_texture = &data->east;
-
-		// color = get_pixel(actual_texture, data->render.tex_x, data->render.tex_y);
 		color = get_pixel(data->render.actual_texture, data->render.tex_x, data->render.tex_y);
-
 		put_pixel(data, y, x, color);
-
-		// printf(" brefore draw_end ca print : y = %d, x = %d\n", y, x);
 		y++;
 	}
 
 	while (y < HEIGHT_WINDOW)
 	{
-		put_pixel(data, y, x, 0x808080); //data->ceiling.color)
-		// printf(" after draw_end ca print : y = %d, x = %d\n", y, x);
+		put_pixel(data, y, x, data->ground.color);
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/28 15:09:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 08:18:34 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static int	set_colors(t_data *data, char **ceiling, char **ground)
 		return (1);
 	data->ceiling.color = create_trgb(1, data->ceiling.r,
 		data->ceiling.g, data->ceiling.b);
+	// printf("ceiling color = %d\n", data->ceiling.color);
 	data->ground.color = create_trgb(1, data->ground.r,
 		data->ground.g, data->ground.b);
 	return (0);
