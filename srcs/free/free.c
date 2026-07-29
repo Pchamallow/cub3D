@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/28 15:06:12 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:21:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,22 @@ void	free_map(char **map)
 
 static void	free_textures(t_data *data, t_direction *dir)
 {
-	// free(dir->no);
-	// free(dir->so);
-	// free(dir->we);
-	// free(dir->ea);
-	// dir->no = NULL;
-	// dir->so = NULL;
-	// dir->we = NULL;
-	// dir->ea = NULL;
-	(void)dir;
-	// rajouter if image existe pour chacun
-	mlx_destroy_image(data->mlx, data->north.image);
-	mlx_destroy_image(data->mlx, data->south.image);
-	mlx_destroy_image(data->mlx, data->east.image);
-	mlx_destroy_image(data->mlx, data->weast.image);
+	free(dir->no);
+	free(dir->so);
+	free(dir->we);
+	free(dir->ea);
+	dir->no = NULL;
+	dir->so = NULL;
+	dir->we = NULL;
+	dir->ea = NULL;
+	if (data->north.image)
+		mlx_destroy_image(data->mlx, data->north.image);
+	if (data->south.image)
+		mlx_destroy_image(data->mlx, data->south.image);
+	if (data->east.image)
+		mlx_destroy_image(data->mlx, data->east.image);
+	if (data->weast.image)
+		mlx_destroy_image(data->mlx, data->weast.image);
 }
 
 static void	free_images(t_data *data)
