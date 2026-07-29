@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 15:38:24 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:53:30 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	error_directions(t_data *data, int *is_find, char *dir, int *i)
 			ft_printf_fd(2, "\n" RESET);
 			return (1);
 		}
-		if (*is_find == 1)
+		else if (*is_find == 1)
 			return (0);
 		else if (*is_find > 1)
 		{

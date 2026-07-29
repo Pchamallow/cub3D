@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 13:01:54 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 14:34:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:54:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ static void	start_north_south(t_data *data)
 	}
 }
 
-static int	load_textures(t_data *data)
-{
-	// remplacer par les paths recuperer depuis le file
-	load_image(data, &data->north, data->north.path);
-	load_image(data, &data->south, "./srcs/texture/SO.xpm");
-	load_image(data, &data->east, "./srcs/texture/EA.xpm");
-	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
-	return (0);
-}
-
 // create an image to show
 // create a buffer image in order to write in
 int	init_render(t_data *data)
@@ -72,8 +62,6 @@ int	init_render(t_data *data)
 		return (1); // message protection ?
 	start_north_south(data);
 	start_east_weast(data);
-	if (load_textures(data))
-		return (1);
 	if (render(data))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:48:17 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/28 16:05:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:52:57 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 #include "../../lib/libft/libft.h"
 #include "../../lib/minilibx-linux/mlx.h"
 
-void	load_image(t_data *data, t_image *dir, char *path)
+void	load_image(t_data *data, t_image *dir)
 {
-	(void)path;
-	dir->image = mlx_xpm_file_to_image(data->mlx, path,
+	dir->image = mlx_xpm_file_to_image(data->mlx, dir->path,
 		&dir->width, &dir->height);
 	if (!dir->image)
 	{
+		ft_printf_fd(2, RED "Error\n");
+		ft_printf_fd(2, "Loading image : %s", dir->path);
+		ft_printf_fd(2, "\n" RESET);
 		free_all(data);
-		ft_putstr_fd("Error\n", 2);
-		ft_putstr_fd("Error loading image :", 2);
-		ft_putstr_fd(path, 2);
-		ft_putchar_fd('\n', 2);
 		exit(1);
 	}
 	dir->addr = mlx_get_data_addr(dir->image,

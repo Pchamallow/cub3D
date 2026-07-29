@@ -6,13 +6,22 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 15:37:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:55:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../lib/minilibx-linux/mlx.h"
 #include "../../lib/libft/libft.h"
+
+static int	load_textures(t_data *data)
+{
+	load_image(data, &data->north);
+	load_image(data, &data->south);
+	load_image(data, &data->east);
+	load_image(data, &data->weast);
+	return (0);
+}
 
 static void	*init_window(t_data *data)
 {
@@ -27,6 +36,8 @@ static void	*init_window(t_data *data)
 int	ft_init_game(t_data *data)
 {
 	data->mlx = mlx_init();
+	if (load_textures(data))
+		return (1);
 	mlx_do_key_autorepeatoff(data->mlx);
 	if (!data->mlx)
 	{
