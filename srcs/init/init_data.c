@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 14:50:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:37:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ int	ft_init_data(t_data *data)
 		return (1);
 	if (is_tabs(data->map.full_file))
 		return (1);
-	// have already a index begin maze
-	// rien apres le maze
-	//-> parcourt le nb de directions == 4
 	if (get_all_directions(data))
 		return (1);
 	if (init_rgb(data))

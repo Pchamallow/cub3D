@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 15:31:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:38:24 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,11 @@ static char	*get_direction(t_data *data, char *dir)
 		if (erase_cpy(&ret, &tmp))
 			return (NULL);
 		if (error_directions(data, &is_find, dir, &i))
+		{
+			if (ret)
+				free(ret);
 			return (NULL);
+		}
 		else
 			i++;
 	}
