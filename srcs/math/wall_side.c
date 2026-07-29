@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:47:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:58:09 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	dda_loop(t_data *data)
 // chercher le rayon qui va vers les lignes verticales
 // chercher les rayon vers les lignes horizontal
 // si rayon horizontal < rayon vertical = c est de face
-double	cast_ray(t_data *data)
+void	cast_ray(t_data *data)
 {
 	t_render *render = &data->render;
 
@@ -134,5 +134,7 @@ double	cast_ray(t_data *data)
 	data->wall.distance_y = data->player.pos_x + render->perp_wall_dist * render->ray_dir_y;
 	if (render->perp_wall_dist <= 0.0001)
 		render->perp_wall_dist = 0.0001;
-	return (render->perp_wall_dist);
+
+
+	// printf("side = %d, set x = %f, step y = %f\n", side, data->render.step_x, data->render.step_y);
 }

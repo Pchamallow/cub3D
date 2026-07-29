@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:24:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 11:01:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step_x;
 }
 
-void	put_texture_pixel(t_data *data, int x, double distance)
+void	put_texture_pixel(t_data *data, int x)
 {
+	double distance = data->render.perp_wall_dist;
 	//Calculate height of line to draw on screen
 	double h_wall = (HEIGHT_WINDOW / distance);
 
@@ -92,7 +93,21 @@ void	put_texture_pixel(t_data *data, int x, double distance)
  
 	int color;
 	
-	data->render.actual_texture = &data->north;
+	if (data->wall.wall_side == 0)
+	{
+		if (data->render.ray_dir_x > 0)
+			data->render.actual_texture = &data->north;
+		else
+			data->render.actual_texture = &data->south;
+	}
+	else
+	{
+		if (data->render.ray_dir_y > 0)
+			data->render.actual_texture = &data->weast;
+		else
+			data->render.actual_texture = &data->east;
+	}
+
 	while (y <= draw_end)
 	{
 		data->render.tex_y = (int)data->render.tex_pos;
