@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 15:50:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 16:05:33 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_data
 	int				height;
 	int				max_width;
 	int				max_height;
+	int				is_find;
 	t_color			ceiling;
 	t_color			ground;
 	t_player		player;

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 15:53:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 16:08:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,15 @@ static int	search_direction(t_data *data, int i, char *dir, char **ret)
 		ft_display_error("Get direction - allocation memory failed");
 		return (-1);
 	}
+	data->is_find += 1;
 	return (1);
 }
 
-static int	error_directions(t_data *data, int *is_find, char *dir, int *i)
+static int	error_directions(t_data *data, char *dir, int *i)
 {
 	if (*i == data->map.begin_maze - 1)
 	{
-		if (!*is_find)
+		if (!data->is_find)
 		{
 			ft_printf_fd(2, RED "Error\n");
 			ft_printf_fd(2, "Before the maze, missing at least one"
@@ -101,9 +102,9 @@ static int	error_directions(t_data *data, int *is_find, char *dir, int *i)
 			ft_printf_fd(2, "\n" RESET);
 			return (1);
 		}
-		else if (*is_find == 1)
+		else if (data->is_find == 1)
 			return (0);
-		else if (*is_find > 1)
+		else if (data->is_find > 1)
 		{
 			ft_printf_fd(2, RED "Error\n");
 			ft_printf_fd(2, "Too many argument :"
@@ -123,19 +124,17 @@ static char	*get_direction(t_data *data, char *dir)
 {
 	char	*ret;
 	char	*tmp;
-	int		is_find;
 	int		i;
 
 	i = 0;
 	ret = NULL;
 	tmp = NULL;
-	is_find = 0;
+	data->is_find = 0;
 	while (data->map.full_file[i] && i < data->map.begin_maze)
 	{
-		is_find += search_direction(data, i, dir, &tmp);
-		if (erase_cpy(&ret, &tmp))
-			return (NULL);
-		if (error_directions(data, &is_find, dir, &i))
+		if (search_direction(data, i, dir, &tmp) == - 1
+			|| erase_cpy(&ret, &tmp)
+			|| error_directions(data, dir, &i))
 		{
 			if (ret)
 				free(ret);
