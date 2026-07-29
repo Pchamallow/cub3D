@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 13:01:54 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 13:09:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:25:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ static void	start_north_south(t_data *data)
 	}
 }
 
+static int	load_textures(t_data *data)
+{
+	load_image(data, &data->north, "./srcs/texture/NO.xpm");
+	load_image(data, &data->south, "./srcs/texture/SO.xpm");
+	load_image(data, &data->east, "./srcs/texture/EA.xpm");
+	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
+	return (0);
+}
+
 // create an image to show
 // create a buffer image in order to write in
 int	init_render(t_data *data)
@@ -62,6 +71,8 @@ int	init_render(t_data *data)
 		return (1); // message protection ?
 	start_north_south(data);
 	start_east_weast(data);
+	if (load_textures(data))
+		return (1);
 	if (render(data))
 		return (1);
 	return (0);
