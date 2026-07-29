@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 12:31:42 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 12:37:10 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	if (data->render.tex_x >= data->north.width)
 		data->render.tex_x = data->north.width - 1;
 	data->render.step = (double)data->north.height / (double)h_wall;
-	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step_x;
+	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 }
 
 void	put_texture_pixel(t_data *data, int x)
