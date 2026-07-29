@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:25:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:48:32 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,22 @@ int	render(t_data *data)
 	load_image(data, &data->south, "./srcs/texture/SO.xpm");
 	load_image(data, &data->east, "./srcs/texture/EA.xpm");
 	load_image(data, &data->weast, "./srcs/texture/WE.xpm");
+
+	// data->player.dir_y = 0;
+	// data->player.dir_x = -1;
+	// data->render.plane_x = 0;
+	// data->render.plane_y = 0.66;
+	
 	while (x < WIDTH_WINDOW)
 	{
 		data->render.x = x;
-		ray_orientation(data);
+		// ray_orientation(data);
 
-		double cam_x = ((WIDTH_WINDOW / 2.0) - x) / (WIDTH_WINDOW / 2.0);
-		data->render.ray_dir = data->player.dirp
-			+ atan(cam_x * tan(FOV_RAD / 2.0));
-		data->render.ray_dir_y = sin(data->render.ray_dir);
-		data->render.ray_dir_x = cos(data->render.ray_dir);
+		// double cam_x = ((WIDTH_WINDOW / 2.0) - x) / (WIDTH_WINDOW / 2.0);
+		// data->render.ray_dir = data->player.dirp
+		// 	+ atan(cam_x * tan(FOV_RAD / 2.0));
+		// data->render.ray_dir_y = sin(data->render.ray_dir);
+		// data->render.ray_dir_x = cos(data->render.ray_dir);
 
 		double distance = cast_ray(data);
 		

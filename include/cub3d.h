@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:04:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:34:20 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct s_render
 	double			side_x;
 	double			side_y;
 	double			perp_wall_dist;
+	double			plane_x;
+	double			plane_y;
 	t_image			*actual_texture;
 }			t_render;
 

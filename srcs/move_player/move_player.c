@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/23 14:50:49 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 14:35:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:39:56 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 #include <math.h>
 #include "stdio.h" // a suppr
 
-int	init_rotate_dirp(t_data *data)
-{
-	if (data->key.left)
-	{
-		data->player.has_turn = 1;
-		data->player.dirp += SPEED_ROT;
-	}
-	else if (data->key.right)
-	{
-		data->player.has_turn = 1;
-		data->player.dirp -= SPEED_ROT;
-	}
-	else
-		return (1);
-	return (0);
-}
+// int	init_rotate_dirp(t_data *data)
+// {
+// 	if (data->key.left)
+// 	{
+// 		data->player.has_turn = 1;
+// 		data->player.dirp += ROT_SPEED;
+// 	}
+// 	else if (data->key.right)
+// 	{
+// 		data->player.has_turn = 1;
+// 		data->player.dirp -= ROT_SPEED;
+// 	}
+// 	else
+// 		return (1);
+// 	return (0);
+// }
 
 /*
 * Limit the number by refer to PI
@@ -44,27 +44,55 @@ int	init_rotate_dirp(t_data *data)
 *			we need to get the range between 2 * PI -> number
 *			else the player doesn t rotate
 */
+// void	rotate_player(t_data *data)
+// {
+// 	double	delta;
+
+// 	if (init_rotate_dirp(data))
+// 		return ;
+// 	if (data->player.dirp > 2.0 * PI)
+// 	{
+// 		delta = data->player.dirp - (2.0 * PI);
+// 		data->player.dirp = 0.0 + delta;
+// 	}
+// 	else if (data->player.dirp < 0.0)
+// 	{
+// 		delta = data->player.dirp * -1.0;
+// 		data->player.dirp = (2.0 * PI) - delta;
+// 	}
+// 	// printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
+// 	data->player.dir_x = cos(data->player.dirp);
+// 	data->player.dir_y = sin(data->player.dirp);
+// 	// printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+// }
+
 void	rotate_player(t_data *data)
 {
-	double	delta;
-
-	if (init_rotate_dirp(data))
-		return ;
-	if (data->player.dirp > 2.0 * PI)
+	//  regler le rotpseed
+	t_player *player = &data->player;
+	if (data->key.right)
 	{
-		delta = data->player.dirp - (2.0 * PI);
-		data->player.dirp = 0.0 + delta;
+		data->player.has_turn = 1;
+		double old_dir_x = player->dir_x;
+		player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y * sin(-ROT_SPEED);
+		player->dir_y = old_dir_x * sin(-ROT_SPEED) + player->dir_y * cos(-ROT_SPEED);
+		double oldPlaneX = data->render.plane_x;
+		data->render.plane_x = data->render.plane_x * cos(-ROT_SPEED) - data->render.plane_y * sin(-ROT_SPEED);
+		data->render.plane_y = oldPlaneX * sin(-ROT_SPEED) + data->render.plane_y * cos(-ROT_SPEED);
 	}
-	else if (data->player.dirp < 0.0)
+	if (data->key.left)
 	{
-		delta = data->player.dirp * -1.0;
-		data->player.dirp = (2.0 * PI) - delta;
+		data->player.has_turn = 1;
+		double old_dir_x = player->dir_x;
+		player->dir_x = player->dir_x * cos(ROT_SPEED) - player->dir_y * sin(ROT_SPEED);
+		player->dir_y = old_dir_x * sin(ROT_SPEED) + player->dir_y * cos(ROT_SPEED);
+		double oldPlaneX = data->render.plane_x;
+		data->render.plane_x = data->render.plane_x * cos(ROT_SPEED) - data->render.plane_y * sin(ROT_SPEED);
+		data->render.plane_y = oldPlaneX * sin(ROT_SPEED) + data->render.plane_y * cos(ROT_SPEED);
 	}
-	// printf("[DEBUG] rotate dirp = %f\n", data->player.dirp);
-	data->player.dir_x = cos(data->player.dirp);
-	data->player.dir_y = sin(data->player.dirp);
-	// printf("[DEBUG] dirx = %f, diry = %f\n", data->player.dir_x, data->player.dir_y);
+		
 }
+
 
 void	move_player(t_data *data, double x, double y)
 {
@@ -92,14 +120,14 @@ void	move_forward_backward(t_data *data)
 
 	if (data->key.w)
 	{
-		x = data->player.pos_x + data->player.dir_y / SPEED_MOVE;
-		y = data->player.pos_y + data->player.dir_x / SPEED_MOVE;
+		x = data->player.pos_x + data->player.dir_y / MOVE_SPEED;
+		y = data->player.pos_y + data->player.dir_x / MOVE_SPEED;
 		move_player(data, x, y);
 	}
 	if (data->key.s)
 	{
-		x = data->player.pos_x - data->player.dir_y / SPEED_MOVE;
-		y = data->player.pos_y - data->player.dir_x / SPEED_MOVE;
+		x = data->player.pos_x - data->player.dir_y / MOVE_SPEED;
+		y = data->player.pos_y - data->player.dir_x / MOVE_SPEED;
 		move_player(data, x, y);
 	}
 }
@@ -111,15 +139,15 @@ void	move_left_right(t_data *data)
 
 	if (data->key.a)
 	{
-		x = data->player.pos_x + sin(data->player.dirp + PI / 2) / SPEED_MOVE;
-		y = data->player.pos_y + cos(data->player.dirp + PI / 2) / SPEED_MOVE;
+		x = data->player.pos_x + sin(data->player.dirp + PI / 2) / MOVE_SPEED;
+		y = data->player.pos_y + cos(data->player.dirp + PI / 2) / MOVE_SPEED;
 		move_player(data, x, y);
 	}
 	if (data->key.d)
 	{
 		// printf(" pos before w -> avancer :   x = %f, y = %f\n", data->player.pos_x , data->player.pos_y);
-		x = data->player.pos_x - sin(data->player.dirp + PI / 2) / SPEED_MOVE;
-		y = data->player.pos_y - cos(data->player.dirp + PI / 2) / SPEED_MOVE;
+		x = data->player.pos_x - sin(data->player.dirp + PI / 2) / MOVE_SPEED;
+		y = data->player.pos_y - cos(data->player.dirp + PI / 2) / MOVE_SPEED;
 		// printf("calculs:   cos = %f, sin = %f\n", cos(data->player.dirp + PI/2),
 		//  sin(data->player.dirp + PI/2));
 		// printf(" pos after w -> avancer :   x = %f, y = %f\n", x, y);

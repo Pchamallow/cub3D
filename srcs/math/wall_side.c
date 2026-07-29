@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:24:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:47:49 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ double	cast_ray(t_data *data)
 	t_render *render = &data->render;
 
 	double cameraX = 2 * render->x / (double)WIDTH_WINDOW - 1;
-	render->ray_dir_x = data->player.dir_x + 0 * cameraX;
-	render->ray_dir_y = data->player.dir_y + 0.66 * cameraX;
+	render->ray_dir_x = data->player.dir_x + render->plane_x * cameraX;
+	render->ray_dir_y = data->player.dir_y + render->plane_y * cameraX;
 	
 	init_dda_direction_x(data);
 	init_dda_direction_y(data);

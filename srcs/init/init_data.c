@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 08:18:34 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:48:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,10 @@ int	ft_init_data(t_data *data)
 	ft_printf_fd(2, "-------\n");
 	if (is_valid_maze(data))
 		return (1);
+	data->player.dir_y = 0;
+	data->player.dir_x = -1;
+	data->render.plane_x = 0;
+	data->render.plane_y = 0.66;
 	// init_image(data);
 	return (0);
 }
