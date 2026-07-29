@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 08:42:45 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 14:38:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:43:00 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ static void	free_render(t_data *data)
 		mlx_destroy_image(data->mlx, data->render.image);
 		data->render.image = NULL;
 	}
-	// if (data->render.path)
-	// {
-	// 	free(data->render.path);
-	// 	data->render.path = NULL;
-	// }
 }
 
 void	free_all(t_data *data)

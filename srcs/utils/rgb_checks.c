@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 17:14:01 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/16 15:04:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:48:29 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_double_rgb(t_data *data, char *e)
 	}
 	if (count > 1)
 	{
-		ft_display_error("multiple same rgb detected,"
+		ft_display_error("Multiple same rgb detected,"
 			" please use only one C and one F");
 		return (1);
 	}

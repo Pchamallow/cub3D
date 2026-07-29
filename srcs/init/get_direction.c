@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 14:38:32 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 15:31:46 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,35 +89,58 @@ static int	search_direction(t_data *data, int i, char *dir, char **ret)
 	return (1);
 }
 
+static int	error_directions(t_data *data, int *is_find, char *dir, int *i)
+{
+	if (*i == data->map.begin_maze - 1)
+	{
+		if (!*is_find)
+		{
+			ft_printf_fd(2, RED "Error\n");
+			ft_printf_fd(2, "Before the maze, missing at least one"
+				" argument: %s, usage: [%s] [./path]", dir, dir);
+			ft_printf_fd(2, "\n" RESET);
+			return (1);
+		}
+		if (*is_find == 1)
+			return (0);
+		else if (*is_find > 1)
+		{
+			ft_printf_fd(2, RED "Error\n");
+			ft_printf_fd(2, "Too many argument :"
+			" %s, usage: [%s] [./path]", dir, dir);
+			ft_printf_fd(2, "\n" RESET);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 /* get_direction
 * only space are allowed between informations
 * Information have to be seperated by at least one space
 */
 static char	*get_direction(t_data *data, char *dir)
 {
-	char	**file;
 	char	*ret;
+	char	*tmp;
 	int		is_find;
 	int		i;
 
 	i = 0;
-	file = data->map.full_file;
 	ret = NULL;
-	while (file[i])
+	tmp = NULL;
+	is_find = 0;
+	while (data->map.full_file[i] && i < data->map.begin_maze)
 	{
-		is_find = search_direction(data, i, dir, &ret);
-		if (is_find == -1)
+		is_find += search_direction(data, i, dir, &tmp);
+		if (erase_cpy(&ret, &tmp))
 			return (NULL);
-		else if (is_find == 1)
-			return (ret);
+		if (error_directions(data, &is_find, dir, &i))
+			return (NULL);
 		else
 			i++;
 	}
-	ft_printf_fd(2, RED "Error\n");
-	ft_printf_fd(2, "Missing at least one argument:"
-		" %s, usage: [%s] [./path]", dir, dir);
-	ft_printf_fd(2, "\n" RESET);
-	return (NULL);
+	return (ret);
 }
 
 int	get_all_directions(t_data *data)
