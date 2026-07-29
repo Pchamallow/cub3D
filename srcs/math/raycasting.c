@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 12:59:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 13:55:50 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	render(t_data *data)
 		put_texture_pixel(data, x);
 		x++;
 	}
-	printf("dir_x = %f, dir_y = %f, plane_x = %f, plane_y = %f\n",
-		data->player.dir_x, data->player.dir_y, data->render.plane_x, data->render.plane_y);
+	// printf("dir_x = %f, dir_y = %f, plane_x = %f, plane_y = %f\n",
+	// 	data->player.dir_x, data->player.dir_y, data->render.plane_x, data->render.plane_y);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
 }
