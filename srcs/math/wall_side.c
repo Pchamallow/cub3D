@@ -6,20 +6,13 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:58:09 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 12:31:58 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdio.h> // for printf
 #include <math.h> // autorise ???
-
-// static int	ft_abs(double nb)
-// {
-// 	if (nb < 0)
-// 		nb = nb *-1;
-// 	return (nb);
-// }
 
 int get_pixel(t_image *dir, int x, int y)
 {

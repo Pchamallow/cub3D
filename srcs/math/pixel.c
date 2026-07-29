@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 11:01:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 12:31:42 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 }
 
-/*
-* 1. get_dir_wall(): search dir wall (face or side) and choose texture
-* 2. if wall_x > 0.99 && wall.x < 0.01 -> its north or south
-* 3. if direction is weast -> miror the texture, else if it will be reversed
-* 4. set limits coordonates
-*/
+
 static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
 {
 	double	wall_x;
