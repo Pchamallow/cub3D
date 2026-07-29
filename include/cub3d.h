@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:53:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 13:03:41 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct s_player
 	double			pos_x;
 	double			pos_y;
 	char			direction;
-	double			dirp;
 	double			dir_x;
 	double			dir_y;
 	double			plane_x;
@@ -173,20 +172,18 @@ int		init_full_file(t_data *data);
 int		get_lines_columns(t_data *data);
 int		check_walls(t_data *data);
 int		get_all_directions(t_data *data);
+int		init_rgb(t_data *data);
+int		init_render(t_data *data);
 
 // Math
 
 int		render(t_data *data);
 int		refresh_map(t_data *data);
-void	ray_orientation(t_data *data);
-double	reach_wall(t_data *data);
-void	init_direction(t_data *data);
 void	put_texture_pixel(t_data *data, int x);
 // void	wall_side(t_data *data);
 void	cast_ray(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		get_pixel(t_image *dir, int x, int y);
-void	get_dir_wall(t_data *data);
 
 // Events
 

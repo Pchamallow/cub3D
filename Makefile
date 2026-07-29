@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/29 12:30:27 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/29 13:03:20 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ NC			:='\033[0m'
 
 INIT_DIR	= srcs/init
 INIT_SRCS	= ${INIT_DIR}/init_data.c	\
-			${INIT_DIR}/get_direction.c
+			${INIT_DIR}/get_direction.c	\
+			${INIT_DIR}/init_rgb.c		\
+			${INIT_DIR}/init_render.c
 
 EVENT_UI_DIR= srcs/events/ui
 EVENT_UI_SRCS= ${EVENT_UI_DIR}/close.c

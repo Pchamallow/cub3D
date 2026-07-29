@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 10:48:27 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 13:02:53 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,6 @@ static void	*init_window(t_data *data)
 	data->width = WIDTH_WINDOW;
 	ptr = mlx_new_window(data->mlx, data->width, data->height, "cub3d");
 	return (ptr);
-}
-
-// create an image to show
-// create a buffer image in order to write in
-static int	init_render(t_data *data)
-{
-	data->render.image = mlx_new_image(data->mlx, data->width, data->height);
-	if (!data->render.image)
-		return (1); // add message error
-	data->render.buffer = mlx_get_data_addr(data->render.image, &data->render.pixel_bits,
-		&data->render.line_bytes, &data->render.endian);
-	if (!data->render.buffer)
-		return (1); // message protection ?
-	if (render(data))
-		return (1);
-	return (0);
 }
 
 int	ft_init_game(t_data *data)
@@ -61,48 +45,7 @@ int	ft_init_game(t_data *data)
 	return (0);
 }
 
-static int	set_colors(t_data *data, char **ceiling, char **ground)
-{
-	data->ceiling.r = secure_rgb(ft_atol(ceiling[0]));
-	data->ceiling.g = secure_rgb(ft_atol(ceiling[1]));
-	data->ceiling.b = secure_rgb(ft_atol(ceiling[2]));
-	data->ground.r = secure_rgb(ft_atol(ground[0]));
-	data->ground.g = secure_rgb(ft_atol(ground[1]));
-	data->ground.b = secure_rgb(ft_atol(ground[2]));
-	if (data->ceiling.r == -1 || data->ceiling.g == -1
-		|| data->ceiling.b == -1 || data->ground.r == -1
-		|| data->ground.g == -1 || data->ground.b == -1)
-		return (1);
-	data->ceiling.color = create_trgb(1, data->ceiling.r,
-		data->ceiling.g, data->ceiling.b);
-	// printf("ceiling color = %d\n", data->ceiling.color);
-	data->ground.color = create_trgb(1, data->ground.r,
-		data->ground.g, data->ground.b);
-	return (0);
-}
 
-static int	init_rgb(t_data *data)
-{
-	char	**ground;
-	char	**ceiling;
-	int		error;
-
-	if (check_double_rgb(data, "F") || check_double_rgb(data, "C"))
-		return (1);
-	ground = ft_split_rgb(data, "F");
-	if (!ground)
-		return (1);
-	ceiling = ft_split_rgb(data, "C");
-	if (!ceiling)
-	{
-		free_map(ground);
-		return (1);
-	}
-	error = set_colors(data, ceiling, ground);
-	free_map(ground);
-	free_map(ceiling);
-	return (error);
-}
 
 // static void	init_image(t_data *data)
 // {
@@ -132,10 +75,6 @@ int	ft_init_data(t_data *data)
 	ft_printf_fd(2, "-------\n");
 	if (is_valid_maze(data))
 		return (1);
-	data->player.dir_y = 0;
-	data->player.dir_x = -1;
-	data->render.plane_x = 0;
-	data->render.plane_y = 0.66;
 	// init_image(data);
 	return (0);
 }
