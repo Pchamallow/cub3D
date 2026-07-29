@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 10:49:30 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 08:35:25 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 08:37:15 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_dir_wall(t_data *data)
 	double floor_x = floor(data->wall.distance_x);
 	double floor_y = floor(data->wall.distance_y);
 
-	data->render.actual_texture = &data->east;
+	data->render.actual_texture = &data->weast;
 
 	// printf(" distance x = %f, floor + 0.5 = %f,  floor + 1 = %f\n",
 	// 	data->wall.distance_x, floor_x + 0.5, floor_x + 1);
@@ -120,7 +120,8 @@ void	get_dir_wall(t_data *data)
 			&& data->wall.distance_y > floor_y + 0.9)
 		{
 			// printf("its the weast !\n");
-			data->render.actual_texture = &data->weast;
+			data->render.actual_texture = &data->east;
+			// data->render.actual_texture = &data->weast;
 		}
 	}
 	
