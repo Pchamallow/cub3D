@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 13:03:41 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 14:39:52 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,6 @@ typedef struct s_map
 	int				begin_maze;
 }				t_map;
 
-typedef struct s_direction
-{
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-}				t_direction;
-
-
 typedef struct s_player
 {
 	int				x_start_p;
@@ -150,7 +141,6 @@ typedef struct s_data
 	t_image			south;
 	t_image			east;
 	t_image			weast;
-	t_direction		direction;
 	t_wall			wall;
 }			t_data;
 
