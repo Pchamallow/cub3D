@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:04:58 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:24:02 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	coordinates_textures_north_south(t_data *data, int h_wall, double dr
 	if (data->render.actual_texture == &data->north)
 		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
 	data->render.step = (double)data->north.height / (double)h_wall;
-	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step_x;
+	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 }
 
 /*
@@ -84,7 +84,7 @@ void	put_texture_pixel(t_data *data, int x, double distance)
 		y++;
 	}
 	
-	get_dir_wall(data);
+	// get_dir_wall(data);
 	if (data->wall.wall_side == 0)
 		coordinates_textures_north_south(data, h_wall, draw_start);
 	else
@@ -92,6 +92,7 @@ void	put_texture_pixel(t_data *data, int x, double distance)
  
 	int color;
 	
+	data->render.actual_texture = &data->north;
 	while (y <= draw_end)
 	{
 		data->render.tex_y = (int)data->render.tex_pos;

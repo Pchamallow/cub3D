@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 10:00:37 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:24:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static void	init_dda_direction_y(t_data *data)
 	t_render *render = &data->render;
 	int	player_y = (int) data->player.pos_x;
 
-	if (render->ray_dir == 0)
+	if (render->ray_dir_y == 0)
 		render->delta_y = 1e30;
 	else
-		render->delta_y = fabs(1.0/render->ray_dir);
-	if (render->ray_dir < 0)
+		render->delta_y = fabs(1.0/render->ray_dir_y);
+	if (render->ray_dir_y < 0)
 	{
 		render->step_y = -1;
 		render->side_y = (data->player.pos_x - player_y) * (render->delta_y);
@@ -57,11 +57,11 @@ static void	init_dda_direction_x(t_data *data)
 	t_render *render = &data->render;
 	int	player_x = (int) data->player.pos_y;
 
-	if (render->ray_dir == 0)
+	if (render->ray_dir_x == 0)
 		render->delta_x = 1e30;
 	else
-		render->delta_x = fabs(1.0/render->ray_dir);
-	if (render->ray_dir < 0)
+		render->delta_x = fabs(1.0/render->ray_dir_x);
+	if (render->ray_dir_x < 0)
 	{
 		render->step_x = -1;
 		render->side_x = (data->player.pos_y - player_x) * (render->delta_x);
@@ -112,11 +112,11 @@ static int	dda_loop(t_data *data)
 double	cast_ray(t_data *data)
 {
 	t_render *render = &data->render;
-	// verifier mise en forme valide
-	// delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
-	// delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-	// securite si == 0
 
+	double cameraX = 2 * render->x / (double)WIDTH_WINDOW - 1;
+	render->ray_dir_x = data->player.dir_x + 0 * cameraX;
+	render->ray_dir_y = data->player.dir_y + 0.66 * cameraX;
+	
 	init_dda_direction_x(data);
 	init_dda_direction_y(data);
 
@@ -128,10 +128,10 @@ double	cast_ray(t_data *data)
 		data->render.perp_wall_dist = render->side_y - render->delta_y;
 
 	data->wall.map_x = (int)data->player.pos_y;
-	data->wall.map_x = (int)data->player.pos_x;
+	data->wall.map_y = (int)data->player.pos_x;
 	data->wall.wall_side = side;
 	data->wall.distance_x = data->player.pos_y + render->perp_wall_dist * render->ray_dir_x;
-	data->wall.distance_x = data->player.pos_x + render->perp_wall_dist * render->ray_dir_y;
+	data->wall.distance_y = data->player.pos_x + render->perp_wall_dist * render->ray_dir_y;
 	if (render->perp_wall_dist <= 0.0001)
 		render->perp_wall_dist = 0.0001;
 	return (render->perp_wall_dist);

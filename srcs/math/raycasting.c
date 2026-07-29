@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/28 17:06:58 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:25:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ int	render(t_data *data)
 		data->render.ray_dir_y = sin(data->render.ray_dir);
 		data->render.ray_dir_x = cos(data->render.ray_dir);
 
-		double distance = reach_wall(data);
+		double distance = cast_ray(data);
+		
 		put_texture_pixel(data, x, distance);
 		x++;
 	}
-	get_dir_wall(data);
+	// get_dir_wall(data);
 	// print_player_info(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->render.image, 0, 0);
 	return (0);
