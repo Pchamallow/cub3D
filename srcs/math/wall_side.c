@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 09:24:02 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/29 10:00:37 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,182 +30,109 @@ int get_pixel(t_image *dir, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
+static void	init_dda_direction_y(t_data *data)
+{
+	t_render *render = &data->render;
+	int	player_y = (int) data->player.pos_x;
+
+	if (render->ray_dir == 0)
+		render->delta_y = 1e30;
+	else
+		render->delta_y = fabs(1.0/render->ray_dir);
+	if (render->ray_dir < 0)
+	{
+		render->step_y = -1;
+		render->side_y = (data->player.pos_x - player_y) * (render->delta_y);
+	}
+	else
+	{
+		render->step_y = 1;
+		render->side_y = (player_y + 1.0 - data->player.pos_x) * (render->delta_y);
+	}
+		
+}
+
+static void	init_dda_direction_x(t_data *data)
+{
+	t_render *render = &data->render;
+	int	player_x = (int) data->player.pos_y;
+
+	if (render->ray_dir == 0)
+		render->delta_x = 1e30;
+	else
+		render->delta_x = fabs(1.0/render->ray_dir);
+	if (render->ray_dir < 0)
+	{
+		render->step_x = -1;
+		render->side_x = (data->player.pos_y - player_x) * (render->delta_x);
+	}
+	else
+	{
+		render->step_x = 1;
+		render->side_x = (player_x + 1.0 - data->player.pos_y) * (render->delta_x);
+	}
+		
+}
+
+
+static int	dda_loop(t_data *data)
+{
+	t_render *render = &data->render;
+	int	side;
+
+	side = 0;
+	int	x = (int) data->player.pos_y;
+	int	y = (int) data->player.pos_x;
+
+	// rajouter limites ? < 0 + hauteur de lines et columns
+	while (data->map.maze[x]
+			&& data->map.maze[x][y]
+			&& data->map.maze[x][y] != '1')
+	{
+		if (render->side_x < render->side_y)
+		{
+			render->side_x += render->delta_x;
+			x += render->step_x;
+			side = 0;
+		}
+		else
+		{
+			render->side_y += render->delta_y;
+			y += render->step_y;
+			side = 1;
+		}
+	}
+	return (side);
+}
+
+
 // chercher le rayon qui va vers les lignes verticales
 // chercher les rayon vers les lignes horizontal
 // si rayon horizontal < rayon vertical = c est de face
-// double	cast_ray(t_data *data)
-// {
-// 	// double dir_x = -1;
-// 	// double dir_y = 0;
-// 	double dir_x = data->player.dir_x;
-// 	double dir_y = data->player.dir_y;
-// 	// double dir_x = data->player.dir_y;
-// 	// double dir_y = data->player.dir_x;
+double	cast_ray(t_data *data)
+{
+	t_render *render = &data->render;
+	// verifier mise en forme valide
+	// delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
+	// delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
+	// securite si == 0
 
-// 	double camera_x = 2 * data->render.x / (double)WIDTH_WINDOW - 1;
-// 	double	plane_x = -dir_y * 0.66;
-// 	double	plane_y = dir_x * 0.66; // FOV standrad 
-// 	double ray_dir_x = dir_x + plane_x * camera_x;
-// 	double ray_dir_y = dir_y + plane_y * camera_x;
+	init_dda_direction_x(data);
+	init_dda_direction_y(data);
 
-// 	int map_x;
-// 	int map_y;
-// 	double side_dist_x;
-// 	double side_dist_y;
-// 	double delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
-// 	double delta_dist_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
-// 	double	pos_x = data->player.pos_x;
-// 	double	pos_y = data->player.pos_y;
-// 	int step_x;
-// 	int step_y;
-// 	int side = 0;
-
-// 	map_x = (int)pos_x;
-// 	map_y = (int)pos_y;
-
-// 	// verifier mise en forme valide
-// 	// delta_dist_x = (ray_dir_x == 0) ? 1e30 : fabs(1 / ray_dir_x);
-// 	// delta_dist_y = (ray_dir_y == 0) ? 1e30 : fabs(1 / ray_dir_y);
-// 	// securite si == 0
-
-// 	if (ray_dir_y < 0)
-// 	{
-// 		step_y = -1;
-// 		side_dist_y = (pos_y - map_y) * delta_dist_y;
-// 	}
-// 	else
-// 	{
-// 		step_y = 1;
-// 		side_dist_y = (map_y + 1.0 - pos_y) * delta_dist_y;
-// 	}
+	int	side = dda_loop(data);
 	
-// 	if (ray_dir_x < 0)
-// 	{
-// 		step_x = -1;
-// 		side_dist_x = (pos_x - map_x) * delta_dist_x;
-// 	}
-// 	else
-// 	{
-// 		step_x = 1;
-// 		side_dist_x = (map_x + 1.0 - pos_x) * delta_dist_x;
-// 	}
+	if (side == 0)
+		data->render.perp_wall_dist = render->side_x - render->delta_x;
+	else
+		data->render.perp_wall_dist = render->side_y - render->delta_y;
 
-// 	int	hit = 0;
-// 	while (hit == 0)
-// 	{
-// 		if (side_dist_x < side_dist_y)
-// 		{
-// 			side_dist_x += delta_dist_x;
-// 			map_x += step_x;
-// 			side = 0;
-// 		}
-// 		else
-// 		{
-// 			side_dist_y += delta_dist_y;
-// 			map_y += step_y;
-// 			side = 1;
-// 		}
-
-// 		if (map_y < 0 || map_y >= data->map.height
-// 			|| map_x < 0 || map_x >= data->map.width)
-// 			break;
-
-// 		if (data->map.maze[map_x][map_y] == '1')
-// 		// if (data->map.maze[map_y][map_x] == '1')
-// 			hit = 1;
-// 	}
-// 	printf("map x = %d, map y = %d\n", map_x, map_y);
-
-// 	double perp_wall_dist;
-
-// 	// if (side == 0)
-// 	// 	perp_wall_dist = (map_x - pos_x + (1 - step_x) / 2) / ray_dir_x;
-// 	// else
-// 	// 	perp_wall_dist = (map_y - pos_y + (1 - step_y) / 2) / ray_dir_y;
-
-// 	if (side == 0)
-// 		perp_wall_dist = (side_dist_x - delta_dist_x);
-// 	else
-// 		perp_wall_dist = (side_dist_y - delta_dist_y);
-
-// 	int line_height = (int)(HEIGHT_WINDOW / perp_wall_dist);
-	
-// 	int draw_start = -line_height / 2 + HEIGHT_WINDOW / 2;
-// 	int draw_end = line_height / 2 + HEIGHT_WINDOW / 2;
-
-// 	if (draw_start < 0)
-// 		draw_start = 0;
-
-// 	if (draw_end >= HEIGHT_WINDOW)
-// 		draw_end = HEIGHT_WINDOW - 1;
-		
-// 	if (side == 0)
-// 	{
-// 		if (ray_dir_x > 0)
-// 			data->render.actual_texture = EAST;
-// 		else
-// 			data->render.actual_texture = WEST;
-// 	}
-// 	else
-// 	{
-// 		if (ray_dir_y > 0)
-// 			data->render.actual_texture = SOUTH;
-// 		else
-// 			data->render.actual_texture = NORTH;
-// 	}
-	
-// 	// choose texture
-// 	t_image *texture;
-
-// 	// a modifier pour avoir toutes les directions
-// 	if (data->render.actual_texture == NORTH)
-// 		texture = &data->north;
-// 	else 
-// 		texture = &data->north;
-	
-	
-		
-// 	double wall_x;
-
-// 	if (side == 0)
-// 		wall_x = pos_y + perp_wall_dist * ray_dir_y;
-// 	else
-// 		wall_x = pos_x + perp_wall_dist * ray_dir_x;
-	
-// 	wall_x -= floor(wall_x);
-// 	int tex_x = (int)(wall_x * texture->width);
-
-// 	if (side == 0 && ray_dir_x > 0)
-// 		tex_x = (int)(texture->width - tex_x - 1);
-
-// 	if (side == 1 && ray_dir_y < 0)
-// 		tex_x = (int)(texture->width - tex_x - 1);
-
-
-
-	
-// 	double step = (double)texture->height / line_height;
-
-// 	double tex_pos = (draw_start - HEIGHT_WINDOW / 2 + line_height / 2) * step;
-
-// 	int y = draw_start;
-// 	int tex_y;
-// 	while (y < draw_end)
-// 	{
-// 		 tex_y = (int)tex_pos & (texture->height - 1);
-
-// 		if (tex_y < 0)
-// 			tex_y = 0;
-// 		if (tex_y >= texture->height)
-// 			tex_y = texture->height - 1;
-
-// 		tex_pos += step;
-
-// 		int color = get_pixel(texture, tex_x, tex_y);
-
-// 		put_pixel(data, data->render.x, y, color);
-// 		// put_pixel(data, y, data->render.x, color);
-// 		y++;
-// 	}
-// 	return (tex_pos);
-// }
+	data->wall.map_x = (int)data->player.pos_y;
+	data->wall.map_x = (int)data->player.pos_x;
+	data->wall.wall_side = side;
+	data->wall.distance_x = data->player.pos_y + render->perp_wall_dist * render->ray_dir_x;
+	data->wall.distance_x = data->player.pos_x + render->perp_wall_dist * render->ray_dir_y;
+	if (render->perp_wall_dist <= 0.0001)
+		render->perp_wall_dist = 0.0001;
+	return (render->perp_wall_dist);
+}
