@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:14:22 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/24 10:01:05 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 10:12:11 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	handle_directions(t_data *data, int keycode)
 int	handle_keypress(int keycode, void *param)
 {
 	t_data	*data;
-	
+
 	data = (t_data *)param;
 	if (keycode == ESC)
 		close_esc(keycode, data);
@@ -88,10 +88,7 @@ int	handle_keyrelease(int keycode, void *param)
 	if (keycode == ARROW_LEFT)
 		data->key.left = 0;
 	if (keycode == ARROW_RIGHT)
-	{
 		data->key.right = 0;
-		// printf("right off\n");
-	}
 	return (0);
 }
 

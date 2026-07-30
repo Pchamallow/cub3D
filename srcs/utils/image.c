@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 01:48:17 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 15:52:57 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 10:11:44 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	load_image(t_data *data, t_image *dir)
 {
 	dir->image = mlx_xpm_file_to_image(data->mlx, dir->path,
-		&dir->width, &dir->height);
+			&dir->width, &dir->height);
 	if (!dir->image)
 	{
 		ft_printf_fd(2, RED "Error\n");
@@ -27,5 +27,5 @@ void	load_image(t_data *data, t_image *dir)
 		exit(1);
 	}
 	dir->addr = mlx_get_data_addr(dir->image,
-		&dir->pixel_bits, &dir->line_bytes, &dir->endian);
+			&dir->pixel_bits, &dir->line_bytes, &dir->endian);
 }

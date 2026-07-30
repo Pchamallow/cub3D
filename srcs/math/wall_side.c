@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 12:49:19 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 10:08:27 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int get_pixel(t_image *dir, int x, int y)
 {
 	char *pixel;
 
-	// printf("get pixel -> x = %d y = %d\n", x, y);
 	pixel = dir->addr + (y * dir->line_bytes + x * (dir->pixel_bits / 8));
 	return (*(unsigned int *)pixel);
 }
@@ -77,8 +76,8 @@ static int	dda_loop(t_data *data)
 	int	x = (int) data->player.pos_y;
 	int	y = (int) data->player.pos_x;
 
-	// rajouter limites ? < 0 + hauteur de lines et columns
-	while (data->map.maze[x]
+	while ( x < data->map.lines && y < data->map.columns
+			&& data->map.maze[x]
 			&& data->map.maze[x][y]
 			&& data->map.maze[x][y] != '1')
 	{

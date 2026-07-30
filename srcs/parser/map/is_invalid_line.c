@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/12 14:05:50 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/27 14:00:53 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 10:09:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int	is_invalid_player(t_data *data, int y)
 	while (data->map.full_file[y][j])
 	{
 		c = data->map.full_file[y][j];
-		if (c == 'N' || c == 'S' || c == 'E'
-			|| c == 'W')
+		if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		{
 			data->player.direction = c;
 			data->map.start_count++;
@@ -31,8 +30,6 @@ static int	is_invalid_player(t_data *data, int y)
 			data->player.x_start_p = j + 1;
 			data->player.pos_y = data->player.y_start_p;
 			data->player.pos_x = data->player.x_start_p;
-			// printf("[DEBUG] - start pos player =  y : %f"
-			// 	"  x : %f\n", data->player.pos_y, data->player.pos_x);
 			if (data->map.start_count > 1)
 			{
 				ft_display_error("Too many player starting"

@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 16:08:49 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 10:10:46 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static int	error_directions(t_data *data, char *dir, int *i)
 		{
 			ft_printf_fd(2, RED "Error\n");
 			ft_printf_fd(2, "Too many argument :"
-			" %s, usage: [%s] [./path]", dir, dir);
+				" %s, usage: [%s] [./path]", dir, dir);
 			ft_printf_fd(2, "\n" RESET);
 			return (1);
 		}
@@ -132,7 +132,7 @@ static char	*get_direction(t_data *data, char *dir)
 	data->is_find = 0;
 	while (data->map.full_file[i] && i < data->map.begin_maze)
 	{
-		if (search_direction(data, i, dir, &tmp) == - 1
+		if (search_direction(data, i, dir, &tmp) == -1
 			|| erase_cpy(&ret, &tmp)
 			|| error_directions(data, dir, &i))
 		{
@@ -160,6 +160,5 @@ int	get_all_directions(t_data *data)
 	data->east.path = get_direction(data, "EA");
 	if (!data->east.path)
 		return (1);
-	// print_directions(data);
 	return (0);
 }
