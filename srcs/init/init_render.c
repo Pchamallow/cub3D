@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 13:01:54 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:55:04 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:04:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ static void	start_north_south(t_data *data)
 	}
 }
 
-// create an image to render
-// create a buffer image in order to write in
+/*
+* create a buffer image in order to write in -> image render
+*/
 int	init_render(t_data *data)
 {
 	data->render.image = mlx_new_image(data->mlx, data->width, data->height);

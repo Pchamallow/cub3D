@@ -6,13 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 16:55:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:01:03 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdio.h> // for printf
-#include <math.h> // autorise ???
+#include <math.h>
 
 int	get_pixel(t_image *dir, int x, int y)
 {

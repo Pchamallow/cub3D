@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:00:54 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 17:00:15 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdint.h>
 #include <math.h>
 #include "../../lib/libft/libft.h"
-#include <stdio.h>
 
 int	render(t_data *data)
 {
