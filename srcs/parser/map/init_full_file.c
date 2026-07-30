@@ -37,22 +37,21 @@ static int	init_columns(t_data *data, char *line, int y)
 static int	init_map_lines(t_data *data, char **line, int fd)
 {
 	int	y;
+	int	has_malloc_failed;
 
 	y = 0;
+	has_malloc_failed = 0;
 	while (y < data->map.lines)
 	{
-		if (init_columns(data, *line, y))
-		{
-			if (*line)
-				free(*line);
-			close(fd);
-			return (1);
-		}
+		if (!has_malloc_failed && init_columns(data, *line, y))
+			has_malloc_failed = 1;
 		free(*line);
 		*line = get_next_line(fd);
 		y++;
 	}
-	return (0);
+	if (has_malloc_failed)
+		close(fd);
+	return (has_malloc_failed);
 }
 
 static int	init_map_content(t_data *data)
@@ -96,8 +95,8 @@ int	init_full_file(t_data *data)
 	if (data->map.lines < 10 || data->map.columns < 6
 		|| data->map.lines > 300 || data->map.columns > 300)
 	{
-		ft_display_error("Map size is invalid,"
-			" must be 6x10 and 300x300 (inclusive)");
+		ft_display_error("File size is invalid,"
+			" must be between 6x10 and 300x300 (inclusive)");
 		return (1);
 	}
 	data->map.full_file = (char **)malloc((sizeof(char *))

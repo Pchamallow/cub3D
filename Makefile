@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/30 17:26:05 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/30 18:14:07 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror
 MAKEFLAGS	+= --no-print-directory
-BUILD_DIR	:= .cub3d
+BUILD_DIR	:= .cub3D
 
-NAME		:= cub3d
+NAME		:= cub3D
 
 # Includes
 INCLUDES	:=								\
@@ -121,7 +121,7 @@ $(GNL):
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT) $(GNL)
 	@$(CC) $(CFLAGS) $(OBJS) $(GNL) $(LIBFT) $(FLAGS_MLX) $(ADD_LIB) -o $(NAME)
-	@echo $(GREEN)"\n✨ cub3d build created. ✨\n"$(NC)
+	@echo $(GREEN)"\n✨ $(NAME) build created. ✨\n"$(NC)
 
 # Compilation .c -> .o
 $(BUILD_DIR)/%.o: %.c
@@ -133,13 +133,13 @@ clean:
 	@$(MAKE) -C $(DIR_LIB) clean -s
 	@$(MAKE) -C $(DIR_GNL) clean -s
 	@rm -rf $(BUILD_DIR)
-	@echo $(GREEN)"cub3d build is clean. 🧹"$(NC)
+	@echo $(GREEN)"$(NAME) build is clean. 🧹"$(NC)
 
 fclean: clean
 	@$(MAKE) -C $(DIR_LIB) fclean -s
 	@$(MAKE) -C $(DIR_GNL) fclean -s
 	@rm -f $(NAME)
-	@echo $(GREEN)"cub3d library is clean. 🧹"$(NC)
+	@echo $(GREEN)"$(NAME) library is clean. 🧹"$(NC)
 
 re: fclean
 	$(MAKE) all

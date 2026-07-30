@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/30 16:52:11 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 18:16:36 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*init_window(t_data *data)
 
 	data->height = HEIGHT_WINDOW;
 	data->width = WIDTH_WINDOW;
-	ptr = mlx_new_window(data->mlx, data->width, data->height, "cub3d");
+	ptr = mlx_new_window(data->mlx, data->width, data->height, "cub3D");
 	return (ptr);
 }
 
