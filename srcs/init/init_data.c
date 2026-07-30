@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 09:36:44 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/30 10:00:39 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:55:01 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,23 @@ int	ft_init_game(t_data *data)
 	}
 	ft_init_hooks(data);
 	if (init_render(data))
+		return (1);
+	return (0);
+}
+
+static int	get_all_directions(t_data *data)
+{
+	data->north.path = get_direction(data, "NO");
+	if (!data->north.path)
+		return (1);
+	data->south.path = get_direction(data, "SO");
+	if (!data->south.path)
+		return (1);
+	data->weast.path = get_direction(data, "WE");
+	if (!data->weast.path)
+		return (1);
+	data->east.path = get_direction(data, "EA");
+	if (!data->east.path)
 		return (1);
 	return (0);
 }

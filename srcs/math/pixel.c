@@ -6,21 +6,21 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:30:23 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:52:40 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include <stdlib.h>
-#include <math.h> // verify if allowed
+#include <math.h>
 
 void	put_pixel(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->render.buffer + (x * data->render.line_bytes
-		+ y * (data->render.pixel_bits/ 8));
-	*(unsigned int*)dst = color;
+			+ y * (data->render.pixel_bits / 8));
+	*(unsigned int *)dst = color;
 }
 
 /*
@@ -35,10 +35,10 @@ static void	get_wall_start_end(t_render *render)
 	distance = render->perp_wall_dist;
 	render->h_wall = (HEIGHT_WINDOW / distance);
 	render->draw_start = -render->h_wall / 2 + HEIGHT_WINDOW / 2;
-	if(render->draw_start < 0)
+	if (render->draw_start < 0)
 		render->draw_start = 0;
 	render->draw_end = render->h_wall / 2 + HEIGHT_WINDOW / 2;
-	if(render->draw_end >= HEIGHT_WINDOW)
+	if (render->draw_end >= HEIGHT_WINDOW)
 		render->draw_end = HEIGHT_WINDOW - 1;
 }
 
@@ -61,8 +61,10 @@ static void	render_wall(t_data *data, t_render *render, int *y)
 }
 
 /*
-* 1. get_wall_start_end()	: lowest and highest pixel in which the wall is visible
-* 2. get_textures()			: choose texture et his parameters
+* 1. get_wall_start_end()
+*	lowest and highest pixel in which the wall is visible
+* 2. get_textures()
+*	choose texture et his parameters
 * 3. render ceiling
 * 4. render wall
 * 5. render ground

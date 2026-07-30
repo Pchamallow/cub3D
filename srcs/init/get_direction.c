@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:28:26 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 10:10:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:54:26 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static int	error_directions(t_data *data, char *dir, int *i)
 * only space are allowed between informations
 * Information have to be seperated by at least one space
 */
-static char	*get_direction(t_data *data, char *dir)
+char	*get_direction(t_data *data, char *dir)
 {
 	char	*ret;
 	char	*tmp;
@@ -144,21 +144,4 @@ static char	*get_direction(t_data *data, char *dir)
 			i++;
 	}
 	return (ret);
-}
-
-int	get_all_directions(t_data *data)
-{
-	data->north.path = get_direction(data, "NO");
-	if (!data->north.path)
-		return (1);
-	data->south.path = get_direction(data, "SO");
-	if (!data->south.path)
-		return (1);
-	data->weast.path = get_direction(data, "WE");
-	if (!data->weast.path)
-		return (1);
-	data->east.path = get_direction(data, "EA");
-	if (!data->east.path)
-		return (1);
-	return (0);
 }

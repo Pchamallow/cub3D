@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:06:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:54:31 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int		ft_init_data(t_data *data);
 int		init_full_file(t_data *data);
 int		get_lines_columns(t_data *data);
 int		check_walls(t_data *data);
-int		get_all_directions(t_data *data);
+char	*get_direction(t_data *data, char *dir);
 int		init_rgb(t_data *data);
 int		init_render(t_data *data);
 
@@ -174,10 +174,10 @@ int		init_render(t_data *data);
 int		render(t_data *data);
 int		refresh_map(t_data *data);
 void	put_texture_pixel(t_data *data, int x);
-// void	wall_side(t_data *data);
 void	cast_ray(t_data *data);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		get_pixel(t_image *dir, int x, int y);
+void	get_textures(t_data *data, t_render *render);
 
 // Events
 

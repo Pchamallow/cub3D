@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 13:01:54 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 10:11:08 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:55:04 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	init_render(t_data *data)
 	if (!data->render.image)
 		return (1);
 	data->render.buffer = mlx_get_data_addr(data->render.image,
-		&data->render.pixel_bits, &data->render.line_bytes,
-		&data->render.endian);
+			&data->render.pixel_bits, &data->render.line_bytes,
+			&data->render.endian);
 	if (!data->render.buffer)
 		return (1);
 	start_north_south(data);
