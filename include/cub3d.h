@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:54:31 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 16:57:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,11 @@
 # define RED "\033[38;5;1m"
 # define RESET "\x1b[0m"
 
-enum TEXTURES
-{
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-};
-
 typedef struct s_image
 {
 	char			*path;
 	char			*addr;
 	void			*image;
-	int				value;
 	int				width;
 	int				height;
 	int				check;
@@ -131,8 +122,6 @@ typedef struct s_data
 	void			*win;
 	int				width;
 	int				height;
-	int				max_width;
-	int				max_height;
 	int				is_find;
 	t_color			ceiling;
 	t_color			ground;

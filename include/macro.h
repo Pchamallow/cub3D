@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 16:46:20 by nbaudoin          #+#    #+#             */
-/*   Updated: 2026/07/29 14:29:30 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 16:57:41 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,5 @@
 # define FOV 90
 # define MOVE_SPEED 20.00
 # define ROT_SPEED 0.03
-
-
-// @map
 
 #endif

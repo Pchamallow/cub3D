@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:59:10 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:02:00 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 16:55:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,12 @@ static void	init_dda_direction_x(t_data *data)
 	}
 }
 
-static int	dda_loop(t_data *data)
+static void	dda_loop(t_data *data, t_render *render, int *side)
 {
-	t_render	*render;
-	int			side;
 	int			x;
 	int			y;
 
-	side = 0;
-	render = &data->render;
+	*side = 0;
 	x = (int) data->player.pos_y;
 	y = (int) data->player.pos_x;
 	while (x < data->map.lines && y < data->map.columns
@@ -90,16 +87,15 @@ static int	dda_loop(t_data *data)
 		{
 			render->side_x += render->delta_x;
 			x += render->step_x;
-			side = 0;
+			*side = 0;
 		}
 		else
 		{
 			render->side_y += render->delta_y;
 			y += render->step_y;
-			side = 1;
+			*side = 1;
 		}
 	}
-	return (side);
 }
 
 /*
@@ -129,7 +125,7 @@ void	cast_ray(t_data *data)
 	render->ray_dir_y = data->player.dir_y + render->plane_y * camera_x;
 	init_dda_direction_x(data);
 	init_dda_direction_y(data);
-	side = dda_loop(data);
+	dda_loop(data, render, &side);
 	if (side == 0)
 		data->render.perp_wall_dist = render->side_x - render->delta_x;
 	else

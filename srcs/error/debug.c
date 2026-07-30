@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/11 16:04:40 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 10:01:51 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 16:52:59 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	print_rgb(t_data *data)
 void	print_player_info(t_data *data)
 {
 	print_directions(data);
-	printf("\nplayer x = %f | player y = %f\n\n", data->player.pos_x, data->player.pos_y);
+	printf("\nplayer x = %f | player y = %f\n\n",
+		data->player.pos_x, data->player.pos_y);
 }
