@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/30 11:29:04 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/30 17:26:05 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 # ================= VARIABLES ================= #
 
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -g
+CFLAGS		:= -Wall -Wextra -Werror
 MAKEFLAGS	+= --no-print-directory
 BUILD_DIR	:= .cub3d
 
@@ -49,14 +49,12 @@ ERROR_SRCS	= $(ERROR_DIR)/error.c		\
 EVENT_DIR	= srcs/events
 EVENT_SRCS	= ${EVENT_DIR}/hook_manager.c
 
-MOVE_DIR	= srcs/move_player
-MOVE_SRCS	= ${MOVE_DIR}/move_player.c
-
 MATH_DIR= srcs/math
 MATH_SRCS= ${MATH_DIR}/raycasting.c			\
 			${MATH_DIR}/pixel.c				\
 			${MATH_DIR}/wall_side.c			\
-			${MATH_DIR}/get_textures.c
+			${MATH_DIR}/get_textures.c		\
+			${MATH_DIR}/move_player.c
 
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c					\
@@ -71,14 +69,12 @@ ERROR_DIR	= srcs/error
 ERROR_SRCS	= $(ERROR_DIR)/error.c		\
 			$(ERROR_DIR)/debug.c
 
-FREE_DIR	= srcs/free
-FREE_SRCS	= ${FREE_DIR}/free.c
-
 UTILS_DIR	= srcs/utils
-UTILS_SRCS	= $(UTILS_DIR)/fill_null.c			\
-			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c	\
+UTILS_SRCS	= $(UTILS_DIR)/fill_null.c							\
+			$(UTILS_DIR)/image.c ${UTILS_DIR}/split.c			\
 			$(UTILS_DIR)/open_fd.c ${UTILS_DIR}/rgb_checks.c	\
-			$(UTILS_DIR)/erase_cpy.c
+			$(UTILS_DIR)/erase_cpy.c							\
+			$(UTILS_DIR)/free.c
 
 SRCS		:= srcs/main.c $(PARSER_SRCS) $(ERROR_SRCS) ${FREE_SRCS}	\
 				${INIT_SRCS} $(UTILS_SRCS) ${EVENT_SRCS} ${MATH_SRCS}	\
