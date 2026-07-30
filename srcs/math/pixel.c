@@ -6,13 +6,12 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:03:46 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:30:23 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdlib.h> // for exit
-#include <stdio.h> // for printf
+#include <stdlib.h>
 #include <math.h> // verify if allowed
 
 void	put_pixel(t_data *data, int x, int y, int color)
@@ -24,107 +23,65 @@ void	put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	coordinates_textures_north_south(t_data *data, int h_wall, double draw_start)
+/*
+* - h_wall: height of the line to draw on screen
+* - draw_start / draw_end: 
+*  lowest and highest pixel in which the wall is visible
+*/
+static void	get_wall_start_end(t_render *render)
 {
-	double	wall_x;
- 
-	wall_x = data->wall.distance_y - floor(data->wall.distance_y);
-	data->render.tex_x = (int)(wall_x * (double)data->north.width);
-	if (data->render.tex_x < 0)
-		data->render.tex_x = 0;
-	if (data->render.tex_x >= data->north.width)
-		data->render.tex_x = data->north.width - 1;
-	if (data->render.actual_texture == &data->north)
-		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
-	data->render.step = (double)data->north.height / (double)h_wall;
-	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
+	double	distance;
+
+	distance = render->perp_wall_dist;
+	render->h_wall = (HEIGHT_WINDOW / distance);
+	render->draw_start = -render->h_wall / 2 + HEIGHT_WINDOW / 2;
+	if(render->draw_start < 0)
+		render->draw_start = 0;
+	render->draw_end = render->h_wall / 2 + HEIGHT_WINDOW / 2;
+	if(render->draw_end >= HEIGHT_WINDOW)
+		render->draw_end = HEIGHT_WINDOW - 1;
 }
 
-
-static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_start)
+static void	render_wall(t_data *data, t_render *render, int *y)
 {
-	double	wall_x;
- 
-	wall_x = data->wall.distance_x - floor(data->wall.distance_x);
-	data->render.tex_x = (int)(wall_x * (double)data->north.width);
-	if (data->render.actual_texture == &data->east)
-		data->render.tex_x = data->north.width - 1 - data->render.tex_x;
-	if (data->render.tex_x < 0)
-		data->render.tex_x = 0;
-	if (data->render.tex_x >= data->north.width)
-		data->render.tex_x = data->north.width - 1;
-	data->render.step = (double)data->north.height / (double)h_wall;
-	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
+	int	color;
+
+	while (*y <= render->draw_end)
+	{
+		render->tex_y = (int)render->tex_pos;
+		if (render->tex_y < 0)
+			render->tex_y = 0;
+		if (render->tex_y >= data->north.height)
+			render->tex_y = data->north.height - 1;
+		render->tex_pos += render->step;
+		color = get_pixel(render->actual_texture, render->tex_x, render->tex_y);
+		put_pixel(data, *y, render->x, color);
+		*y += 1;
+	}
 }
-
-
-
-static void	
 
 /*
+* 1. get_wall_start_end()	: lowest and highest pixel in which the wall is visible
+* 2. get_textures()			: choose texture et his parameters
+* 3. render ceiling
+* 4. render wall
+* 5. render ground
 */
 void	put_texture_pixel(t_data *data, int x)
 {
-	get_wall_start_end(data);
-	double distance = data->render.perp_wall_dist;
-	//Calculate height of line to draw on screen
-	double h_wall = (HEIGHT_WINDOW / distance);
+	t_render	*render;
+	int			y;
 
-	//calculate lowest and highest pixel to fill in current stripe
-	int draw_start = -h_wall / 2 + HEIGHT_WINDOW / 2;
-	if(draw_start < 0)
-		draw_start = 0;
-
-	int draw_end = h_wall / 2 + HEIGHT_WINDOW / 2;
-	if(draw_end >= HEIGHT_WINDOW)
-		draw_end = HEIGHT_WINDOW - 1;
-
-
-	int y = 0;
-	// printf("ray dir x = %f, ray dir y = %f\n", data->render.ray_dir_x, data->render.ray_dir_y);
-	while (y < draw_start)
+	y = 0;
+	render = &data->render;
+	get_wall_start_end(render);
+	get_textures(data, render);
+	while (y < render->draw_start)
 	{
 		put_pixel(data, y, x, data->ceiling.color);
 		y++;
 	}
-	
-	// get_dir_wall(data);
-	if (data->wall.wall_side == 0)
-		coordinates_textures_north_south(data, h_wall, draw_start);
-	else
-		coordinates_textures_est_west(data, h_wall, draw_start);
- 
-	int color;
-	
-	if (data->wall.wall_side == 0)
-	{
-		if (data->render.ray_dir_x > 0)
-			data->render.actual_texture = &data->north;
-		else
-			data->render.actual_texture = &data->south;
-	}
-	else
-	{
-		if (data->render.ray_dir_y > 0)
-			data->render.actual_texture = &data->weast;
-		else
-			data->render.actual_texture = &data->east;
-	}
-
-	while (y <= draw_end)
-	{
-		data->render.tex_y = (int)data->render.tex_pos;
-		if (data->render.tex_y < 0)
-			data->render.tex_y = 0;
-		if (data->render.tex_y >= data->north.height)
-			data->render.tex_y = data->north.height - 1;
-		data->render.tex_pos += data->render.step;
-		
-		color = get_pixel(data->render.actual_texture, data->render.tex_x, data->render.tex_y);
-		put_pixel(data, y, x, color);
-		y++;
-	}
-
+	render_wall(data, render, &y);
 	while (y < HEIGHT_WINDOW)
 	{
 		put_pixel(data, y, x, data->ground.color);

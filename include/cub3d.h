@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/08 13:50:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/30 11:03:20 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:06:06 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,15 @@ typedef struct s_wall
 
 typedef struct s_render
 {
+	void			*image;
+	char			*buffer;
 	int				pixel_bits;
 	int				line_bytes;
 	int				endian;
 	int				x;
 	int				draw_start;
 	int				draw_end;
-	void			*image;
-	char			*buffer;
+	double			h_wall;
 	double			delta_x;
 	double			delta_y;
 	double			ray_dir;

@@ -6,7 +6,7 @@
 #    By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/15 18:40:53 by pswirgie          #+#    #+#              #
-#    Updated: 2026/07/29 15:32:55 by pswirgie         ###   ########.fr        #
+#    Updated: 2026/07/30 11:29:04 by pswirgie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,9 @@ MOVE_SRCS	= ${MOVE_DIR}/move_player.c
 
 MATH_DIR= srcs/math
 MATH_SRCS= ${MATH_DIR}/raycasting.c			\
-			${MATH_DIR}/ray_calculs.c		\
 			${MATH_DIR}/pixel.c				\
-			${MATH_DIR}/wall_side.c
+			${MATH_DIR}/wall_side.c			\
+			${MATH_DIR}/get_textures.c
 
 PARSER_DIR	= srcs/parser
 PARSER_SRCS	= $(PARSER_DIR)/args.c					\
