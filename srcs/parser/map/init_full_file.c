@@ -80,12 +80,12 @@ static int	get_index_after_args(t_data *data)
 			&& !str_iswhitespaces(data->map.full_file[i]))
 		{
 			data->map.begin_maze = i;
-			return (1);
+			return (0);
 		}
 		i++;
 	}
 	ft_display_error("Map is missing");
-	return (0);
+	return (1);
 }
 
 int	init_full_file(t_data *data)
@@ -108,7 +108,9 @@ int	init_full_file(t_data *data)
 	}
 	if (data->map.full_file)
 		fill_null(data->map.full_file, data->map.lines);
-	if (init_map_content(data) || !get_index_after_args(data))
+	if (init_map_content(data) || get_index_after_args(data))
+		return (1);
+	if (is_invalid_line(data, data->map.begin_maze))
 		return (1);
 	return (0);
 }
