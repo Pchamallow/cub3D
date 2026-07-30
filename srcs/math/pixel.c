@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 10:04:07 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 12:37:10 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:03:46 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 void	put_pixel(t_data *data, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
+
 	dst = data->render.buffer + (x * data->render.line_bytes
 		+ y * (data->render.pixel_bits/ 8));
 	*(unsigned int*)dst = color;
@@ -56,8 +57,15 @@ static void	coordinates_textures_est_west(t_data *data, int h_wall, double draw_
 	data->render.tex_pos = (draw_start - HEIGHT_WINDOW / 2 + h_wall / 2) * data->render.step;
 }
 
+
+
+static void	
+
+/*
+*/
 void	put_texture_pixel(t_data *data, int x)
 {
+	get_wall_start_end(data);
 	double distance = data->render.perp_wall_dist;
 	//Calculate height of line to draw on screen
 	double h_wall = (HEIGHT_WINDOW / distance);

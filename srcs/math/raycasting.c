@@ -6,7 +6,7 @@
 /*   By: pswirgie <pswirgie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:41:36 by pswirgie          #+#    #+#             */
-/*   Updated: 2026/07/29 14:27:06 by pswirgie         ###   ########.fr       */
+/*   Updated: 2026/07/30 11:00:54 by pswirgie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	render(t_data *data)
 	return (0);
 }
 
-
 /*
 * move and rotate here combined with keyrelease allow continuous 
 * movement and rotation while a key is held down
@@ -44,6 +43,5 @@ int	refresh_map(t_data *data)
 	move_forward_backward(data);
 	move_left_right(data);
 	render(data);
-	// print_array(data->map.maze);
 	return (0);
 }
